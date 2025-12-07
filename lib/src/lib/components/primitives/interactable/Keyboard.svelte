@@ -24,6 +24,10 @@
         disabled?: boolean;
         /** Make focusable */
         focusable?: boolean;
+        /** auto-focus the keyboard listener */
+        autoFocus?: boolean;
+        /** Key to unfocus the keyboard listener */
+        unfocusKey?: string;
         /** Additional HTML attributes */
         [key: string]: unknown;
     }
@@ -34,12 +38,15 @@
         onkeyup,
         shortcuts = {},
         global: isGlobal = false,
+        autoFocus = false,
         preventDefault = true,
         stopPropagation = false,
         disabled = false,
         focusable = true,
         ...props
     }: Props = $props();
+
+    let el: HTMLElement | null = $state(null);
 
     function normalizeKey(event: KeyboardEvent): string {
         const parts: string[] = [];
@@ -56,6 +63,12 @@
         onkeydown?.(event);
 
         const key = normalizeKey(event);
+
+        if (key === props.unfocusKey) {
+            
+            return;
+        }
+
         const handler = shortcuts[key];
         
         if (handler) {
@@ -70,11 +83,25 @@
         onkeyup?.(event);
     }
 
+    function focus() {
+        if (el && focusable && !disabled) {
+            el.focus();
+        }
+    }
+
+    function blur() {
+        if (el && focusable && !disabled) {
+            el.blur();
+        }
+    }
+
     onMount(() => {
         if (isGlobal) {
             window.addEventListener("keydown", handleKeyDown);
             window.addEventListener("keyup", handleKeyUp);
         }
+
+        if (autoFocus) focus();
     });
 
     onDestroy(() => {
@@ -92,10 +119,12 @@
 {:else}
     <div
         class="keyboard-listener"
-        role="application"
-        tabindex={focusable && !disabled ? 0 : -1}
+        role="button"
+        tabindex={focusable && !disabled ? 0 : null}
         onkeydown={handleKeyDown}
         onkeyup={handleKeyUp}
+        bind:this={el}
+        onclick={focus}
         {...props}
     >
         {#if children}
@@ -105,16 +134,7 @@
 {/if}
 
 <style>
-    .keyboard-listener {
-        display: contents;
-    }
-
     .keyboard-listener:focus {
-        outline: none;
-    }
-
-    .keyboard-listener:focus-visible {
-        outline: 2px solid currentColor;
-        outline-offset: 2px;
+        outline: auto;
     }
 </style>

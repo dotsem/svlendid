@@ -274,8 +274,10 @@
                 <Text variant="h3" color="onBg">Keyboard Primitive</Text>
                 <Text variant="body2" color="onSurfaceVariant">Focus the box and press keys (try Ctrl+S, Escape)</Text>
                 <Keyboard
+					preventDefault={true}
+					focusable={true}
                     shortcuts={{
-                        "ctrl+s": (e) => { e.preventDefault(); lastKey = "Ctrl+S (Save)"; },
+                        "ctrl+s": (e) => { lastKey = "Ctrl+S (Save)"; },
                         "escape": () => { lastKey = "Escape"; },
                         "enter": () => { lastKey = "Enter"; },
                     }}
