@@ -1,58 +1,187 @@
-# Svelte library
+# Svlendid
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+A Flutter-inspired component library for Svelte 5. Build modern web apps with declarative styling where components and their appearance are tightly coupled — just like in Flutter.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+## Philosophy
 
-## Creating a project
+Svlendid takes inspiration from Flutter's approach to UI:
 
-If you're seeing this, you've probably already done this step. Congrats!
+- **Declarative styling**: Props define appearance, not CSS classes
+- **Composable primitives**: Build complex UIs from simple building blocks
+- **Theme-driven**: Consistent design tokens throughout your app
+- **Developer-first**: Easy to use, easy to customize
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Installation
 
-# create a new project in my-app
-npx sv create my-app
+```bash
+pnpm add svlendid
+# or
+npm install svlendid
 ```
 
-## Developing
+## Quick Start
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### 1. Set up the Theme Provider
 
-```sh
-npm run dev
+Wrap your app with `ThemeProvider` to enable theming:
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```svelte
+<!-- +layout.svelte -->
+<script>
+    import { ThemeProvider } from 'svlendid';
+</script>
+
+<ThemeProvider>
+    <slot />
+</ThemeProvider>
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+### 2. Customize your theme (optional)
 
-## Building
+```svelte
+<script>
+    import { ThemeProvider, type ThemeConfig } from 'svlendid';
 
-To build your library:
+    const myTheme: ThemeConfig = {
+        colors: {
+            primary: "#6366f1",
+            secondary: "#22c55e",
+        },
+        spacing: {
+            m: "20px", // Override medium spacing
+        }
+    };
+</script>
 
-```sh
-npm pack
+<ThemeProvider config={myTheme}>
+    <slot />
+</ThemeProvider>
 ```
 
-To create a production version of your showcase app:
+### 3. Use components
 
-```sh
-npm run build
+```svelte
+<script>
+    import { Button, Text, Stack, Row, Box, Card } from 'svlendid';
+</script>
+
+<Stack gap="m">
+    <Text variant="h1" color="primary">Welcome to Svlendid</Text>
+    
+    <Row gap="s">
+        <Button color="primary">Primary</Button>
+        <Button variant="outlined" color="secondary">Secondary</Button>
+        <Button variant="text">Text Button</Button>
+    </Row>
+    
+    <Card variant="elevated" padding="l">
+        <Text>Card content with elevation</Text>
+    </Card>
+</Stack>
 ```
 
-You can preview the production build with `npm run preview`.
+## Components
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+### Base Components
 
-## Publishing
+| Component | Description |
+|-----------|-------------|
+| `Button` | Multi-variant button with filled, tonal, outlined, and text styles |
+| `Text` | Typography component with theme-aware variants |
+| `Card` | Surface container with elevation variants |
+| `ThemeProvider` | Provides theme context to children |
 
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
+### Layout Components
 
-To publish your library to [npm](https://www.npmjs.com):
+| Component | Description |
+|-----------|-------------|
+| `Box` | Flexible container (like Flutter's Container) |
+| `Flex` | Flexbox layout container |
+| `Stack` | Vertical flex layout (like Flutter's Column) |
+| `Row` | Horizontal flex layout (like Flutter's Row) |
+| `Center` | Centers its children |
+| `Spacer` | Creates space in flex layouts |
+| `Container` | Responsive max-width container |
 
-```sh
-npm publish
+### Primitive Components
+
+| Component | Description |
+|-----------|-------------|
+| `Clickable` | Handles click, double-click, right-click, and long press |
+| `Hoverable` | Tracks hover state and exposes it to children |
+| `Draggable` | Makes content draggable |
+| `Followable` | Element that follows the cursor |
+| `Keyboard` | Handles keyboard shortcuts |
+
+## Theme System
+
+The theme includes:
+
+- **Colors**: Primary, secondary, error, success, warning, info, surfaces, and more
+- **Spacing**: none, xs, s, m, l, xl, 2xl, 3xl
+- **Radius**: none, xs, s, m, l, xl, 2xl, full
+- **Typography**: h1-h6, body1, body2, subtitle1, subtitle2, caption, overline
+- **Shadows**: none, s, m, l
+- **Transitions**: instant, fast, normal, slow
+
+### Accessing Theme Values
+
+```svelte
+<script>
+    import { getTheme, useColors, useSpacing } from 'svlendid';
+    
+    const theme = getTheme();
+    const colors = useColors();
+    const spacing = useSpacing();
+    
+    // Use values
+    const primaryColor = colors.primary;
+    const mediumSpacing = spacing.m;
+</script>
 ```
+
+## Examples
+
+### Interactive Hover Effect
+
+```svelte
+<Hoverable>
+    {#snippet children({ isHovered })}
+        <Box 
+            bg={isHovered ? "primary" : "surface"} 
+            padding="m" 
+            radius="m"
+        >
+            <Text color={isHovered ? "onPrimary" : "onSurface"}>
+                Hover me!
+            </Text>
+        </Box>
+    {/snippet}
+</Hoverable>
+```
+
+### Keyboard Shortcuts
+
+```svelte
+<Keyboard 
+    global 
+    shortcuts={{
+        "ctrl+s": (e) => { e.preventDefault(); save(); },
+        "escape": () => closeModal(),
+    }}
+/>
+```
+
+### Draggable Element
+
+```svelte
+<Draggable ondragend={({ deltaX, deltaY }) => updatePosition(deltaX, deltaY)}>
+    <Box bg="primary" padding="m" radius="m">
+        <Text color="onPrimary">Drag me!</Text>
+    </Box>
+</Draggable>
+```
+
+## License
+
+MIT
