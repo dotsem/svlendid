@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Snippet } from "svelte";
+    import { onMount, type Snippet } from "svelte";
     import { getTheme } from "$lib/config/theme.js";
     import type { ColorPalette } from "$lib/types/colorPalette.type.js";
     import type { Radius, Spacing } from "$lib/types/layout.type.js";
@@ -32,6 +32,8 @@
         disabled?: boolean;
         /** Read-only state */
         readonly?: boolean;
+        /** auto-focus the input*/
+        autofocus?: boolean;
         /** Full width */
         fullWidth?: boolean;
         /** Leading icon/content */
@@ -60,6 +62,7 @@
         color = "primary",
         radius,
         type = "text",
+        autofocus = false,
         disabled = false,
         readonly = false,
         fullWidth = false,
@@ -73,6 +76,8 @@
     }: Props = $props();
 
     const theme = getTheme();
+
+    let el: HTMLInputElement | null = $state(null);
 
     let isFocused = $state(false);
     const inputId = $state(`input-${Math.random().toString(36).slice(2, 9)}`);
@@ -90,6 +95,12 @@
         isFocused = false;
         onblur?.(e);
     }
+
+    onMount(() => {
+        if (el && autofocus && !disabled) {
+            el.focus();
+        }
+    })
 </script>
 
 <div 
@@ -123,6 +134,7 @@
             id={inputId}
             {type}
             bind:value
+            bind:this={el}
             {placeholder}
             {disabled}
             {readonly}
