@@ -30,6 +30,7 @@
 		"vite": "^7.2.2"
 	},
 	"dependencies": {
-		"lib": "workspace:*"
+		"lib": "workspace:*",
+		"shiki": "^3.19.0"
 	}
 }

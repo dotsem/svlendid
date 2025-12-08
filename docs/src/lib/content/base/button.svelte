@@ -32,6 +32,7 @@
     title="Basic Usage"
     description="Import and use the Button component"
     code={BasicUsageCode}
+
 >
     <BasicUsage />
 </Demo>
@@ -46,6 +47,7 @@
     title="Button Variants"
     description="filled, tonal, outlined, and text variants"
     code={VariantsCode}
+
 >
     <Variants />
 </Demo>
@@ -72,6 +74,7 @@
     title="Button Colors"
     description="Different color schemes from the theme"
     code={ColorsCode}
+
 >
     <Colors />
 </Demo>

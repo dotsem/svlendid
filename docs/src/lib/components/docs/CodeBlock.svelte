@@ -1,9 +1,11 @@
 <!-- 
     CodeBlock component for displaying code with syntax highlighting
-    Used in documentation to show example code
+    Uses Shiki for syntax highlighting
 -->
 <script lang="ts">
-    import { Box, Row, Text, Clickable, Icon } from 'lib';
+    import { Row, Text, Clickable, Icon } from 'lib';
+    import { highlightCode } from '$lib/utils/syntax-highlight';
+    import { browser } from '$app/environment';
 
     interface Props {
         code: string;
@@ -20,6 +22,16 @@
     }: Props = $props();
 
     let copied = $state(false);
+    let highlightedHtml = $state<string | null>(null);
+
+    // Load syntax highlighting on client
+    $effect(() => {
+        if (browser && code) {
+            highlightCode(code.trim(), language).then((html: string) => {
+                highlightedHtml = html;
+            });
+        }
+    });
 
     async function copyCode() {
         await navigator.clipboard.writeText(code);
@@ -27,7 +39,21 @@
         setTimeout(() => copied = false, 2000);
     }
 
-    const lines = $derived(code.trim().split('\n'));
+    // Add line numbers to code if needed
+    function addLineNumbers(codeText: string): string {
+        const lines = codeText.trim().split('\n');
+        return lines.map((line, i) => 
+            `<span class="line-number">${i + 1}</span>${line}`
+        ).join('\n');
+    }
+    
+    // Escape HTML for fallback display
+    function escapeHtml(text: string): string {
+        return text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
 </script>
 
 <div class="code-block">
@@ -50,15 +76,23 @@
             </Clickable>
         </div>
     {/if}
-    <pre class="code-content"><code class="language-{language}">{#if showLineNumbers}{#each lines as line, i}<span class="line-number">{i + 1}</span>{line}
-{/each}{:else}{code.trim()}{/if}</code></pre>
+    
+    <div class="code-content" class:with-line-numbers={showLineNumbers}>
+        {#if highlightedHtml}
+            <!-- Shiki highlighted code -->
+            {@html highlightedHtml}
+        {:else}
+            <!-- Fallback plain text -->
+            <pre><code class="language-{language}">{#if showLineNumbers}{@html addLineNumbers(code.trim())}{:else}{escapeHtml(code.trim())}{/if}</code></pre>
+        {/if}
+    </div>
 </div>
 
 <style>
     .code-block {
         border-radius: 8px;
         overflow: hidden;
-        background: #1e1e2e;
+        background: #282c34;
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -67,18 +101,40 @@
         justify-content: space-between;
         align-items: center;
         padding: 8px 16px;
-        background: rgba(0, 0, 0, 0.2);
+        background: #21252b;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .code-content {
+        margin: 0;
+        padding: 0;
+        overflow-x: auto;
+    }
+
+    .code-content :global(pre) {
         margin: 0;
         padding: 16px;
         overflow-x: auto;
         font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
         font-size: 13px;
         line-height: 1.6;
-        color: #cdd6f4;
+        background: transparent !important;
+    }
+
+    .code-content :global(code) {
+        font-family: inherit;
+        background: transparent !important;
+    }
+
+    /* Fallback styling */
+    .code-content pre {
+        margin: 0;
+        padding: 16px;
+        overflow-x: auto;
+        font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #abb2bf;
     }
 
     .code-content code {
@@ -89,7 +145,18 @@
         display: inline-block;
         width: 2em;
         margin-right: 1em;
-        color: #6c7086;
+        color: #4b5263;
+        text-align: right;
+        user-select: none;
+    }
+
+    .with-line-numbers :global(.line::before) {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        width: 2em;
+        margin-right: 1em;
+        color: #4b5263;
         text-align: right;
         user-select: none;
     }
