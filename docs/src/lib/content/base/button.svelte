@@ -1,15 +1,18 @@
 <script lang="ts">
-    import { Button, Row, Column, Text, Icon, Box } from 'lib';
     import { Demo, PropTable } from '$lib';
     import { getComponentProps } from '$lib/utils/component-docs';
 
-    let isLoading = $state(false);
-    let clickCount = $state(0);
-
-    function simulateLoading() {
-        isLoading = true;
-        setTimeout(() => isLoading = false, 2000);
-    }
+    // Import demo components and their raw source code
+    import {
+        BasicUsage, BasicUsageCode,
+        Variants, VariantsCode,
+        Colors, ColorsCode,
+        Sizes, SizesCode,
+        WithIcons, WithIconsCode,
+        Loading, LoadingCode,
+        Disabled, DisabledCode,
+        FullWidth, FullWidthCode,
+    } from './button/index';
 
     // Auto-generated props from component source
     const buttonProps = getComponentProps('Button');
@@ -28,13 +31,9 @@
 <Demo
     title="Basic Usage"
     description="Import and use the Button component"
-    code={`\<script\>
-    import { Button } from 'lib';
-\</script\>
-
-<Button>Click me</Button>`}
+    code={BasicUsageCode}
 >
-    <Button>Click me</Button>
+    <BasicUsage />
 </Demo>
 
 <h2 id="variants">Variants</h2>
@@ -46,19 +45,9 @@
 <Demo
     title="Button Variants"
     description="filled, tonal, outlined, and text variants"
-    code={`<Row gap="m" wrap>
-    <Button variant="filled">Filled</Button>
-    <Button variant="tonal">Tonal</Button>
-    <Button variant="outlined">Outlined</Button>
-    <Button variant="text">Text</Button>
-</Row>`}
+    code={VariantsCode}
 >
-    <Row gap="m" wrap>
-        <Button variant="filled">Filled</Button>
-        <Button variant="tonal">Tonal</Button>
-        <Button variant="outlined">Outlined</Button>
-        <Button variant="text">Text</Button>
-    </Row>
+    <Variants />
 </Demo>
 
 <h3 id="variant-filled">Filled</h3>
@@ -82,45 +71,23 @@
 <Demo
     title="Button Colors"
     description="Different color schemes from the theme"
-    code={`<Row gap="s" wrap>
-    <Button color="primary">Primary</Button>
-    <Button color="secondary">Secondary</Button>
-    <Button color="error">Error</Button>
-    <Button color="success">Success</Button>
-    <Button color="warning">Warning</Button>
-    <Button color="info">Info</Button>
-</Row>`}
+    code={ColorsCode}
 >
-    <Row gap="s" wrap>
-        <Button color="primary">Primary</Button>
-        <Button color="secondary">Secondary</Button>
-        <Button color="error">Error</Button>
-        <Button color="success">Success</Button>
-        <Button color="warning">Warning</Button>
-        <Button color="info">Info</Button>
-    </Row>
+    <Colors />
 </Demo>
 
 <h2 id="sizes">Sizes</h2>
 
 <p>
-    Three sizes are available: small, medium (default), and large:
+    Five sizes are available: xs, s, m (default), l, and xl:
 </p>
 
 <Demo
     title="Button Sizes"
-    description="s, m, and l size options"
-    code={`<Row gap="m" align="center">
-    <Button size="s">Small</Button>
-    <Button size="m">Medium</Button>
-    <Button size="l">Large</Button>
-</Row>`}
+    description="xs, s, m, l, and xl size options"
+    code={SizesCode}
 >
-    <Row gap="m" align="center">
-        <Button size="s">Small</Button>
-        <Button size="m">Medium</Button>
-        <Button size="l">Large</Button>
-    </Row>
+    <Sizes />
 </Demo>
 
 <h2 id="icons">With Icons</h2>
@@ -132,89 +99,50 @@
 <Demo
     title="Buttons with Icons"
     description="Leading and trailing icon support"
-    code={`<Row gap="m" wrap>
-    <Button color="primary">
-        {#snippet leadingIcon()}<Icon name="Plus" size={18} />{/snippet}
-        Add Item
-    </Button>
-    <Button color="secondary" variant="outlined">
-        Settings
-        {#snippet trailingIcon()}<Icon name="ChevronRight" size={18} />{/snippet}
-    </Button>
-    <Button color="error" variant="tonal">
-        {#snippet leadingIcon()}<Icon name="Trash2" size={18} />{/snippet}
-        Delete
-    </Button>
-</Row>`}
+    code={WithIconsCode}
 >
-    <Row gap="m" wrap>
-        <Button color="primary">
-            {#snippet leadingIcon()}<Icon name="Plus" size={18} />{/snippet}
-            Add Item
-        </Button>
-        <Button color="secondary" variant="outlined">
-            Settings
-            {#snippet trailingIcon()}<Icon name="ChevronRight" size={18} />{/snippet}
-        </Button>
-        <Button color="error" variant="tonal">
-            {#snippet leadingIcon()}<Icon name="Trash2" size={18} />{/snippet}
-            Delete
-        </Button>
-    </Row>
+    <WithIcons />
 </Demo>
 
 <h2 id="states">States</h2>
 
-<h3 id="state-disabled">Disabled</h3>
-
-<Demo
-    title="Disabled Button"
-    description="Buttons can be disabled"
-    code={`<Button disabled>Disabled</Button>`}
->
-    <Button disabled>Disabled</Button>
-</Demo>
-
 <h3 id="state-loading">Loading</h3>
+
+<p>
+    Use the <code>loading</code> prop to show a loading spinner. The button maintains its width
+    to prevent layout shifts.
+</p>
 
 <Demo
     title="Loading Button"
     description="Shows a spinner while loading"
-    code={`<Button loading={isLoading} onclick={simulateLoading}>
-    {isLoading ? 'Loading...' : 'Click to Load'}
-</Button>`}
+    code={LoadingCode}
 >
-    <Button loading={isLoading} onclick={simulateLoading}>
-        {isLoading ? 'Loading...' : 'Click to Load'}
-    </Button>
+    <Loading />
 </Demo>
 
-<h3 id="state-elevated">Elevated</h3>
+<h3 id="state-disabled">Disabled</h3>
 
 <Demo
-    title="Elevated Button"
-    description="Adds shadow for more prominence"
-    code={`<Button elevated>Elevated</Button>`}
+    title="Disabled Buttons"
+    description="Buttons can be disabled"
+    code={DisabledCode}
 >
-    <Button elevated>Elevated</Button>
+    <Disabled />
 </Demo>
 
-<h2 id="interactive">Interactive Example</h2>
+<h2 id="full-width">Full Width</h2>
+
+<p>
+    Use <code>expandedWidth</code> to make a button fill its container:
+</p>
 
 <Demo
-    title="Click Counter"
-    description="Button with click handler"
-    code={`\<script\>
-    let clickCount = $state(0);
-\</script\>
-
-<Button onclick={() => clickCount++}>
-    Clicked {clickCount} times
-</Button>`}
+    title="Full Width Button"
+    description="Button expands to fill container"
+    code={FullWidthCode}
 >
-    <Button onclick={() => clickCount++}>
-        Clicked {clickCount} times
-    </Button>
+    <FullWidth />
 </Demo>
 
 <h2 id="props">Props</h2>

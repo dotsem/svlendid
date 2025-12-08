@@ -4,48 +4,60 @@
 -->
 <script lang="ts">
     import type { Snippet } from 'svelte';
-    import { onMount } from 'svelte';
     import { Text, Column, Row, Divider, Box } from 'lib';
     import { tableOfContents, type TocEntry } from '$lib/stores/docs';
-    import { getAdjacentItems } from '$lib/data/navigation';
+    import { getAdjacentItems, findNavItem } from '$lib/data/navigation';
+    import { browser } from '$app/environment';
 
     interface Props {
         title: string;
         description?: string;
-        category: string;
+        /** Category slug (not title) for navigation */
+        categorySlug: string;
+        /** Display name for category */
+        categoryTitle: string;
         slug: string;
         children: Snippet;
     }
 
-    let { title, description, category, slug, children }: Props = $props();
+    let { title, description, categorySlug, categoryTitle, slug, children }: Props = $props();
 
-    const adjacent = $derived(getAdjacentItems(category, slug));
+    const adjacent = $derived(getAdjacentItems(categorySlug, slug));
 
-    // Extract headings for TOC on mount
-    onMount(() => {
-        const headings = document.querySelectorAll('.doc-content h2[id], .doc-content h3[id], .doc-content h4[id]');
-        const entries: TocEntry[] = [];
+    // Extract headings for TOC - re-runs when slug changes
+    $effect(() => {
+        // Track slug to re-run on navigation
+        const currentSlug = slug;
+        
+        if (browser) {
+            // Small delay to ensure content is rendered
+            const timer = setTimeout(() => {
+                const headings = document.querySelectorAll('.doc-content h2[id], .doc-content h3[id], .doc-content h4[id]');
+                const entries: TocEntry[] = [];
 
-        headings.forEach(heading => {
-            const level = parseInt(heading.tagName[1]);
-            entries.push({
-                id: heading.id,
-                title: heading.textContent || '',
-                level,
-            });
-        });
+                headings.forEach(heading => {
+                    const level = parseInt(heading.tagName[1]);
+                    entries.push({
+                        id: heading.id,
+                        title: heading.textContent || '',
+                        level,
+                    });
+                });
 
-        tableOfContents.set(entries);
+                tableOfContents.set(entries);
+            }, 50);
 
-        return () => {
-            tableOfContents.set([]);
-        };
+            return () => {
+                clearTimeout(timer);
+                tableOfContents.set([]);
+            };
+        }
     });
 </script>
 
 <article class="doc-page">
     <header class="doc-header">
-        <Text variant="overline" color="primary">{category}</Text>
+        <Text variant="overline" color="primary">{categoryTitle}</Text>
         <Text variant="h2" color="onBg">{title}</Text>
         {#if description}
             <Text variant="body1" color="onSurfaceVariant">{description}</Text>

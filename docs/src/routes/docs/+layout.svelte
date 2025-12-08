@@ -1,11 +1,10 @@
 <script lang="ts">
-    import { ThemeProvider, type ThemeConfig } from 'lib';
     import { Sidebar, Navbar, TableOfContents, SearchModal, sidebarOpen } from '$lib';
 
     let { children } = $props();
 </script>
 
-<ThemeProvider>
+
     <div class="docs-layout">
         <Sidebar />
         <Navbar />
@@ -17,13 +16,12 @@
         <TableOfContents />
         <SearchModal />
     </div>
-</ThemeProvider>
 
 <style>
     :global(body) {
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: var(--color-bg, #ffffff);
+        background: var(--color-bg);
     }
 
     :global(*) {

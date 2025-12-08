@@ -114,7 +114,8 @@
 <DocPage
     title={data.item.title}
     description={data.item.description}
-    category={data.category.title}
+    categorySlug={data.category.slug}
+    categoryTitle={data.category.title}
     slug={data.item.slug}
 >
     {#if ContentComponent}

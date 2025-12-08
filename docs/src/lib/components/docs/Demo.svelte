@@ -1,6 +1,10 @@
 <!-- 
     Demo component - Shows a live demo with toggleable source code
     Single source of truth: the code shown is the actual code rendered
+    
+    When using ?raw imports, the code is automatically cleaned up:
+    - Leading HTML comments are removed
+    - The code is trimmed
 -->
 <script lang="ts">
     import type { Snippet } from 'svelte';
@@ -10,7 +14,7 @@
     interface Props {
         /** The demo content to render */
         children: Snippet;
-        /** The source code to display (should match the demo) */
+        /** The source code to display (can be raw import) */
         code: string;
         /** Title for the demo */
         title?: string;
@@ -31,7 +35,21 @@
         language = 'svelte',
     }: Props = $props();
 
-    let showCode = $state(defaultExpanded);
+    let showCode = $derived(defaultExpanded);
+
+    /**
+     * Clean up raw code imports:
+     * - Remove leading HTML comments (<!-- Demo: ... -->)
+     * - Trim whitespace
+     */
+    function cleanCode(rawCode: string): string {
+        return rawCode
+            // Remove leading HTML comment (demo description)
+            .replace(/^<!--[\s\S]*?-->\s*\n?/, '')
+            .trim();
+    }
+
+    const displayCode = $derived(cleanCode(code));
 </script>
 
 <div class="demo-container">
@@ -64,7 +82,7 @@
     {#if showCode}
         <div class="demo-code">
             <Animate animation="fadeUp" duration={200}>
-                <CodeBlock {code} {language} />
+                <CodeBlock code={displayCode} {language} />
             </Animate>
         </div>
     {/if}

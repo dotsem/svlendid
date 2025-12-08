@@ -1,5 +1,6 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
+    import { ThemeProvider } from 'lib';
 
 	let { children } = $props();
 </script>
@@ -11,7 +12,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </svelte:head>
 
-{@render children()}
+<ThemeProvider>
+	{@render children()}
+</ThemeProvider>
 
 <style>
 	:global(*) {

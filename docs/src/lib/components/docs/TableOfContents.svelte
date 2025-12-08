@@ -1,14 +1,39 @@
 <!-- 
     Table of Contents - Right sidebar showing page sections
+    Automatically updates on page navigation and tracks scroll position
 -->
 <script lang="ts">
     import { Text, Column } from 'lib';
     import { tableOfContents, activeHeading } from '$lib/stores/docs';
-    import { onMount } from 'svelte';
+    import { page } from '$app/stores';
+    import { onMount, onDestroy } from 'svelte';
+    import { browser } from '$app/environment';
 
-    // Set up intersection observer to track active heading
-    onMount(() => {
-        const observer = new IntersectionObserver(
+    let observer: IntersectionObserver | null = null;
+    let scrollHandler: (() => void) | null = null;
+
+    // Re-setup observer when TOC entries change (page navigation)
+    $effect(() => {
+        // Subscribe to tableOfContents changes
+        const entries = $tableOfContents;
+        
+        if (browser && entries.length > 0) {
+            // Small delay to ensure DOM is updated
+            setTimeout(() => setupObserver(), 50);
+        }
+    });
+
+    function setupObserver() {
+        // Cleanup previous observer
+        if (observer) {
+            observer.disconnect();
+        }
+        if (scrollHandler) {
+            window.removeEventListener('scroll', scrollHandler);
+        }
+
+        // Create new intersection observer
+        observer = new IntersectionObserver(
             (entries) => {
                 for (const entry of entries) {
                     if (entry.isIntersecting) {
@@ -24,9 +49,28 @@
 
         // Observe all headings
         const headings = document.querySelectorAll('h2[id], h3[id], h4[id]');
-        headings.forEach(h => observer.observe(h));
+        headings.forEach(h => observer!.observe(h));
 
-        return () => observer.disconnect();
+        // Handle scroll to bottom - highlight last item
+        scrollHandler = () => {
+            const scrolledToBottom = 
+                window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
+            
+            if (scrolledToBottom && $tableOfContents.length > 0) {
+                const lastEntry = $tableOfContents[$tableOfContents.length - 1];
+                activeHeading.set(lastEntry.id);
+            }
+        };
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+    }
+
+    onDestroy(() => {
+        if (observer) {
+            observer.disconnect();
+        }
+        if (browser && scrollHandler) {
+            window.removeEventListener('scroll', scrollHandler);
+        }
     });
 
     function scrollToHeading(id: string) {
@@ -67,8 +111,8 @@
         top: 60px;
         padding: 24px 0;
         overflow-y: auto;
-        border-left: 1px solid var(--color-border, #e5e7eb);
-        background: var(--color-bg, #ffffff);
+        border-left: 1px solid var(--color-border);
+        background: var(--color-bg);
     }
 
     .toc-nav {
@@ -80,7 +124,7 @@
         text-align: left;
         padding: 6px 16px;
         font-size: 13px;
-        color: var(--color-onSurfaceVariant, #6b7280);
+        color: var(--color-onSurfaceVariant);
         background: none;
         border: none;
         border-left: 2px solid transparent;
@@ -89,13 +133,13 @@
     }
 
     .toc-item:hover {
-        color: var(--color-onSurface, #1f2937);
+        color: var(--color-onSurface);
     }
 
     .toc-item.active {
-        color: var(--color-primary, #6366f1);
-        border-left-color: var(--color-primary, #6366f1);
-        background: var(--colorThemeProvider-primaryContainer, #e0e7ff);
+        color: var(--color-primary);
+        border-left-color: var(--color-primary);
+        background: var(--color-primaryContainer);
     }
 
     .toc-item.level-2 {
