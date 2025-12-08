@@ -2,9 +2,21 @@
     import type { Snippet } from "svelte";
     import { getTheme } from "$lib/config/theme.js";
     import type { ColorPalette } from "$lib/types/colorPalette.type.js";
+    import { resolveColor, getOnColor } from "$lib/utils/style.js";
 
     /**
-     * Badge - Small status indicator
+     * @component Badge
+     * Small status indicator that can display counts or dots.
+     * Supports both theme palette colors and custom colors.
+     * 
+     * @example
+     * <Badge content={5} color="error">
+     *   <Icon name="Bell" />
+     * </Badge>
+     * 
+     * <Badge dot color="#00ff00">
+     *   <Avatar />
+     * </Badge>
      */
     type BadgePosition = "top-right" | "top-left" | "bottom-right" | "bottom-left";
 
@@ -12,8 +24,10 @@
         children: Snippet;
         /** Badge content (number or text) */
         content?: string | number;
-        /** Badge color */
-        color?: ColorPalette;
+        /** Badge color (palette key or custom CSS color) */
+        color?: ColorPalette | string;
+        /** Text color (auto-calculated if not provided) */
+        textColor?: string;
         /** Position when used as overlay */
         position?: BadgePosition;
         /** Show as dot without content */
@@ -32,6 +46,7 @@
         children,
         content,
         color = "error",
+        textColor,
         position = "top-right",
         dot = false,
         max = 99,
@@ -42,10 +57,13 @@
 
     const theme = getTheme();
 
-    const bgColor = $derived(theme.colors[color] ?? theme.colors.error);
-    const textColor = $derived(() => {
-        const onKey = `on${color.charAt(0).toUpperCase()}${color.slice(1)}` as keyof typeof theme.colors;
-        return theme.colors[onKey] ?? "#fff";
+    // Resolve background color - supports both palette and custom colors
+    const bgColor = $derived(resolveColor(color, theme) ?? theme.colors.error);
+    
+    // Resolve text color - auto-calculate or use provided
+    const computedTextColor = $derived.by(() => {
+        if (textColor) return textColor;
+        return getOnColor(color, theme);
     });
 
     const displayContent = $derived.by(() => {
@@ -74,7 +92,7 @@
             class="badge {position}"
             class:dot
             style:background={bgColor}
-            style:color={textColor()}
+            style:color={computedTextColor}
             style:--badge-radius={theme.radius.full}
         >
             {displayContent}

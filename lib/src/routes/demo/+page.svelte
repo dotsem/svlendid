@@ -23,6 +23,7 @@
         Ripple,
         Badge,
         Icon,
+        Animate,
         type ThemeConfig,
         type ClickEffect,
         lighten,
@@ -514,6 +515,101 @@
                             <Text color="onPrimaryContainer">Centered ripple</Text>
                         </Box>
                     </Ripple>
+                </Row>
+            </Column>
+
+            <Divider margin="l" />
+
+            <!-- Animate Demo -->
+            <Column gap="m">
+                <Text variant="h3" color="onBg">Animate Component</Text>
+                <Text variant="body2" color="onSurfaceVariant">Scroll down to see entry animations powered by IntersectionObserver</Text>
+                
+                <Row gap="m" wrap>
+                    <Animate animation="fadeUp" duration={600}>
+                        <Card>
+                            <Box padding="m">
+                                <Text variant="h6">Fade Up</Text>
+                                <Text variant="body2" color="onSurfaceVariant">Default animation</Text>
+                            </Box>
+                        </Card>
+                    </Animate>
+                    
+                    <Animate animation="fadeLeft" duration={600} delay={100}>
+                        <Card>
+                            <Box padding="m">
+                                <Text variant="h6">Fade Left</Text>
+                                <Text variant="body2" color="onSurfaceVariant">With delay</Text>
+                            </Box>
+                        </Card>
+                    </Animate>
+                    
+                    <Animate animation="scale" duration={600} delay={200}>
+                        <Card>
+                            <Box padding="m">
+                                <Text variant="h6">Scale</Text>
+                                <Text variant="body2" color="onSurfaceVariant">Zoom in effect</Text>
+                            </Box>
+                        </Card>
+                    </Animate>
+                </Row>
+
+                <Row gap="m" wrap>
+                    <Animate animation="blur" duration={800}>
+                        <Card>
+                            <Box padding="m">
+                                <Text variant="h6">Blur</Text>
+                                <Text variant="body2" color="onSurfaceVariant">Blur fade in</Text>
+                            </Box>
+                        </Card>
+                    </Animate>
+                    
+                    <Animate animation="flip" duration={800} delay={100}>
+                        <Card>
+                            <Box padding="m">
+                                <Text variant="h6">Flip</Text>
+                                <Text variant="body2" color="onSurfaceVariant">3D flip effect</Text>
+                            </Box>
+                        </Card>
+                    </Animate>
+                    
+                    <Animate animation="rotate" duration={600} delay={200} angle="45deg">
+                        <Card>
+                            <Box padding="m">
+                                <Text variant="h6">Rotate</Text>
+                                <Text variant="body2" color="onSurfaceVariant">Custom angle</Text>
+                            </Box>
+                        </Card>
+                    </Animate>
+                </Row>
+
+                <Row gap="m" wrap>
+                    <Animate animation="bounceIn" duration={800} easing="bounce">
+                        <Card>
+                            <Box padding="m">
+                                <Text variant="h6">Bounce In</Text>
+                                <Text variant="body2" color="onSurfaceVariant">Playful bounce</Text>
+                            </Box>
+                        </Card>
+                    </Animate>
+                    
+                    <Animate animation="slideUp" duration={500} easing="spring" delay={100}>
+                        <Card>
+                            <Box padding="m">
+                                <Text variant="h6">Slide Up</Text>
+                                <Text variant="body2" color="onSurfaceVariant">Spring easing</Text>
+                            </Box>
+                        </Card>
+                    </Animate>
+                    
+                    <Animate animation="zoomIn" duration={600} delay={200} once>
+                        <Card>
+                            <Box padding="m">
+                                <Text variant="h6">Zoom In (Once)</Text>
+                                <Text variant="body2" color="onSurfaceVariant">Only animates once</Text>
+                            </Box>
+                        </Card>
+                    </Animate>
                 </Row>
             </Column>
 

@@ -1,0 +1,1359 @@
+{
+  "generatedAt": "2025-12-07T22:24:22.959Z",
+  "components": {
+    "Button": {
+      "name": "Button",
+      "description": "A versatile button component with multiple variants and sizes.",
+      "example": "<Button onclick={() => console.log('clicked')}>Click me</Button>\n<Button variant=\"outlined\" color=\"secondary\">Outlined</Button>\n",
+      "props": [
+        {
+          "name": "onclick",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Click handler"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme from the palette",
+          "default": "\"primary\""
+        },
+        {
+          "name": "variant",
+          "type": "ButtonVariant",
+          "required": false,
+          "description": "Button style variant",
+          "default": "\"filled\""
+        },
+        {
+          "name": "size",
+          "type": "ButtonSize",
+          "required": false,
+          "description": "Predefined size",
+          "default": "\"m\""
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "description": "Fixed width (prevents layout shift during loading)"
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius (uses theme radius keys or custom value)"
+        },
+        {
+          "name": "elevated",
+          "type": "boolean",
+          "required": false,
+          "description": "Show elevation shadow",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "expandedWidth",
+          "type": "boolean",
+          "required": false,
+          "description": "Make button take full width of container",
+          "default": "false"
+        },
+        {
+          "name": "padding",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Custom padding override"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "required": false,
+          "description": "Loading state - button maintains its width",
+          "default": "false"
+        },
+        {
+          "name": "leadingIcon",
+          "type": "Snippet",
+          "required": false,
+          "description": "Icon to show before text"
+        },
+        {
+          "name": "trailingIcon",
+          "type": "Snippet",
+          "required": false,
+          "description": "Icon to show after text"
+        }
+      ],
+      "snippets": [
+        "leadingIcon",
+        "trailingIcon"
+      ],
+      "filePath": "base/Button.svelte"
+    },
+    "Card": {
+      "name": "Card",
+      "description": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "CardVariant",
+          "required": false,
+          "description": "Card style variant",
+          "default": "\"elevated\""
+        },
+        {
+          "name": "bg",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Background color"
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius"
+        },
+        {
+          "name": "padding",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Padding"
+        },
+        {
+          "name": "clickable",
+          "type": "boolean",
+          "required": false,
+          "description": "Make card clickable",
+          "default": "false"
+        },
+        {
+          "name": "onclick",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Click handler (only if clickable)"
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "description": "Width"
+        },
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "description": "Height"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Card.svelte"
+    },
+    "Divider": {
+      "name": "Divider",
+      "description": "",
+      "props": [
+        {
+          "name": "direction",
+          "type": "\"horizontal\" | \"vertical\"",
+          "required": false,
+          "description": "Orientation",
+          "default": "\"horizontal\""
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Color from palette or custom"
+        },
+        {
+          "name": "thickness",
+          "type": "string",
+          "required": false,
+          "description": "Thickness",
+          "default": "\"1px\""
+        },
+        {
+          "name": "margin",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Margin around the divider"
+        },
+        {
+          "name": "indent",
+          "type": "string",
+          "required": false,
+          "description": "Indent from start",
+          "default": "\"0\""
+        },
+        {
+          "name": "endIndent",
+          "type": "string",
+          "required": false,
+          "description": "Indent from end",
+          "default": "\"0\""
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Divider.svelte"
+    },
+    "Icon": {
+      "name": "Icon",
+      "description": "Renders icons from the Lucide icon library with theme integration.",
+      "example": "<Icon name=\"Home\" />\n<Icon name=\"Settings\" size=\"24px\" color=\"primary\" />\n",
+      "props": [
+        {
+          "name": "name",
+          "type": "string; // Use string for prop, IconName for intellisense hints",
+          "required": true,
+          "description": "Icon name from Lucide icons"
+        },
+        {
+          "name": "size",
+          "type": "string | number",
+          "required": false,
+          "description": "Icon size (default: 24px)",
+          "default": "24"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Color from palette or custom CSS color"
+        },
+        {
+          "name": "strokeWidth",
+          "type": "number",
+          "required": false,
+          "description": "Stroke width",
+          "default": "2"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Accessible label for screen readers"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Icon.svelte"
+    },
+    "Input": {
+      "name": "Input",
+      "description": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "description": "Current value (bindable)",
+          "default": "$bindable(\"\")"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text",
+          "default": "\"\""
+        },
+        {
+          "name": "variant",
+          "type": "InputVariant",
+          "required": false,
+          "description": "Input variant style",
+          "default": "\"outlined\""
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Label text"
+        },
+        {
+          "name": "helper",
+          "type": "string",
+          "required": false,
+          "description": "Helper text below input"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "description": "Error message (also sets error state)"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme from palette",
+          "default": "\"primary\""
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius"
+        },
+        {
+          "name": "type",
+          "type": "\"text\" | \"password\" | \"email\" | \"number\" | \"tel\" | \"url\" | \"search\"",
+          "required": false,
+          "description": "Input type",
+          "default": "\"text\""
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "type": "boolean",
+          "required": false,
+          "description": "Read-only state",
+          "default": "false"
+        },
+        {
+          "name": "autofocus",
+          "type": "boolean",
+          "required": false,
+          "description": "auto-focus the input",
+          "default": "false"
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "required": false,
+          "description": "Full width",
+          "default": "false"
+        },
+        {
+          "name": "leading",
+          "type": "Snippet",
+          "required": false,
+          "description": "Leading icon/content"
+        },
+        {
+          "name": "trailing",
+          "type": "Snippet",
+          "required": false,
+          "description": "Trailing icon/content"
+        },
+        {
+          "name": "oninput",
+          "type": "(event: Event & { currentTarget: HTMLInputElement",
+          "required": false,
+          "description": "Input event handler"
+        }
+      ],
+      "snippets": [
+        "leading",
+        "trailing"
+      ],
+      "filePath": "base/Input.svelte"
+    },
+    "Text": {
+      "name": "Text",
+      "description": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "TextVariant",
+          "required": false,
+          "description": "Typography variant from theme",
+          "default": "\"body1\""
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Text color from palette or custom"
+        },
+        {
+          "name": "align",
+          "type": "\"left\" | \"center\" | \"right\" | \"justify\"",
+          "required": false,
+          "description": "Text alignment"
+        },
+        {
+          "name": "weight",
+          "type": "\"extraThin\" | \"thin\" | \"regular\" | \"medium\" | \"bold\" | \"extrabold\" | number",
+          "required": false,
+          "description": "Font weight override"
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "description": "Font size override"
+        },
+        {
+          "name": "lineHeight",
+          "type": "string",
+          "required": false,
+          "description": "Line height override"
+        },
+        {
+          "name": "letterSpacing",
+          "type": "string",
+          "required": false,
+          "description": "Letter spacing override"
+        },
+        {
+          "name": "italic",
+          "type": "boolean",
+          "required": false,
+          "description": "Make text italic"
+        },
+        {
+          "name": "decoration",
+          "type": "\"none\" | \"underline\" | \"line-through\" | \"overline\"",
+          "required": false,
+          "description": "Text decoration"
+        },
+        {
+          "name": "transform",
+          "type": "\"none\" | \"uppercase\" | \"lowercase\" | \"capitalize\"",
+          "required": false,
+          "description": "Text transform"
+        },
+        {
+          "name": "maxLines",
+          "type": "number",
+          "required": false,
+          "description": "Truncate with ellipsis after n lines (0 = no truncation)"
+        },
+        {
+          "name": "wrap",
+          "type": "boolean",
+          "required": false,
+          "description": "Allow text to wrap",
+          "default": "true"
+        },
+        {
+          "name": "as",
+          "type": "\"p\" | \"span\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"label\" | \"div\"",
+          "required": false,
+          "description": "HTML element to render",
+          "default": "\"span\""
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Text.svelte"
+    },
+    "ThemeProvider": {
+      "name": "ThemeProvider",
+      "description": "Provides theme context to all child components. Wrap your app with this component to enable theming.",
+      "props": [
+        {
+          "name": "config",
+          "type": "ThemeConfig",
+          "required": false,
+          "description": "Theme configuration - only override what you need"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/ThemeProvider.svelte"
+    },
+    "Tooltip": {
+      "name": "Tooltip",
+      "description": "",
+      "props": [
+        {
+          "name": "content",
+          "type": "string | Snippet",
+          "required": true,
+          "description": "Tooltip text or content"
+        },
+        {
+          "name": "position",
+          "type": "TooltipPosition",
+          "required": false,
+          "description": "Position relative to trigger",
+          "default": "\"top\""
+        },
+        {
+          "name": "bg",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Background color"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Text color"
+        },
+        {
+          "name": "delay",
+          "type": "number",
+          "required": false,
+          "description": "Delay before showing (ms)",
+          "default": "200"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable tooltip",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Tooltip.svelte"
+    },
+    "Box": {
+      "name": "Box",
+      "description": "A fundamental layout container with extensive styling options. The most versatile building block for creating layouts.",
+      "example": "<Box bg=\"surface\" padding=\"m\" radius=\"m\">\nContent goes here\n</Box>\n",
+      "props": [
+        {
+          "name": "bg",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Background color from palette or custom CSS (supports gradients)"
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "description": "Width"
+        },
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "description": "Height"
+        },
+        {
+          "name": "minWidth",
+          "type": "string",
+          "required": false,
+          "description": "Min width"
+        },
+        {
+          "name": "minHeight",
+          "type": "string",
+          "required": false,
+          "description": "Min height"
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "description": "Max width"
+        },
+        {
+          "name": "maxHeight",
+          "type": "string",
+          "required": false,
+          "description": "Max height"
+        },
+        {
+          "name": "padding",
+          "type": "Spacing | string | (Spacing | string)[]",
+          "required": false,
+          "description": "Padding - single value or [vertical, horizontal] or [top, right, bottom, left]"
+        },
+        {
+          "name": "margin",
+          "type": "Spacing | string | (Spacing | string)[]",
+          "required": false,
+          "description": "Margin - single value or [vertical, horizontal] or [top, right, bottom, left]"
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius"
+        },
+        {
+          "name": "border",
+          "type": "string",
+          "required": false,
+          "description": "Border"
+        },
+        {
+          "name": "shadow",
+          "type": "BoxShadow | string",
+          "required": false,
+          "description": "Box shadow level or custom shadow"
+        },
+        {
+          "name": "display",
+          "type": "string",
+          "required": false,
+          "description": "Display type",
+          "default": "\"block\""
+        },
+        {
+          "name": "direction",
+          "type": "\"row\" | \"column\" | \"row-reverse\" | \"column-reverse\"",
+          "required": false,
+          "description": "Flex direction (if display is flex)"
+        },
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | \"stretch\" | \"baseline\"",
+          "required": false,
+          "description": "Align items (flex)"
+        },
+        {
+          "name": "justify",
+          "type": "\"start\" | \"center\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+          "required": false,
+          "description": "Justify content (flex)"
+        },
+        {
+          "name": "gap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Gap between children"
+        },
+        {
+          "name": "wrap",
+          "type": "\"nowrap\" | \"wrap\" | \"wrap-reverse\"",
+          "required": false,
+          "description": "Flex wrap"
+        },
+        {
+          "name": "overflow",
+          "type": "\"visible\" | \"hidden\" | \"scroll\" | \"auto\"",
+          "required": false,
+          "description": "Overflow behavior"
+        },
+        {
+          "name": "position",
+          "type": "\"static\" | \"relative\" | \"absolute\" | \"fixed\" | \"sticky\"",
+          "required": false,
+          "description": "Position"
+        },
+        {
+          "name": "style",
+          "type": "string",
+          "required": false,
+          "description": "Custom inline styles"
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Box.svelte"
+    },
+    "Center": {
+      "name": "Center",
+      "description": "",
+      "props": [
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "description": "Width of the container",
+          "default": "\"100%\""
+        },
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "description": "Height of the container",
+          "default": "\"100%\""
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Center.svelte"
+    },
+    "Column": {
+      "name": "Column",
+      "description": "Vertical layout container that arranges children in a column.",
+      "example": "<Column gap=\"m\" align=\"center\">\n<Text>Item 1</Text>\n<Text>Item 2</Text>\n</Column>\n",
+      "props": [
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | \"stretch\"",
+          "required": false,
+          "description": "Align items on horizontal axis",
+          "default": "\"stretch\""
+        },
+        {
+          "name": "justify",
+          "type": "\"start\" | \"center\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+          "required": false,
+          "description": "Justify content on vertical axis",
+          "default": "\"start\""
+        },
+        {
+          "name": "gap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Gap between children"
+        },
+        {
+          "name": "reverse",
+          "type": "boolean",
+          "required": false,
+          "description": "Reverse the order of children",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Column.svelte"
+    },
+    "Container": {
+      "name": "Container",
+      "description": "",
+      "props": [
+        {
+          "name": "size",
+          "type": "ContainerSize | \"full\"",
+          "required": false,
+          "description": "Max width preset from theme",
+          "default": "\"l\""
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "description": "Custom max width"
+        },
+        {
+          "name": "center",
+          "type": "boolean",
+          "required": false,
+          "description": "Center the container",
+          "default": "true"
+        },
+        {
+          "name": "padding",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Horizontal padding",
+          "default": "\"m\""
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Container.svelte"
+    },
+    "Expanded": {
+      "name": "Expanded",
+      "description": "A widget that expands to fill available space in a Row or Column. Similar to flex-grow in CSS.",
+      "example": "<Row>\n<Button>Fixed</Button>\n<Expanded>\n<Input placeholder=\"Takes remaining space\" />\n</Expanded>\n</Row>\n",
+      "props": [
+        {
+          "name": "flex",
+          "type": "number",
+          "required": false,
+          "description": "Flex grow factor (default: 1)",
+          "default": "1"
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Expanded.svelte"
+    },
+    "Flex": {
+      "name": "Flex",
+      "description": "",
+      "props": [
+        {
+          "name": "direction",
+          "type": "\"row\" | \"column\" | \"row-reverse\" | \"column-reverse\"",
+          "required": false,
+          "description": "Flex direction",
+          "default": "\"row\""
+        },
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | \"stretch\" | \"baseline\"",
+          "required": false,
+          "description": "Align items on cross axis",
+          "default": "\"stretch\""
+        },
+        {
+          "name": "justify",
+          "type": "\"start\" | \"center\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+          "required": false,
+          "description": "Justify content on main axis",
+          "default": "\"start\""
+        },
+        {
+          "name": "gap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Gap between children"
+        },
+        {
+          "name": "wrap",
+          "type": "\"nowrap\" | \"wrap\" | \"wrap-reverse\"",
+          "required": false,
+          "description": "Flex wrap",
+          "default": "\"nowrap\""
+        },
+        {
+          "name": "inline",
+          "type": "boolean",
+          "required": false,
+          "description": "Make flex container inline",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Flex.svelte"
+    },
+    "Row": {
+      "name": "Row",
+      "description": "",
+      "props": [
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | \"stretch\" | \"baseline\"",
+          "required": false,
+          "description": "Align items on vertical axis",
+          "default": "\"center\""
+        },
+        {
+          "name": "justify",
+          "type": "\"start\" | \"center\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
+          "required": false,
+          "description": "Justify content on horizontal axis",
+          "default": "\"start\""
+        },
+        {
+          "name": "gap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Gap between children"
+        },
+        {
+          "name": "wrap",
+          "type": "boolean",
+          "required": false,
+          "description": "Wrap items",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Row.svelte"
+    },
+    "Spacer": {
+      "name": "Spacer",
+      "description": "",
+      "props": [
+        {
+          "name": "width",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Fixed width"
+        },
+        {
+          "name": "height",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Fixed height"
+        },
+        {
+          "name": "flex",
+          "type": "number",
+          "required": false,
+          "description": "Flex grow factor (use in Flex/Row/Stack)"
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Spacer.svelte"
+    },
+    "Stack": {
+      "name": "Stack",
+      "description": "Positions children on top of each other (z-axis stacking). All children are positioned absolutely within the stack.",
+      "example": "<Stack>\n<img src=\"background.jpg\" alt=\"\" />\n<div>Overlay content</div>\n</Stack>\n",
+      "props": [
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "description": "Width of the stack container",
+          "default": "\"100%\""
+        },
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "description": "Height of the stack container",
+          "default": "\"auto\""
+        },
+        {
+          "name": "align",
+          "type": "\"start\" | \"center\" | \"end\" | \"stretch\"",
+          "required": false,
+          "description": "Alignment of children within the stack",
+          "default": "\"stretch\""
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Stack.svelte"
+    },
+    "Animate": {
+      "name": "Animate",
+      "description": "Powerful entry/exit animation component using IntersectionObserver. Animate elements when they enter or leave the viewport with preset or custom animations.",
+      "example": "<Animate animation=\"fadeUp\" duration={500}>\n<Card>Animated content</Card>\n</Animate>\n\n<Animate animation=\"scale\" once>\n<Text>Animates only once</Text>\n</Animate>\n",
+      "props": [
+        {
+          "name": "animation",
+          "type": "AnimationPreset | string",
+          "required": false,
+          "description": "Animation preset or custom animation name",
+          "default": "\"fadeUp\""
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "required": false,
+          "description": "Animation duration in ms",
+          "default": "600"
+        },
+        {
+          "name": "delay",
+          "type": "number",
+          "required": false,
+          "description": "Delay before animation starts (ms)",
+          "default": "0"
+        },
+        {
+          "name": "easing",
+          "type": "AnimationEasing | string",
+          "required": false,
+          "description": "Animation timing function",
+          "default": "\"ease-out\""
+        },
+        {
+          "name": "distance",
+          "type": "string",
+          "required": false,
+          "description": "Distance for directional animations",
+          "default": "\"30px\""
+        },
+        {
+          "name": "scale",
+          "type": "number",
+          "required": false,
+          "description": "Scale factor for scale animations (0-1 for shrink, >1 for grow)",
+          "default": "0.9"
+        },
+        {
+          "name": "angle",
+          "type": "string",
+          "required": false,
+          "description": "Rotation angle",
+          "default": "\"15deg\""
+        },
+        {
+          "name": "exitAnimation",
+          "type": "AnimationPreset | string",
+          "required": false,
+          "description": "Exit animation (defaults to reverse of entry)"
+        },
+        {
+          "name": "threshold",
+          "type": "number",
+          "required": false,
+          "description": "Threshold for triggering animation (0-1)",
+          "default": "0.1"
+        },
+        {
+          "name": "rootMargin",
+          "type": "string",
+          "required": false,
+          "description": "Root margin for early/late triggering",
+          "default": "\"0px\""
+        },
+        {
+          "name": "once",
+          "type": "boolean",
+          "required": false,
+          "description": "Only animate once (won't re-animate when scrolling back)",
+          "default": "false"
+        },
+        {
+          "name": "startVisible",
+          "type": "boolean",
+          "required": false,
+          "description": "Start with element visible (animates out on scroll)",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable animation",
+          "default": "false"
+        },
+        {
+          "name": "onanimationstart",
+          "type": "() => void",
+          "required": false,
+          "description": "Called when animation starts"
+        },
+        {
+          "name": "onanimationend",
+          "type": "() => void",
+          "required": false,
+          "description": "Called when animation ends"
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/animation/Animate.svelte"
+    },
+    "Clickable": {
+      "name": "Clickable",
+      "description": "",
+      "props": [
+        {
+          "name": "onclick",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Single click handler"
+        },
+        {
+          "name": "ondoubleclick",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Double click handler"
+        },
+        {
+          "name": "oncontextmenu",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Right click / context menu handler"
+        },
+        {
+          "name": "onmouseenter",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Mouse enter handler"
+        },
+        {
+          "name": "onmouseleave",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Mouse leave handler"
+        },
+        {
+          "name": "onlongpress",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Long press handler (hold for 500ms)"
+        },
+        {
+          "name": "longPressDuration",
+          "type": "number",
+          "required": false,
+          "description": "Long press duration in ms",
+          "default": "500"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable all interactions",
+          "default": "false"
+        },
+        {
+          "name": "cursor",
+          "type": "string",
+          "required": false,
+          "description": "Cursor style when hovering",
+          "default": "\"pointer\""
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/interactable/Clickable.svelte"
+    },
+    "Draggable": {
+      "name": "Draggable",
+      "description": "",
+      "props": [
+        {
+          "name": "feedback",
+          "type": "Snippet",
+          "required": false,
+          "description": "Feedback content shown while dragging (defaults to children)"
+        },
+        {
+          "name": "ondragstart",
+          "type": "(data: DragData) => void",
+          "required": false,
+          "description": "Called when drag starts"
+        },
+        {
+          "name": "ondrag",
+          "type": "(data: DragData) => void",
+          "required": false,
+          "description": "Called during drag"
+        },
+        {
+          "name": "ondragend",
+          "type": "(data: DragData) => void",
+          "required": false,
+          "description": "Called when drag ends"
+        },
+        {
+          "name": "data",
+          "type": "unknown",
+          "required": false,
+          "description": "Data to pass to drop targets"
+        },
+        {
+          "name": "axis",
+          "type": "\"both\" | \"horizontal\" | \"vertical\"",
+          "required": false,
+          "description": "Axis constraint: 'both' | 'horizontal' | 'vertical'",
+          "default": "\"both\""
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable dragging",
+          "default": "false"
+        }
+      ],
+      "snippets": [
+        "feedback"
+      ],
+      "filePath": "primitives/interactable/Draggable.svelte"
+    },
+    "Followable": {
+      "name": "Followable",
+      "description": "",
+      "props": [],
+      "snippets": [],
+      "filePath": "primitives/interactable/Followable.svelte"
+    },
+    "Hoverable": {
+      "name": "Hoverable",
+      "description": "",
+      "props": [],
+      "snippets": [],
+      "filePath": "primitives/interactable/Hoverable.svelte"
+    },
+    "Keyboard": {
+      "name": "Keyboard",
+      "description": "",
+      "props": [
+        {
+          "name": "onkeydown",
+          "type": "(event: KeyboardEvent) => void",
+          "required": false,
+          "description": "Called on any key down"
+        },
+        {
+          "name": "onkeyup",
+          "type": "(event: KeyboardEvent) => void",
+          "required": false,
+          "description": "Called on any key up"
+        },
+        {
+          "name": "shortcuts",
+          "type": "Record<string, (event: KeyboardEvent) => void>",
+          "required": false,
+          "description": "Map of key combinations to handlers. Format: \"ctrl+s\", \"shift+enter\", \"escape\""
+        },
+        {
+          "name": "global",
+          "type": "boolean",
+          "required": false,
+          "description": "Listen globally (window) instead of just when focused"
+        },
+        {
+          "name": "preventDefault",
+          "type": "boolean",
+          "required": false,
+          "description": "Prevent default behavior for matched shortcuts"
+        },
+        {
+          "name": "stopPropagation",
+          "type": "boolean",
+          "required": false,
+          "description": "Stop propagation for matched shortcuts"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable keyboard handling"
+        },
+        {
+          "name": "focusable",
+          "type": "boolean",
+          "required": false,
+          "description": "Make focusable"
+        },
+        {
+          "name": "autoFocus",
+          "type": "boolean",
+          "required": false,
+          "description": "auto-focus the keyboard listener"
+        },
+        {
+          "name": "unfocusKey",
+          "type": "string",
+          "required": false,
+          "description": "Key to unfocus the keyboard listener"
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/interactable/Keyboard.svelte"
+    },
+    "Ripple": {
+      "name": "Ripple",
+      "description": "",
+      "props": [
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Ripple color"
+        },
+        {
+          "name": "opacity",
+          "type": "number",
+          "required": false,
+          "description": "Ripple opacity",
+          "default": "0.3"
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "required": false,
+          "description": "Duration in ms",
+          "default": "400"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable ripple",
+          "default": "false"
+        },
+        {
+          "name": "center",
+          "type": "boolean",
+          "required": false,
+          "description": "Center ripple instead of from click point",
+          "default": "false"
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius (uses theme radius keys or custom value)"
+        },
+        {
+          "name": "onclick",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Click handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/interactable/Ripple.svelte"
+    },
+    "Portal": {
+      "name": "Portal",
+      "description": "",
+      "props": [
+        {
+          "name": "target",
+          "type": "string | HTMLElement",
+          "required": false,
+          "description": "Target element selector or element",
+          "default": "\"body\""
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable portal (render in place)",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/visibility/Portal.svelte"
+    },
+    "Visible": {
+      "name": "Visible",
+      "description": "Detects when element enters/leaves the viewport using IntersectionObserver. Useful for lazy loading, animations on scroll, and tracking visibility.",
+      "example": "<Visible threshold={0.5} onenter={() => console.log('visible!')}>\n{#snippet children({ isVisible, ratio })}\n<div>{isVisible ? 'In view!' : 'Scroll to see me'}</div>\n{/snippet}\n</Visible>\n",
+      "props": [],
+      "snippets": [],
+      "filePath": "primitives/visibility/Visible.svelte"
+    },
+    "Badge": {
+      "name": "Badge",
+      "description": "Small status indicator that can display counts or dots. Supports both theme palette colors and custom colors.",
+      "example": "<Badge content={5} color=\"error\">\n<Icon name=\"Bell\" />\n</Badge>\n\n<Badge dot color=\"#00ff00\">\n<Avatar />\n</Badge>\n",
+      "props": [
+        {
+          "name": "content",
+          "type": "string | number",
+          "required": false,
+          "description": "Badge content (number or text)"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Badge color (palette key or custom CSS color)",
+          "default": "\"error\""
+        },
+        {
+          "name": "textColor",
+          "type": "string",
+          "required": false,
+          "description": "Text color (auto-calculated if not provided)"
+        },
+        {
+          "name": "position",
+          "type": "BadgePosition",
+          "required": false,
+          "description": "Position when used as overlay",
+          "default": "\"top-right\""
+        },
+        {
+          "name": "dot",
+          "type": "boolean",
+          "required": false,
+          "description": "Show as dot without content",
+          "default": "false"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "required": false,
+          "description": "Maximum number to show (shows \"99+\" if exceeded)",
+          "default": "99"
+        },
+        {
+          "name": "hideWhenEmpty",
+          "type": "boolean",
+          "required": false,
+          "description": "Hide badge when content is 0 or empty",
+          "default": "true"
+        },
+        {
+          "name": "show",
+          "type": "boolean",
+          "required": false,
+          "description": "Show badge (can be used to conditionally hide)",
+          "default": "true"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/Badge.svelte"
+    }
+  }
+}

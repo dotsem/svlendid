@@ -1,0 +1,581 @@
+/**
+ * Svlendid Animation Library
+ * Modular CSS animations for the Animate component
+ * 
+ * Each animation uses CSS custom properties for configuration:
+ * --animate-duration: Animation duration
+ * --animate-delay: Animation delay
+ * --animate-easing: Timing function
+ * --animate-distance: Distance for directional animations
+ * --animate-scale: Scale factor
+ * --animate-angle: Rotation angle
+ */
+
+/* ========================================
+   BASE STATES
+   ======================================== */
+.animate-wrapper {
+    will-change: transform, opacity, filter;
+}
+
+.animate-hidden {
+    pointer-events: none;
+}
+
+.animate-visible {
+    pointer-events: auto;
+}
+
+/* ========================================
+   FADE ANIMATIONS
+   ======================================== */
+.animate-fade {
+    transition: opacity var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { opacity: 0; }
+    &.animate-visible { opacity: 1; }
+}
+
+.animate-fadeUp {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0; 
+        transform: translateY(var(--animate-distance));
+    }
+    &.animate-visible { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeDown {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0; 
+        transform: translateY(calc(var(--animate-distance) * -1));
+    }
+    &.animate-visible { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+.animate-fadeLeft {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0; 
+        transform: translateX(var(--animate-distance));
+    }
+    &.animate-visible { 
+        opacity: 1; 
+        transform: translateX(0);
+    }
+}
+
+.animate-fadeRight {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0; 
+        transform: translateX(calc(var(--animate-distance) * -1));
+    }
+    &.animate-visible { 
+        opacity: 1; 
+        transform: translateX(0);
+    }
+}
+
+.animate-fadeScale {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0; 
+        transform: scale(var(--animate-scale));
+    }
+    &.animate-visible { 
+        opacity: 1; 
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+   SLIDE ANIMATIONS
+   ======================================== */
+.animate-slideUp {
+    transition: transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { transform: translateY(100%); }
+    &.animate-visible { transform: translateY(0); }
+}
+
+.animate-slideDown {
+    transition: transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { transform: translateY(-100%); }
+    &.animate-visible { transform: translateY(0); }
+}
+
+.animate-slideLeft {
+    transition: transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { transform: translateX(100%); }
+    &.animate-visible { transform: translateX(0); }
+}
+
+.animate-slideRight {
+    transition: transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { transform: translateX(-100%); }
+    &.animate-visible { transform: translateX(0); }
+}
+
+/* ========================================
+   SCALE ANIMATIONS
+   ======================================== */
+.animate-scale {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: scale(var(--animate-scale)); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: scale(1); 
+    }
+}
+
+.animate-scaleUp {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: scale(0.5) translateY(var(--animate-distance)); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: scale(1) translateY(0); 
+    }
+}
+
+.animate-scaleDown {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: scale(1.2); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: scale(1); 
+    }
+}
+
+/* ========================================
+   ZOOM ANIMATIONS
+   ======================================== */
+.animate-zoomIn {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: scale(0); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: scale(1); 
+    }
+}
+
+.animate-zoomOut {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: scale(2); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: scale(1); 
+    }
+}
+
+/* ========================================
+   ROTATE ANIMATIONS
+   ======================================== */
+.animate-rotate {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: rotate(var(--animate-angle)) scale(var(--animate-scale)); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: rotate(0) scale(1); 
+    }
+}
+
+.animate-rotateLeft {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+    transform-origin: left center;
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: rotate(calc(var(--animate-angle) * -1)); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: rotate(0); 
+    }
+}
+
+.animate-rotateRight {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+    transform-origin: right center;
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: rotate(var(--animate-angle)); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: rotate(0); 
+    }
+}
+
+/* ========================================
+   FLIP ANIMATIONS
+   ======================================== */
+.animate-flip {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: perspective(1000px) rotateY(90deg); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: perspective(1000px) rotateY(0); 
+    }
+}
+
+.animate-flipX {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: perspective(1000px) rotateX(90deg); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: perspective(1000px) rotateX(0); 
+    }
+}
+
+.animate-flipY {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: perspective(1000px) rotateY(90deg); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: perspective(1000px) rotateY(0); 
+    }
+}
+
+/* ========================================
+   BLUR ANIMATIONS
+   ======================================== */
+.animate-blur {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        filter var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        filter: blur(10px); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        filter: blur(0); 
+    }
+}
+
+.animate-blurUp {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        filter var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: translateY(var(--animate-distance));
+        filter: blur(10px); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0); 
+    }
+}
+
+.animate-blurDown {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        filter var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: translateY(calc(var(--animate-distance) * -1));
+        filter: blur(10px); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0); 
+    }
+}
+
+/* ========================================
+   SKEW ANIMATIONS
+   ======================================== */
+.animate-skewLeft {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: skewX(var(--animate-angle)) translateX(var(--animate-distance)); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: skewX(0) translateX(0); 
+    }
+}
+
+.animate-skewRight {
+    transition: 
+        opacity var(--animate-duration) var(--animate-easing) var(--animate-delay),
+        transform var(--animate-duration) var(--animate-easing) var(--animate-delay);
+
+    &.animate-hidden { 
+        opacity: 0;
+        transform: skewX(calc(var(--animate-angle) * -1)) translateX(calc(var(--animate-distance) * -1)); 
+    }
+    &.animate-visible { 
+        opacity: 1;
+        transform: skewX(0) translateX(0); 
+    }
+}
+
+/* ========================================
+   BOUNCE ANIMATIONS (Keyframe-based)
+   ======================================== */
+.animate-bounce {
+    &.animate-hidden { 
+        opacity: 0;
+        transform: translateY(var(--animate-distance)); 
+    }
+    &.animate-visible { 
+        animation: bounceIn var(--animate-duration) var(--animate-easing) var(--animate-delay) forwards;
+    }
+}
+
+.animate-bounceIn {
+    &.animate-hidden { 
+        opacity: 0;
+        transform: scale(0.3); 
+    }
+    &.animate-visible { 
+        animation: bounceInEffect var(--animate-duration) var(--animate-easing) var(--animate-delay) forwards;
+    }
+}
+
+.animate-bounceLeft {
+    &.animate-hidden { 
+        opacity: 0;
+        transform: translateX(100%); 
+    }
+    &.animate-visible { 
+        animation: bounceInLeft var(--animate-duration) var(--animate-easing) var(--animate-delay) forwards;
+    }
+}
+
+.animate-bounceRight {
+    &.animate-hidden { 
+        opacity: 0;
+        transform: translateX(-100%); 
+    }
+    &.animate-visible { 
+        animation: bounceInRight var(--animate-duration) var(--animate-easing) var(--animate-delay) forwards;
+    }
+}
+
+/* ========================================
+   ATTENTION ANIMATIONS (Continuous/Keyframe)
+   ======================================== */
+.animate-pulse.animate-visible {
+    animation: pulse calc(var(--animate-duration) * 2) ease-in-out infinite;
+}
+
+.animate-shake.animate-visible {
+    animation: shake var(--animate-duration) var(--animate-easing) var(--animate-delay);
+}
+
+.animate-swing.animate-visible {
+    transform-origin: top center;
+    animation: swing var(--animate-duration) var(--animate-easing) var(--animate-delay);
+}
+
+.animate-rubberBand.animate-visible {
+    animation: rubberBand var(--animate-duration) var(--animate-easing) var(--animate-delay);
+}
+
+.animate-wobble.animate-visible {
+    animation: wobble var(--animate-duration) var(--animate-easing) var(--animate-delay);
+}
+
+.animate-jello.animate-visible {
+    animation: jello var(--animate-duration) var(--animate-easing) var(--animate-delay);
+}
+
+.animate-heartbeat.animate-visible {
+    animation: heartbeat calc(var(--animate-duration) * 2) ease-in-out infinite;
+}
+
+/* ========================================
+   NONE ANIMATION
+   ======================================== */
+.animate-none {
+    opacity: 1;
+    transform: none;
+}
+
+/* ========================================
+   KEYFRAMES
+   ======================================== */
+@keyframes bounceIn {
+    0% { transform: translateY(var(--animate-distance)); opacity: 0; }
+    50% { transform: translateY(-10px); }
+    70% { transform: translateY(5px); }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounceInEffect {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes bounceInLeft {
+    0% { transform: translateX(100%); opacity: 0; }
+    60% { transform: translateX(-25px); opacity: 1; }
+    75% { transform: translateX(10px); }
+    90% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes bounceInRight {
+    0% { transform: translateX(-100%); opacity: 0; }
+    60% { transform: translateX(25px); opacity: 1; }
+    75% { transform: translateX(-10px); }
+    90% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes swing {
+    20% { transform: rotate(15deg); }
+    40% { transform: rotate(-10deg); }
+    60% { transform: rotate(5deg); }
+    80% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes rubberBand {
+    0% { transform: scale(1); }
+    30% { transform: scaleX(1.25) scaleY(0.75); }
+    40% { transform: scaleX(0.75) scaleY(1.25); }
+    50% { transform: scaleX(1.15) scaleY(0.85); }
+    65% { transform: scaleX(0.95) scaleY(1.05); }
+    75% { transform: scaleX(1.05) scaleY(0.95); }
+    100% { transform: scale(1); }
+}
+
+@keyframes wobble {
+    0% { transform: translateX(0); }
+    15% { transform: translateX(-25%) rotate(-5deg); }
+    30% { transform: translateX(20%) rotate(3deg); }
+    45% { transform: translateX(-15%) rotate(-3deg); }
+    60% { transform: translateX(10%) rotate(2deg); }
+    75% { transform: translateX(-5%) rotate(-1deg); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes jello {
+    0%, 100% { transform: scale(1); }
+    30% { transform: scale(1.25, 0.75); }
+    40% { transform: scale(0.75, 1.25); }
+    50% { transform: scale(1.15, 0.85); }
+    65% { transform: scale(0.95, 1.05); }
+    75% { transform: scale(1.05, 0.95); }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.3); }
+    70% { transform: scale(1); }
+}

@@ -72,6 +72,12 @@ export { default as Visible } from "$lib/components/primitives/visibility/Visibl
 export { default as Portal } from "$lib/components/primitives/visibility/Portal.svelte";
 
 // ============================================
+// Primitive Components - Animation
+// ============================================
+export { default as Animate } from "$lib/components/primitives/animation/Animate.svelte";
+export type { AnimationPreset, AnimationEasing, AnimationConfig } from "$lib/types/animation.type.js";
+
+// ============================================
 // Widgets
 // ============================================
 export { default as Tooltip } from "$lib/components/base/Tooltip.svelte";
@@ -102,3 +108,16 @@ export {
     parseColor,
     rgbaToString,
 } from "$lib/utils/color.js";
+
+export {
+    resolveColor,
+    resolveSpacing,
+    resolveSpacingArray,
+    resolveRadius,
+    resolveShadow,
+    alignMap,
+    justifyMap,
+    getOnColor,
+    getContainerColor,
+    getOnContainerColor,
+} from "$lib/utils/style.js";

@@ -2,14 +2,30 @@
     import type { Snippet } from "svelte";
     import { getTheme } from "$lib/config/theme.js";
     import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-    import type { Radius, Spacing } from "$lib/types/layout.type.js";
+    import type { Radius, Spacing, BoxShadow } from "$lib/types/layout.type.js";
+    import { 
+        resolveColor, 
+        resolveSpacing, 
+        resolveSpacingArray, 
+        resolveRadius,
+        resolveShadow,
+        alignMap, 
+        justifyMap 
+    } from "$lib/utils/style.js";
 
     /**
-     * Box - A fundamental layout container
+     * @component Box
+     * A fundamental layout container with extensive styling options.
+     * The most versatile building block for creating layouts.
+     * 
+     * @example
+     * <Box bg="surface" padding="m" radius="m">
+     *   Content goes here
+     * </Box>
      */
     interface Props {
         children?: Snippet;
-        /** Background color from palette or custom */
+        /** Background color from palette or custom CSS (supports gradients) */
         bg?: ColorPalette | string;
         /** Width */
         width?: string;
@@ -31,8 +47,8 @@
         radius?: Radius | string;
         /** Border */
         border?: string;
-        /** Box shadow level */
-        shadow?: "none" | "s" | "m" | "l";
+        /** Box shadow level or custom shadow */
+        shadow?: BoxShadow | string;
         /** Display type */
         display?: string;
         /** Flex direction (if display is flex) */
@@ -49,6 +65,8 @@
         overflow?: "visible" | "hidden" | "scroll" | "auto";
         /** Position */
         position?: "static" | "relative" | "absolute" | "fixed" | "sticky";
+        /** Custom inline styles */
+        style?: string;
         /** Additional HTML attributes */
         [key: string]: unknown;
     }
@@ -75,68 +93,52 @@
         wrap,
         overflow,
         position,
+        style,
         ...props
     }: Props = $props();
 
     const theme = getTheme();
 
-    // Resolve color from palette or use as-is
-    function resolveColor(color: ColorPalette | string | undefined): string | undefined {
-        if (!color) return undefined;
-        const paletteColor = theme.colors[color as ColorPalette];
-        return paletteColor ?? color;
-    }
+    // Use $derived to ensure reactivity with theme
+    const computedBg = $derived(bg ? resolveColor(bg, theme) : undefined);
+    const computedPadding = $derived(padding ? resolveSpacingArray(padding, theme) : undefined);
+    const computedMargin = $derived(margin ? resolveSpacingArray(margin, theme) : undefined);
+    const computedGap = $derived(gap ? resolveSpacing(gap, theme) : undefined);
+    const computedRadius = $derived(radius ? resolveRadius(radius, theme) : undefined);
+    const computedShadow = $derived(shadow ? resolveShadow(shadow, theme) : undefined);
 
-    // Resolve spacing from theme or use as-is
-    function resolveSpacing(value: Spacing | string | undefined): string | undefined {
-        if (!value) return undefined;
-        const themeSpacing = theme.spacing[value as Spacing];
-        return themeSpacing ?? value;
-    }
-
-    // Convert padding/margin array to CSS string
-    function resolveSpacingArray(value: Spacing | string | (Spacing | string)[] | undefined): string | undefined {
-        if (!value) return undefined;
-        if (Array.isArray(value)) {
-            return value.map(v => resolveSpacing(v)).join(" ");
-        }
-        return resolveSpacing(value);
-    }
-
-    // Map align/justify shorthand to CSS values
-    const alignMap = { start: "flex-start", center: "center", end: "flex-end", stretch: "stretch", baseline: "baseline" };
-    const justifyMap = { start: "flex-start", center: "center", end: "flex-end", between: "space-between", around: "space-around", evenly: "space-evenly" };
-
-    const computedBg = $derived(resolveColor(bg));
-    const computedPadding = $derived(resolveSpacingArray(padding));
-    const computedMargin = $derived(resolveSpacingArray(margin));
-    const computedGap = $derived(resolveSpacing(gap));
-    const computedRadius = $derived(radius ? (theme.radius[radius as Radius] ?? radius) : undefined);
-    const computedShadow = $derived(shadow ? theme.boxShadow[shadow] : undefined);
+    // Build combined style string
+    const computedStyle = $derived.by(() => {
+        const styles: string[] = [];
+        if (computedBg) styles.push(`background: ${computedBg}`);
+        if (width) styles.push(`width: ${width}`);
+        if (height) styles.push(`height: ${height}`);
+        if (minWidth) styles.push(`min-width: ${minWidth}`);
+        if (minHeight) styles.push(`min-height: ${minHeight}`);
+        if (maxWidth) styles.push(`max-width: ${maxWidth}`);
+        if (maxHeight) styles.push(`max-height: ${maxHeight}`);
+        if (computedPadding) styles.push(`padding: ${computedPadding}`);
+        if (computedMargin) styles.push(`margin: ${computedMargin}`);
+        if (computedRadius) styles.push(`border-radius: ${computedRadius}`);
+        if (border) styles.push(`border: ${border}`);
+        if (computedShadow) styles.push(`box-shadow: ${computedShadow}`);
+        if (display) styles.push(`display: ${display}`);
+        if (direction) styles.push(`flex-direction: ${direction}`);
+        if (align) styles.push(`align-items: ${alignMap[align]}`);
+        if (justify) styles.push(`justify-content: ${justifyMap[justify]}`);
+        if (computedGap) styles.push(`gap: ${computedGap}`);
+        if (wrap) styles.push(`flex-wrap: ${wrap}`);
+        if (overflow) styles.push(`overflow: ${overflow}`);
+        if (position) styles.push(`position: ${position}`);
+        // Append custom style last so it can override
+        if (style) styles.push(style);
+        return styles.join('; ');
+    });
 </script>
 
 <div
     class="box"
-    style:background={computedBg}
-    style:width={width}
-    style:height={height}
-    style:min-width={minWidth}
-    style:min-height={minHeight}
-    style:max-width={maxWidth}
-    style:max-height={maxHeight}
-    style:padding={computedPadding}
-    style:margin={computedMargin}
-    style:border-radius={computedRadius}
-    style:border={border}
-    style:box-shadow={computedShadow}
-    style:display={display}
-    style:flex-direction={direction}
-    style:align-items={align ? alignMap[align] : undefined}
-    style:justify-content={justify ? justifyMap[justify] : undefined}
-    style:gap={computedGap}
-    style:flex-wrap={wrap}
-    style:overflow={overflow}
-    style:position={position}
+    style={computedStyle}
     {...props}
 >
     {#if children}

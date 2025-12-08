@@ -1,0 +1,10 @@
+{
+  "name": "svlendid-monorepo",
+  "private": true,
+  "scripts": {
+    "dev:lib": "pnpm --filter lib dev",
+    "dev:docs": "pnpm --filter docs dev",
+    "build:lib": "pnpm --filter lib build",
+    "build:docs": "pnpm --filter docs build"
+  }
+}
