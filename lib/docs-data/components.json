@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-07T22:24:22.959Z",
+  "generatedAt": "2025-12-09T22:14:56.938Z",
   "components": {
     "Button": {
       "name": "Button",
@@ -302,17 +302,10 @@
           "description": "Border radius"
         },
         {
-          "name": "type",
-          "type": "\"text\" | \"password\" | \"email\" | \"number\" | \"tel\" | \"url\" | \"search\"",
-          "required": false,
-          "description": "Input type",
-          "default": "\"text\""
-        },
-        {
           "name": "disabled",
           "type": "boolean",
           "required": false,
-          "description": "Disabled state",
+          "description": "Input type Disabled state",
           "default": "false"
         },
         {
@@ -385,16 +378,10 @@
           "description": "Text alignment"
         },
         {
-          "name": "weight",
-          "type": "\"extraThin\" | \"thin\" | \"regular\" | \"medium\" | \"bold\" | \"extrabold\" | number",
-          "required": false,
-          "description": "Font weight override"
-        },
-        {
           "name": "size",
           "type": "string",
           "required": false,
-          "description": "Font size override"
+          "description": "Font weight override Font size override"
         },
         {
           "name": "lineHeight",
@@ -438,13 +425,6 @@
           "required": false,
           "description": "Allow text to wrap",
           "default": "true"
-        },
-        {
-          "name": "as",
-          "type": "\"p\" | \"span\" | \"h1\" | \"h2\" | \"h3\" | \"h4\" | \"h5\" | \"h6\" | \"label\" | \"div\"",
-          "required": false,
-          "description": "HTML element to render",
-          "default": "\"span\""
         }
       ],
       "snippets": [],
@@ -452,7 +432,7 @@
     },
     "ThemeProvider": {
       "name": "ThemeProvider",
-      "description": "Provides theme context to all child components. Wrap your app with this component to enable theming.",
+      "description": "Provides theme context to all child components. Wrap your app with this component to enable theming. Also generates CSS custom properties for all theme colors.",
       "props": [
         {
           "name": "config",
@@ -1210,7 +1190,7 @@
     },
     "Ripple": {
       "name": "Ripple",
-      "description": "",
+      "description": "Material Design ripple effect wrapper",
       "props": [
         {
           "name": "color",
@@ -1261,6 +1241,47 @@
       ],
       "snippets": [],
       "filePath": "primitives/interactable/Ripple.svelte"
+    },
+    "RippleEffect": {
+      "name": "RippleEffect",
+      "description": "",
+      "props": [
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Ripple color"
+        },
+        {
+          "name": "opacity",
+          "type": "number",
+          "required": false,
+          "description": "Ripple opacity",
+          "default": "0.3"
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "required": false,
+          "description": "Duration in ms",
+          "default": "400"
+        },
+        {
+          "name": "center",
+          "type": "boolean",
+          "required": false,
+          "description": "Center ripple instead of from click point",
+          "default": "false"
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius (uses theme radius keys or custom value)"
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/interactable/RippleEffect.svelte"
     },
     "Portal": {
       "name": "Portal",

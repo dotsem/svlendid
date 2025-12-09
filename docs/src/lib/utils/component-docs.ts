@@ -1,13 +1,13 @@
 /**
  * Component Documentation Data Utilities
- * 
+ *
  * Loads and provides access to auto-generated component documentation
  * from the lib package's docs-data/components.json
  */
 
 // Import the generated docs data
-// @ts-ignore - JSON import
-import docsData from 'lib/docs-data';
+// Vite handles JSON imports natively
+import docsData from "../../../../lib/docs-data/components.json";
 
 export interface PropInfo {
     name: string;
@@ -73,7 +73,7 @@ export function getComponentNames(): string[] {
 export function searchComponents(query: string): ComponentDoc[] {
     const q = query.toLowerCase();
     return Object.values((docsData as DocsData).components).filter(
-        comp => 
+        (comp) =>
             comp.name.toLowerCase().includes(q) ||
             comp.description.toLowerCase().includes(q)
     );
