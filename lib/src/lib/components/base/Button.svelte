@@ -187,7 +187,7 @@
     const clickEffectClass = $derived(`click-effect-${theme.clickEffect}`);
 
     import RippleEffect from "$package/components/primitives/interactable/RippleEffect.svelte";
-    let rippleEffect: RippleEffect;
+    let rippleEffect = $state<RippleEffect>();
 
     function handleClick(event: MouseEvent) {
         if (!disabled && !loading) {

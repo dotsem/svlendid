@@ -14,13 +14,9 @@
         disabled?: boolean;
     }
 
-    let {
-        children,
-        target = "body",
-        disabled = false,
-    }: Props = $props();
+    let { children, target = "body", disabled = false }: Props = $props();
 
-    let portalContainer: HTMLElement;
+    let portalContainer = $state<HTMLElement>();
     let mounted = $state(false);
 
     onMount(() => {
@@ -29,9 +25,10 @@
             return;
         }
 
-        const targetEl = typeof target === "string" 
-            ? document.querySelector(target) 
-            : target;
+        const targetEl =
+            typeof target === "string"
+                ? document.querySelector(target)
+                : target;
 
         if (targetEl) {
             portalContainer = document.createElement("div");

@@ -76,11 +76,7 @@
     const IconComponent = $derived.by(() => {
         const icon = lucideIcons[name as LucideExport];
         if (!icon || nonIconExports.has(name)) return null;
-        return icon as Component<{
-            size?: number | string;
-            color?: string;
-            strokeWidth?: number;
-        }>;
+        return icon as unknown as Component<any>;
     });
 </script>
 

@@ -89,8 +89,8 @@
         extrabold: 800,
     };
 
-    // Get font config from theme
-    const fontConfig = $derived(theme.fonts[variant]);
+    // Get font config from theme - with fallback
+    const fontConfig = $derived(theme.fonts[variant] ?? theme.fonts.body1);
 
     // Resolve color from palette or use as-is
     function resolveColor(

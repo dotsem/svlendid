@@ -79,7 +79,10 @@ export { default as Text } from "$package/components/base/Text.svelte";
 export { default as Card } from "$package/components/base/Card.svelte";
 export { default as Input } from "$package/components/base/Input.svelte";
 export { default as Divider } from "$package/components/base/Divider.svelte";
-export { default as Icon, type IconName } from "$package/components/base/Icon.svelte";
+export {
+    default as Icon,
+    type IconName,
+} from "$package/components/base/Icon.svelte";
 
 // ============================================
 // Layout Components
@@ -150,6 +153,11 @@ export {
     hslToRgb,
     parseColor,
     rgbaToString,
+    readableColor,
+    isLight,
+    isDark,
+    luminance,
+    contrastRatio,
 } from "$package/utils/color.js";
 
 export {

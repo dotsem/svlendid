@@ -148,7 +148,6 @@
     });
 </script>
 
-```
 <div class="box" style={computedStyle} {...props}>
     {#if children}
         {@render children()}

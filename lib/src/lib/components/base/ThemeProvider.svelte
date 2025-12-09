@@ -54,12 +54,11 @@
         return vars.join("; ");
     }
 
-    // Create theme synchronously during component initialization
-    // This ensures theme is available before any child renders (including SSR)
-    const theme: Theme = createTheme(config);
+    // Create theme synchronously - use $derived to track config changes locally
+    const theme = $derived(createTheme(config));
 
     // Generate CSS vars synchronously (same on server and client)
-    const cssVars = generateCssVars(theme);
+    const cssVars = $derived(generateCssVars(theme));
 
     // Set context synchronously - must happen during component init, not in $effect
     const THEME_CONTEXT_KEY = Symbol.for("svlendid-theme");
