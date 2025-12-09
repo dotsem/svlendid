@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { resolve } from '$app/paths';
-    import { 
-        ThemeProvider, 
-        Button, 
-        Text, 
-        Box, 
-        Stack, 
+    import { resolve } from "$app/paths";
+    import {
+        ThemeProvider,
+        Button,
+        Text,
+        Box,
+        Stack,
         Column,
-        Row, 
-        Center, 
+        Row,
+        Center,
         Spacer,
         Expanded,
         Clickable,
@@ -28,7 +28,7 @@
         type ClickEffect,
         lighten,
         darken,
-    } from '$lib/index.js';
+    } from "$lib/index.js";
 
     // Custom theme example - only override what you need
     const customTheme: ThemeConfig = {
@@ -38,7 +38,7 @@
             primaryContainer: "#e0e7ff",
             onPrimaryContainer: "#3730a3",
         },
-        clickEffect: "scale", // Can be "scale" | "ripple" | "lift" | "none"
+        clickEffect: "ripple", // Can be "scale" | "ripple" | "lift" | "none"
     };
 
     let clickCount = $state(0);
@@ -52,7 +52,7 @@
 
     function handleLoadingClick() {
         isLoading = true;
-        setTimeout(() => isLoading = false, 2000);
+        setTimeout(() => (isLoading = false), 2000);
     }
 
     function validateInput() {
@@ -102,15 +102,24 @@
                 <Text variant="h3" color="onBg">Buttons with Icons</Text>
                 <Row gap="m" wrap>
                     <Button color="primary">
-                        {#snippet leadingIcon()}<Icon name="Plus" size={18} />{/snippet}
+                        {#snippet leadingIcon()}<Icon
+                                name="Plus"
+                                size={18}
+                            />{/snippet}
                         Add Item
                     </Button>
                     <Button color="secondary" variant="outlined">
                         Settings
-                        {#snippet trailingIcon()}<Icon name="ChevronRight" size={18} />{/snippet}
+                        {#snippet trailingIcon()}<Icon
+                                name="ChevronRight"
+                                size={18}
+                            />{/snippet}
                     </Button>
                     <Button color="error" variant="tonal">
-                        {#snippet leadingIcon()}<Icon name="Trash2" size={18} />{/snippet}
+                        {#snippet leadingIcon()}<Icon
+                                name="Trash2"
+                                size={18}
+                            />{/snippet}
                         Delete
                     </Button>
                 </Row>
@@ -146,7 +155,7 @@
                     <Button disabled>Disabled</Button>
                     <Button elevated>Elevated</Button>
                     <Button loading={isLoading} onclick={handleLoadingClick}>
-                        {isLoading ? 'Loading...' : 'Click to Load'}
+                        {isLoading ? "Loading..." : "Click to Load"}
                     </Button>
                     <Button onclick={() => clickCount++}>
                         Clicked {clickCount} times
@@ -167,8 +176,12 @@
                         <Text variant="h4">Heading 4</Text>
                         <Text variant="h5">Heading 5</Text>
                         <Text variant="h6">Heading 6</Text>
-                        <Text variant="body1">Body 1 - Regular paragraph text</Text>
-                        <Text variant="body2">Body 2 - Smaller paragraph text</Text>
+                        <Text variant="body1"
+                            >Body 1 - Regular paragraph text</Text
+                        >
+                        <Text variant="body2"
+                            >Body 2 - Smaller paragraph text</Text
+                        >
                         <Text variant="caption">Caption text</Text>
                         <Text variant="overline">OVERLINE TEXT</Text>
                     </Column>
@@ -211,9 +224,9 @@
                 <Text variant="h3" color="onBg">Hoverable Primitive</Text>
                 <Hoverable>
                     {#snippet children({ isHovered })}
-                        <Box 
-                            bg={isHovered ? "primary" : "surface"} 
-                            padding="m" 
+                        <Box
+                            bg={isHovered ? "primary" : "surface"}
+                            padding="m"
                             radius="m"
                             style="transition: all 0.2s ease;"
                         >
@@ -228,19 +241,24 @@
             <!-- Clickable Primitive Demo (with fixed double-click) -->
             <Column gap="m">
                 <Text variant="h3" color="onBg">Clickable Primitive</Text>
-                <Text variant="body2" color="onSurfaceVariant">Single and double-click are now properly distinguished!</Text>
+                <Text variant="body2" color="onSurfaceVariant"
+                    >Single and double-click are now properly distinguished!</Text
+                >
                 <Row gap="m">
-                    <Clickable 
+                    <Clickable
                         onclick={() => singleClickCount++}
                         ondoubleclick={() => doubleClickCount++}
-                        oncontextmenu={() => alert('Right click!')}
+                        oncontextmenu={() => alert("Right click!")}
                     >
                         <Box bg="secondaryContainer" padding="m" radius="m">
                             <Column gap="xs">
                                 <Text color="onSecondaryContainer">
                                     Click, double-click, or right-click me!
                                 </Text>
-                                <Text variant="caption" color="onSecondaryContainer">
+                                <Text
+                                    variant="caption"
+                                    color="onSecondaryContainer"
+                                >
                                     Single: {singleClickCount} | Double: {doubleClickCount}
                                 </Text>
                             </Column>
@@ -252,15 +270,26 @@
             <!-- Draggable Primitive Demo -->
             <Column gap="m">
                 <Text variant="h3" color="onBg">Draggable Primitive</Text>
-                <Text variant="body2" color="onSurfaceVariant">Drag the box around!</Text>
-                <Box bg="surface" padding="l" radius="m" style="height: 150px; position: relative;">
+                <Text variant="body2" color="onSurfaceVariant"
+                    >Drag the box around!</Text
+                >
+                <Box
+                    bg="surface"
+                    padding="l"
+                    radius="m"
+                    style="height: 150px; position: relative;"
+                >
                     <Draggable
-                        ondrag={(data) => { dragPosition = { x: data.deltaX, y: data.deltaY }; }}
-                        ondragend={() => { dragPosition = { x: 0, y: 0 }; }}
+                        ondrag={(data) => {
+                            dragPosition = { x: data.deltaX, y: data.deltaY };
+                        }}
+                        ondragend={() => {
+                            dragPosition = { x: 0, y: 0 };
+                        }}
                     >
-                        <Box 
-                            bg="primary" 
-                            padding="m" 
+                        <Box
+                            bg="primary"
+                            padding="m"
                             radius="m"
                             style="transform: translate({dragPosition.x}px, {dragPosition.y}px); transition: transform 0.1s ease;"
                         >
@@ -273,21 +302,40 @@
             <!-- Keyboard Primitive Demo -->
             <Column gap="m">
                 <Text variant="h3" color="onBg">Keyboard Primitive</Text>
-                <Text variant="body2" color="onSurfaceVariant">Focus the box and press keys (try Ctrl+S, Escape)</Text>
-                <Keyboard
-					preventDefault={true}
-					focusable={true}
-                    shortcuts={{
-                        "ctrl+s": (e) => { lastKey = "Ctrl+S (Save)"; },
-                        "escape": () => { lastKey = "Escape"; },
-                        "enter": () => { lastKey = "Enter"; },
-                    }}
-                    onkeydown={(e) => { if (!e.ctrlKey && !e.metaKey) lastKey = e.key; }}
+                <Text variant="body2" color="onSurfaceVariant"
+                    >Focus the box and press keys (try Ctrl+S, Escape)</Text
                 >
-                    <Box bg="surface" padding="m" radius="m" style="outline: 2px dashed var(--color-outline, #888);">
+                <Keyboard
+                    preventDefault={true}
+                    focusable={true}
+                    shortcuts={{
+                        "ctrl+s": (e) => {
+                            lastKey = "Ctrl+S (Save)";
+                        },
+                        escape: () => {
+                            lastKey = "Escape";
+                        },
+                        enter: () => {
+                            lastKey = "Enter";
+                        },
+                    }}
+                    onkeydown={(e) => {
+                        if (!e.ctrlKey && !e.metaKey) lastKey = e.key;
+                    }}
+                >
+                    <Box
+                        bg="surface"
+                        padding="m"
+                        radius="m"
+                        style="outline: 2px dashed var(--color-outline, #888);"
+                    >
                         <Column gap="s" align="center">
-                            <Text color="onSurface">Click here and press a key</Text>
-                            <Text variant="h4" color="primary">{lastKey || "..."}</Text>
+                            <Text color="onSurface"
+                                >Click here and press a key</Text
+                            >
+                            <Text variant="h4" color="primary"
+                                >{lastKey || "..."}</Text
+                            >
                         </Column>
                     </Box>
                 </Keyboard>
@@ -296,16 +344,27 @@
             <!-- Followable Primitive Demo -->
             <Column gap="m">
                 <Text variant="h3" color="onBg">Followable Primitive</Text>
-                <Text variant="body2" color="onSurfaceVariant">Move your mouse over the area</Text>
+                <Text variant="body2" color="onSurfaceVariant"
+                    >Move your mouse over the area</Text
+                >
                 <Followable offset={{ x: 15, y: 15 }}>
                     {#snippet children({ x, y, isActive })}
-                        <Box bg="surface" padding="l" radius="m" style="height: 150px; cursor: crosshair;">
+                        <Box
+                            bg="surface"
+                            padding="l"
+                            radius="m"
+                            style="height: 150px; cursor: crosshair;"
+                        >
                             <Text color="onSurface">Move mouse here</Text>
                         </Box>
                         {#if isActive}
-                            <div style="position: fixed; left: {x}px; top: {y}px; pointer-events: none; z-index: 1000;">
+                            <div
+                                style="position: fixed; left: {x}px; top: {y}px; pointer-events: none; z-index: 1000;"
+                            >
                                 <Box bg="primary" padding="s" radius="s">
-                                    <Text variant="caption" color="onPrimary">Following!</Text>
+                                    <Text variant="caption" color="onPrimary"
+                                        >Following!</Text
+                                    >
                                 </Box>
                             </div>
                         {/if}
@@ -316,21 +375,34 @@
             <!-- Visible Primitive Demo -->
             <Column gap="m">
                 <Text variant="h3" color="onBg">Visible Primitive</Text>
-                <Text variant="body2" color="onSurfaceVariant">Scroll to see visibility detection</Text>
+                <Text variant="body2" color="onSurfaceVariant"
+                    >Scroll to see visibility detection</Text
+                >
                 <Visible threshold={0.5}>
                     {#snippet children({ isVisible, ratio })}
-                        <Box 
-                            bg={isVisible ? "successContainer" : "surface"} 
-                            padding="l" 
+                        <Box
+                            bg={isVisible ? "successContainer" : "surface"}
+                            padding="l"
                             radius="m"
                             style="transition: all 0.3s ease;"
                         >
                             <Column gap="s">
-                                <Text color={isVisible ? "onSuccessContainer" : "onSurface"}>
+                                <Text
+                                    color={isVisible
+                                        ? "onSuccessContainer"
+                                        : "onSurface"}
+                                >
                                     {isVisible ? "✓ Visible!" : "Not visible"}
                                 </Text>
-                                <Text variant="caption" color={isVisible ? "onSuccessContainer" : "onSurfaceVariant"}>
-                                    Intersection ratio: {(ratio * 100).toFixed(0)}%
+                                <Text
+                                    variant="caption"
+                                    color={isVisible
+                                        ? "onSuccessContainer"
+                                        : "onSurfaceVariant"}
+                                >
+                                    Intersection ratio: {(ratio * 100).toFixed(
+                                        0
+                                    )}%
                                 </Text>
                             </Column>
                         </Box>
@@ -345,28 +417,65 @@
                 <Text variant="h3" color="onBg">Column vs Stack</Text>
                 <Row gap="m" wrap>
                     <Column gap="s">
-                        <Text variant="h5" color="onBg">Column (vertical flex)</Text>
-                        <Box bg="surface" padding="m" radius="m" style="width: 200px;">
+                        <Text variant="h5" color="onBg"
+                            >Column (vertical flex)</Text
+                        >
+                        <Box
+                            bg="surface"
+                            padding="m"
+                            radius="m"
+                            style="width: 200px;"
+                        >
                             <Column gap="s">
-                                <Box bg="primaryContainer" padding="s" radius="s">
-                                    <Text color="onPrimaryContainer">Item 1</Text>
+                                <Box
+                                    bg="primaryContainer"
+                                    padding="s"
+                                    radius="s"
+                                >
+                                    <Text color="onPrimaryContainer"
+                                        >Item 1</Text
+                                    >
                                 </Box>
-                                <Box bg="primaryContainer" padding="s" radius="s">
-                                    <Text color="onPrimaryContainer">Item 2</Text>
+                                <Box
+                                    bg="primaryContainer"
+                                    padding="s"
+                                    radius="s"
+                                >
+                                    <Text color="onPrimaryContainer"
+                                        >Item 2</Text
+                                    >
                                 </Box>
-                                <Box bg="primaryContainer" padding="s" radius="s">
-                                    <Text color="onPrimaryContainer">Item 3</Text>
+                                <Box
+                                    bg="primaryContainer"
+                                    padding="s"
+                                    radius="s"
+                                >
+                                    <Text color="onPrimaryContainer"
+                                        >Item 3</Text
+                                    >
                                 </Box>
                             </Column>
                         </Box>
                     </Column>
                     <Column gap="s">
-                        <Text variant="h5" color="onBg">Stack (z-axis overlap)</Text>
+                        <Text variant="h5" color="onBg"
+                            >Stack (z-axis overlap)</Text
+                        >
                         <Stack width="200px" height="120px">
-                            <Box bg="error" padding="m" radius="m" style="width: 100%; height: 100%;">
+                            <Box
+                                bg="error"
+                                padding="m"
+                                radius="m"
+                                style="width: 100%; height: 100%;"
+                            >
                                 <Text color="onError">Background</Text>
                             </Box>
-                            <Box bg="primaryContainer" padding="s" radius="s" style="margin: 20px;">
+                            <Box
+                                bg="primaryContainer"
+                                padding="s"
+                                radius="s"
+                                style="margin: 20px;"
+                            >
                                 <Text color="onPrimaryContainer">Overlay</Text>
                             </Box>
                         </Stack>
@@ -383,8 +492,15 @@
                             <Text color="onPrimaryContainer">Fixed</Text>
                         </Box>
                         <Expanded>
-                            <Box bg="secondaryContainer" padding="s" radius="s" style="width: 100%; height: 100%;">
-                                <Text color="onSecondaryContainer">Expanded (flex-grow)</Text>
+                            <Box
+                                bg="secondaryContainer"
+                                padding="s"
+                                radius="s"
+                                style="width: 100%; height: 100%;"
+                            >
+                                <Text color="onSecondaryContainer"
+                                    >Expanded (flex-grow)</Text
+                                >
                             </Box>
                         </Expanded>
                         <Box bg="primaryContainer" padding="s" radius="s">
@@ -418,15 +534,25 @@
             <!-- Color Utilities Demo -->
             <Column gap="m">
                 <Text variant="h3" color="onBg">Color Utilities</Text>
-                <Text variant="body2" color="onSurfaceVariant">SCSS-like color manipulation functions</Text>
+                <Text variant="body2" color="onSurfaceVariant"
+                    >SCSS-like color manipulation functions</Text
+                >
                 <Row gap="s" wrap>
-                    <Box padding="m" radius="m" style="background: {darken('#6366f1', 20)};">
+                    <Box
+                        padding="m"
+                        radius="m"
+                        style="background: {darken('#6366f1', 20)};"
+                    >
                         <Text style="color: white;">darken 20%</Text>
                     </Box>
                     <Box padding="m" radius="m" style="background: #6366f1;">
                         <Text style="color: white;">Original</Text>
                     </Box>
-                    <Box padding="m" radius="m" style="background: {lighten('#6366f1', 20)};">
+                    <Box
+                        padding="m"
+                        radius="m"
+                        style="background: {lighten('#6366f1', 20)};"
+                    >
                         <Text style="color: #333;">lighten 20%</Text>
                     </Box>
                 </Row>
@@ -441,25 +567,39 @@
                     <Card variant="elevated" padding="l" width="200px">
                         <Column gap="s">
                             <Text variant="h5">Elevated Card</Text>
-                            <Text variant="body2" color="onSurfaceVariant">With shadow elevation</Text>
+                            <Text variant="body2" color="onSurfaceVariant"
+                                >With shadow elevation</Text
+                            >
                         </Column>
                     </Card>
                     <Card variant="filled" padding="l" width="200px">
                         <Column gap="s">
                             <Text variant="h5">Filled Card</Text>
-                            <Text variant="body2" color="onSurfaceVariant">Solid background</Text>
+                            <Text variant="body2" color="onSurfaceVariant"
+                                >Solid background</Text
+                            >
                         </Column>
                     </Card>
                     <Card variant="outlined" padding="l" width="200px">
                         <Column gap="s">
                             <Text variant="h5">Outlined Card</Text>
-                            <Text variant="body2" color="onSurfaceVariant">Border only</Text>
+                            <Text variant="body2" color="onSurfaceVariant"
+                                >Border only</Text
+                            >
                         </Column>
                     </Card>
-                    <Card variant="elevated" padding="l" width="200px" clickable onclick={() => alert('Card clicked!')}>
+                    <Card
+                        variant="elevated"
+                        padding="l"
+                        width="200px"
+                        clickable
+                        onclick={() => alert("Card clicked!")}
+                    >
                         <Column gap="s">
                             <Text variant="h5">Clickable Card</Text>
-                            <Text variant="body2" color="onSurfaceVariant">Click me!</Text>
+                            <Text variant="body2" color="onSurfaceVariant"
+                                >Click me!</Text
+                            >
                         </Column>
                     </Card>
                 </Row>
@@ -471,8 +611,8 @@
             <Column gap="m">
                 <Text variant="h3" color="onBg">Input Fields</Text>
                 <Row gap="m" wrap align="start">
-                    <Input 
-                        label="Outlined Input" 
+                    <Input
+                        label="Outlined Input"
                         placeholder="Type here..."
                         variant="outlined"
                         bind:value={inputValue}
@@ -480,18 +620,18 @@
                         error={inputError}
                         helper="Minimum 3 characters"
                     />
-                    <Input 
-                        label="Filled Input" 
+                    <Input
+                        label="Filled Input"
                         placeholder="Type here..."
                         variant="filled"
                     />
-                    <Input 
-                        label="Underlined Input" 
+                    <Input
+                        label="Underlined Input"
                         placeholder="Type here..."
                         variant="underlined"
                     />
-                    <Input 
-                        label="Disabled Input" 
+                    <Input
+                        label="Disabled Input"
                         placeholder="Can't type here"
                         disabled
                     />
@@ -503,7 +643,9 @@
             <!-- Ripple Effect Demo -->
             <Column gap="m">
                 <Text variant="h3" color="onBg">Ripple Effect</Text>
-                <Text variant="body2" color="onSurfaceVariant">Now properly inherits border-radius!</Text>
+                <Text variant="body2" color="onSurfaceVariant"
+                    >Now properly inherits border-radius!</Text
+                >
                 <Row gap="m">
                     <Ripple radius="m">
                         <Box bg="surface" padding="l" radius="m">
@@ -512,7 +654,9 @@
                     </Ripple>
                     <Ripple color="primary" center radius="full">
                         <Box bg="primaryContainer" padding="l" radius="full">
-                            <Text color="onPrimaryContainer">Centered ripple</Text>
+                            <Text color="onPrimaryContainer"
+                                >Centered ripple</Text
+                            >
                         </Box>
                     </Ripple>
                 </Row>
@@ -523,32 +667,41 @@
             <!-- Animate Demo -->
             <Column gap="m">
                 <Text variant="h3" color="onBg">Animate Component</Text>
-                <Text variant="body2" color="onSurfaceVariant">Scroll down to see entry animations powered by IntersectionObserver</Text>
-                
+                <Text variant="body2" color="onSurfaceVariant"
+                    >Scroll down to see entry animations powered by
+                    IntersectionObserver</Text
+                >
+
                 <Row gap="m" wrap>
                     <Animate animation="fadeUp" duration={600}>
                         <Card>
                             <Box padding="m">
                                 <Text variant="h6">Fade Up</Text>
-                                <Text variant="body2" color="onSurfaceVariant">Default animation</Text>
+                                <Text variant="body2" color="onSurfaceVariant"
+                                    >Default animation</Text
+                                >
                             </Box>
                         </Card>
                     </Animate>
-                    
+
                     <Animate animation="fadeLeft" duration={600} delay={100}>
                         <Card>
                             <Box padding="m">
                                 <Text variant="h6">Fade Left</Text>
-                                <Text variant="body2" color="onSurfaceVariant">With delay</Text>
+                                <Text variant="body2" color="onSurfaceVariant"
+                                    >With delay</Text
+                                >
                             </Box>
                         </Card>
                     </Animate>
-                    
+
                     <Animate animation="scale" duration={600} delay={200}>
                         <Card>
                             <Box padding="m">
                                 <Text variant="h6">Scale</Text>
-                                <Text variant="body2" color="onSurfaceVariant">Zoom in effect</Text>
+                                <Text variant="body2" color="onSurfaceVariant"
+                                    >Zoom in effect</Text
+                                >
                             </Box>
                         </Card>
                     </Animate>
@@ -559,54 +712,80 @@
                         <Card>
                             <Box padding="m">
                                 <Text variant="h6">Blur</Text>
-                                <Text variant="body2" color="onSurfaceVariant">Blur fade in</Text>
+                                <Text variant="body2" color="onSurfaceVariant"
+                                    >Blur fade in</Text
+                                >
                             </Box>
                         </Card>
                     </Animate>
-                    
+
                     <Animate animation="flip" duration={800} delay={100}>
                         <Card>
                             <Box padding="m">
                                 <Text variant="h6">Flip</Text>
-                                <Text variant="body2" color="onSurfaceVariant">3D flip effect</Text>
+                                <Text variant="body2" color="onSurfaceVariant"
+                                    >3D flip effect</Text
+                                >
                             </Box>
                         </Card>
                     </Animate>
-                    
-                    <Animate animation="rotate" duration={600} delay={200} angle="45deg">
+
+                    <Animate
+                        animation="rotate"
+                        duration={600}
+                        delay={200}
+                        angle="45deg"
+                    >
                         <Card>
                             <Box padding="m">
                                 <Text variant="h6">Rotate</Text>
-                                <Text variant="body2" color="onSurfaceVariant">Custom angle</Text>
+                                <Text variant="body2" color="onSurfaceVariant"
+                                    >Custom angle</Text
+                                >
                             </Box>
                         </Card>
                     </Animate>
                 </Row>
 
                 <Row gap="m" wrap>
-                    <Animate animation="bounceIn" duration={800} easing="bounce">
+                    <Animate
+                        animation="bounceIn"
+                        duration={800}
+                        easing="bounce"
+                    >
                         <Card>
                             <Box padding="m">
                                 <Text variant="h6">Bounce In</Text>
-                                <Text variant="body2" color="onSurfaceVariant">Playful bounce</Text>
+                                <Text variant="body2" color="onSurfaceVariant"
+                                    >Playful bounce</Text
+                                >
                             </Box>
                         </Card>
                     </Animate>
-                    
-                    <Animate animation="slideUp" duration={500} easing="spring" delay={100}>
+
+                    <Animate
+                        animation="slideUp"
+                        duration={500}
+                        easing="spring"
+                        delay={100}
+                    >
                         <Card>
                             <Box padding="m">
                                 <Text variant="h6">Slide Up</Text>
-                                <Text variant="body2" color="onSurfaceVariant">Spring easing</Text>
+                                <Text variant="body2" color="onSurfaceVariant"
+                                    >Spring easing</Text
+                                >
                             </Box>
                         </Card>
                     </Animate>
-                    
+
                     <Animate animation="zoomIn" duration={600} delay={200} once>
                         <Card>
                             <Box padding="m">
                                 <Text variant="h6">Zoom In (Once)</Text>
-                                <Text variant="body2" color="onSurfaceVariant">Only animates once</Text>
+                                <Text variant="body2" color="onSurfaceVariant"
+                                    >Only animates once</Text
+                                >
                             </Box>
                         </Card>
                     </Animate>
@@ -614,8 +793,8 @@
             </Column>
 
             <Divider margin="l" />
-            
-            <a href={resolve('/demo/paraglide')}>Paraglide Demo</a>
+
+            <a href={resolve("/demo/paraglide")}>Paraglide Demo</a>
         </Column>
     </Box>
 </ThemeProvider>

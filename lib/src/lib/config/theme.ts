@@ -8,7 +8,11 @@ import type {
     BreakpointValues,
     BoxShadowValues,
 } from "$lib/types/layout.type.js";
-import type { FontTheme, TransitionValues } from "$lib/types/theme.type.js";
+import type {
+    FontTheme,
+    TransitionValues,
+    Font,
+} from "$lib/types/theme.type.js";
 import { defaultLightTheme, defaultDarkTheme } from "./colorPalette.default.js";
 import {
     defaultSpacing,
@@ -18,7 +22,10 @@ import {
     defaultBreakpoints,
     defaultBoxShadow,
 } from "./layout.default.js";
-import { defaultFontTheme, defaultTransitions } from "$lib/config/theme.default.js";
+import {
+    defaultFontTheme,
+    defaultTransitions,
+} from "$lib/config/theme.default.js";
 
 const THEME_CONTEXT_KEY = Symbol.for("svlendid-theme");
 
@@ -44,7 +51,7 @@ export interface ThemeConfig {
     container?: Partial<ContainerValues>;
     breakpoints?: Partial<BreakpointValues>;
     boxShadow?: Partial<BoxShadowValues>;
-    fonts?: Partial<FontTheme>;
+    fonts?: { [K in keyof FontTheme]?: Partial<Font> };
     transitions?: Partial<TransitionValues>;
     /** Global click effect for buttons and clickables */
     clickEffect?: ClickEffect;
@@ -71,6 +78,17 @@ export interface Theme {
  * Creates a complete theme by merging user config with defaults
  */
 export function createTheme(config: ThemeConfig = {}): Theme {
+    const mergedFonts = { ...defaultFontTheme };
+
+    if (config.fonts) {
+        for (const [key, value] of Object.entries(config.fonts)) {
+            const k = key as keyof FontTheme;
+            if (mergedFonts[k]) {
+                mergedFonts[k] = { ...mergedFonts[k], ...value } as Font;
+            }
+        }
+    }
+
     return {
         colors: { ...defaultLightTheme, ...config.colors },
         darkColors: { ...defaultDarkTheme, ...config.darkColors },
@@ -80,7 +98,7 @@ export function createTheme(config: ThemeConfig = {}): Theme {
         container: { ...defaultContainer, ...config.container },
         breakpoints: { ...defaultBreakpoints, ...config.breakpoints },
         boxShadow: { ...defaultBoxShadow, ...config.boxShadow },
-        fonts: { ...defaultFontTheme, ...config.fonts },
+        fonts: mergedFonts,
         transitions: { ...defaultTransitions, ...config.transitions },
         clickEffect: config.clickEffect ?? "scale",
     };

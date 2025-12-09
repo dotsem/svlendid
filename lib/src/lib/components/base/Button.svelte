@@ -21,7 +21,7 @@
     /**
      * @component Button
      * A versatile button component with multiple variants and sizes.
-     * 
+     *
      * @example
      * <Button onclick={() => console.log('clicked')}>Click me</Button>
      * <Button variant="outlined" color="secondary">Outlined</Button>
@@ -94,23 +94,41 @@
     // Get color values from theme based on color prop
     const getColorValue = (colorKey: ColorPalette) => theme.colors[colorKey];
     const getOnColorValue = (colorKey: ColorPalette) => {
-        const onKey = `on${colorKey.charAt(0).toUpperCase()}${colorKey.slice(1)}` as keyof typeof theme.colors;
+        const onKey =
+            `on${colorKey.charAt(0).toUpperCase()}${colorKey.slice(1)}` as keyof typeof theme.colors;
         return theme.colors[onKey] ?? theme.colors.onBg;
     };
     const getContainerColor = (colorKey: ColorPalette) => {
-        const containerKey = `${colorKey}Container` as keyof typeof theme.colors;
+        const containerKey =
+            `${colorKey}Container` as keyof typeof theme.colors;
         return theme.colors[containerKey] ?? getColorValue(colorKey);
     };
     const getOnContainerColor = (colorKey: ColorPalette) => {
-        const onContainerKey = `on${colorKey.charAt(0).toUpperCase()}${colorKey.slice(1)}Container` as keyof typeof theme.colors;
+        const onContainerKey =
+            `on${colorKey.charAt(0).toUpperCase()}${colorKey.slice(1)}Container` as keyof typeof theme.colors;
         return theme.colors[onContainerKey] ?? getOnColorValue(colorKey);
     };
 
     // Size presets with min-width for consistent sizing
     const sizeConfig = {
-        s: { padding: `${theme.spacing.xs} ${theme.spacing.s}`, fontSize: "0.875rem", minHeight: "32px", minWidth: "64px" },
-        m: { padding: `${theme.spacing.s} ${theme.spacing.m}`, fontSize: "1rem", minHeight: "40px", minWidth: "80px" },
-        l: { padding: `${theme.spacing.m} ${theme.spacing.l}`, fontSize: "1.125rem", minHeight: "48px", minWidth: "96px" },
+        s: {
+            padding: `${theme.spacing.xs} ${theme.spacing.s}`,
+            fontSize: "0.875rem",
+            minHeight: "32px",
+            minWidth: "64px",
+        },
+        m: {
+            padding: `${theme.spacing.s} ${theme.spacing.m}`,
+            fontSize: "1rem",
+            minHeight: "40px",
+            minWidth: "80px",
+        },
+        l: {
+            padding: `${theme.spacing.m} ${theme.spacing.l}`,
+            fontSize: "1.125rem",
+            minHeight: "48px",
+            minWidth: "96px",
+        },
     };
 
     // Computed styles based on variant
@@ -158,13 +176,27 @@
 
     const computedRadius = $derived(radius ?? theme.radius.m);
     const computedPadding = $derived(padding ?? sizeConfig[size].padding);
-    const computedShadow = $derived(elevated && variant === "filled" ? theme.boxShadow.m : "none");
+    const computedShadow = $derived(
+        elevated && variant === "filled" ? theme.boxShadow.m : "none"
+    );
     const computedWidth = $derived(
         expandedWidth ? "100%" : (frozenWidth ?? width ?? "auto")
     );
 
     // Click effect class
     const clickEffectClass = $derived(`click-effect-${theme.clickEffect}`);
+
+    import RippleEffect from "$lib/components/primitives/interactable/RippleEffect.svelte";
+    let rippleEffect: RippleEffect;
+
+    function handleClick(event: MouseEvent) {
+        if (!disabled && !loading) {
+            if (theme.clickEffect === "ripple") {
+                rippleEffect?.trigger(event);
+            }
+            onclick?.(event);
+        }
+    }
 </script>
 
 <button
@@ -184,9 +216,17 @@
     style:--btn-transition={theme.transitions.fast}
     style:width={computedWidth}
     disabled={disabled || loading}
-    onclick={onclick}
+    onclick={handleClick}
     {...props}
 >
+    {#if theme.clickEffect === "ripple" && !disabled && !loading}
+        <RippleEffect
+            bind:this={rippleEffect}
+            color={variantStyles.color}
+            radius={computedRadius}
+        />
+    {/if}
+
     {#if loading}
         <span class="loader"></span>
     {:else}
@@ -219,7 +259,7 @@
         font-weight: 500;
         cursor: pointer;
         /* Be specific about what transitions to avoid disabled twitching */
-        transition: 
+        transition:
             background var(--btn-transition) ease,
             filter var(--btn-transition) ease,
             transform var(--btn-transition) ease,
@@ -278,11 +318,15 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        position: relative;
+        z-index: 1;
     }
 
     .content {
         display: inline-flex;
         align-items: center;
+        position: relative;
+        z-index: 1;
     }
 
     .loader {

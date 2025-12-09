@@ -3,11 +3,10 @@
     Automatically updates on page navigation and tracks scroll position
 -->
 <script lang="ts">
-    import { Text, Column } from 'lib';
-    import { tableOfContents, activeHeading } from '$lib/stores/docs';
-    import { page } from '$app/stores';
-    import { onMount, onDestroy } from 'svelte';
-    import { browser } from '$app/environment';
+    import { Text } from "lib";
+    import { tableOfContents, activeHeading } from "$lib/stores/docs";
+    import { onDestroy } from "svelte";
+    import { browser } from "$app/environment";
 
     let observer: IntersectionObserver | null = null;
     let scrollHandler: (() => void) | null = null;
@@ -16,7 +15,7 @@
     $effect(() => {
         // Subscribe to tableOfContents changes
         const entries = $tableOfContents;
-        
+
         if (browser && entries.length > 0) {
             // Small delay to ensure DOM is updated
             setTimeout(() => setupObserver(), 50);
@@ -29,7 +28,7 @@
             observer.disconnect();
         }
         if (scrollHandler) {
-            window.removeEventListener('scroll', scrollHandler);
+            window.removeEventListener("scroll", scrollHandler);
         }
 
         // Create new intersection observer
@@ -42,26 +41,27 @@
                 }
             },
             {
-                rootMargin: '-80px 0px -80% 0px',
+                rootMargin: "-80px 0px -80% 0px",
                 threshold: 0,
             }
         );
 
         // Observe all headings
-        const headings = document.querySelectorAll('h2[id], h3[id], h4[id]');
-        headings.forEach(h => observer!.observe(h));
+        const headings = document.querySelectorAll("h2[id], h3[id], h4[id]");
+        headings.forEach((h) => observer!.observe(h));
 
         // Handle scroll to bottom - highlight last item
         scrollHandler = () => {
-            const scrolledToBottom = 
-                window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50;
-            
+            const scrolledToBottom =
+                window.innerHeight + window.scrollY >=
+                document.documentElement.scrollHeight - 50;
+
             if (scrolledToBottom && $tableOfContents.length > 0) {
                 const lastEntry = $tableOfContents[$tableOfContents.length - 1];
                 activeHeading.set(lastEntry.id);
             }
         };
-        window.addEventListener('scroll', scrollHandler, { passive: true });
+        window.addEventListener("scroll", scrollHandler, { passive: true });
     }
 
     onDestroy(() => {
@@ -69,7 +69,7 @@
             observer.disconnect();
         }
         if (browser && scrollHandler) {
-            window.removeEventListener('scroll', scrollHandler);
+            window.removeEventListener("scroll", scrollHandler);
         }
     });
 
@@ -77,15 +77,20 @@
         const element = document.getElementById(id);
         if (element) {
             const offset = 80; // Navbar height
-            const y = element.getBoundingClientRect().top + window.scrollY - offset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
+            const y =
+                element.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: y, behavior: "smooth" });
         }
     }
 </script>
 
 {#if $tableOfContents.length > 0}
     <aside class="toc">
-        <Text variant="overline" color="onSurfaceVariant" style="padding: 0 16px; margin-bottom: 8px;">
+        <Text
+            variant="overline"
+            color="onSurfaceVariant"
+            style="padding: 0 16px; margin-bottom: 8px;"
+        >
             On This Page
         </Text>
         <nav class="toc-nav">
