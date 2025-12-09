@@ -1,8 +1,8 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
-    import { getTheme } from "$lib/config/theme.js";
-    import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-    import type { Radius, Spacing } from "$lib/types/layout.type.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { Radius, Spacing } from "$package/types/layout.type.js";
 
     /**
      * Card - A surface container with elevation
@@ -46,15 +46,23 @@
 
     const theme = getTheme();
 
-    function resolveColor(color: ColorPalette | string | undefined): string | undefined {
+    function resolveColor(
+        color: ColorPalette | string | undefined
+    ): string | undefined {
         if (!color) return undefined;
         const paletteColor = theme.colors[color as ColorPalette];
         return paletteColor ?? color;
     }
 
     const computedBg = $derived(resolveColor(bg) ?? theme.colors.card);
-    const computedRadius = $derived(radius ? (theme.radius[radius as Radius] ?? radius) : theme.radius.m);
-    const computedPadding = $derived(padding ? (theme.spacing[padding as Spacing] ?? padding) : theme.spacing.m);
+    const computedRadius = $derived(
+        radius ? (theme.radius[radius as Radius] ?? radius) : theme.radius.m
+    );
+    const computedPadding = $derived(
+        padding
+            ? (theme.spacing[padding as Spacing] ?? padding)
+            : theme.spacing.m
+    );
 
     const variantStyles = $derived.by(() => {
         switch (variant) {
@@ -86,8 +94,8 @@
     style:padding={computedPadding}
     style:box-shadow={variantStyles.boxShadow}
     style:border={variantStyles.border}
-    style:width={width}
-    style:height={height}
+    style:width
+    style:height
     style:--transition={theme.transitions.fast}
     onclick={clickable ? onclick : undefined}
     {...props}
@@ -108,7 +116,9 @@
 
     .clickable {
         cursor: pointer;
-        transition: transform var(--transition) ease, box-shadow var(--transition) ease;
+        transition:
+            transform var(--transition) ease,
+            box-shadow var(--transition) ease;
     }
 
     .clickable:hover {

@@ -1,8 +1,8 @@
 <script lang="ts">
     import { onMount, type Snippet } from "svelte";
-    import { getTheme } from "$lib/config/theme.js";
-    import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-    import type { Radius, Spacing } from "$lib/types/layout.type.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { Radius, Spacing } from "$package/types/layout.type.js";
 
     /**
      * Input - Text input field with theme integration
@@ -27,7 +27,14 @@
         /** Border radius */
         radius?: Radius | string;
         /** Input type */
-        type?: "text" | "password" | "email" | "number" | "tel" | "url" | "search";
+        type?:
+            | "text"
+            | "password"
+            | "email"
+            | "number"
+            | "tel"
+            | "url"
+            | "search";
         /** Disabled state */
         disabled?: boolean;
         /** Read-only state */
@@ -83,8 +90,12 @@
     const inputId = $state(`input-${Math.random().toString(36).slice(2, 9)}`);
 
     const hasError = $derived(!!error);
-    const activeColor = $derived(hasError ? theme.colors.error : theme.colors[color]);
-    const computedRadius = $derived(radius ? (theme.radius[radius as Radius] ?? radius) : theme.radius.s);
+    const activeColor = $derived(
+        hasError ? theme.colors.error : theme.colors[color]
+    );
+    const computedRadius = $derived(
+        radius ? (theme.radius[radius as Radius] ?? radius) : theme.radius.s
+    );
 
     function handleFocus(e: FocusEvent) {
         isFocused = true;
@@ -100,27 +111,33 @@
         if (el && autofocus && !disabled) {
             el.focus();
         }
-    })
+    });
 </script>
 
-<div 
-    class="input-wrapper"
-    class:fullWidth
-    class:disabled
->
+<div class="input-wrapper" class:fullWidth class:disabled>
     {#if label}
-        <label class="label" for={inputId} class:focused={isFocused} class:hasValue={!!value} class:hasError>
+        <label
+            class="label"
+            for={inputId}
+            class:focused={isFocused}
+            class:hasValue={!!value}
+            class:hasError
+        >
             {label}
         </label>
     {/if}
-    
-    <div 
+
+    <div
         class="input-container {variant}"
         class:focused={isFocused}
         class:hasError
         style:--input-color={activeColor}
-        style:--input-border-color={hasError ? theme.colors.error : theme.colors.outline}
-        style:--input-bg={variant === "filled" ? theme.colors.surfaceVariant : "transparent"}
+        style:--input-border-color={hasError
+            ? theme.colors.error
+            : theme.colors.outline}
+        style:--input-bg={variant === "filled"
+            ? theme.colors.surfaceVariant
+            : "transparent"}
         style:--input-radius={computedRadius}
         style:--input-transition={theme.transitions.fast}
     >
@@ -129,7 +146,7 @@
                 {@render leading()}
             </span>
         {/if}
-        
+
         <input
             id={inputId}
             {type}
@@ -144,14 +161,14 @@
             {onchange}
             {...props}
         />
-        
+
         {#if trailing}
             <span class="trailing">
                 {@render trailing()}
             </span>
         {/if}
     </div>
-    
+
     {#if error || helper}
         <span class="helper" class:hasError>
             {error || helper}

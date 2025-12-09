@@ -1,4 +1,4 @@
-import type { ColorPaletteValues } from "$lib/types/colorPalette.type.js";
+import type { ColorPaletteValues } from "$package/types/colorPalette.type.js";
 
 export const defaultLightTheme: ColorPaletteValues = {
     primary: "#f97316",

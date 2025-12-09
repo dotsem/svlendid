@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
-    import { getTheme } from "$lib/config/theme.js";
-    import type { ColorPalette } from "$lib/types/colorPalette.type.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type { ColorPalette } from "$package/types/colorPalette.type.js";
 
     /**
      * Tooltip - Shows a tooltip on hover
@@ -42,14 +42,21 @@
     let isVisible = $state(false);
     let showTimeout: ReturnType<typeof setTimeout>;
 
-    function resolveColor(c: ColorPalette | string | undefined, fallback: string): string {
+    function resolveColor(
+        c: ColorPalette | string | undefined,
+        fallback: string
+    ): string {
         if (!c) return fallback;
         const paletteColor = theme.colors[c as ColorPalette];
         return paletteColor ?? c;
     }
 
-    const computedBg = $derived(resolveColor(bg, theme.colors.surface ?? "#333"));
-    const computedColor = $derived(resolveColor(color, theme.colors.onSurface ?? "#fff"));
+    const computedBg = $derived(
+        resolveColor(bg, theme.colors.surface ?? "#333")
+    );
+    const computedColor = $derived(
+        resolveColor(color, theme.colors.onSurface ?? "#fff")
+    );
 
     function handleMouseEnter() {
         if (disabled) return;
@@ -73,9 +80,9 @@
     {...props}
 >
     {@render children()}
-    
+
     {#if isVisible}
-        <div 
+        <div
             class="tooltip {position}"
             style:background={computedBg}
             style:color={computedColor}

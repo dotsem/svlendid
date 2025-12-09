@@ -1,5 +1,5 @@
 import { getContext, setContext } from "svelte";
-import type { ColorPaletteValues } from "$lib/types/colorPalette.type.js";
+import type { ColorPaletteValues } from "$package/types/colorPalette.type.js";
 import type {
     SpacingValues,
     RadiusValues,
@@ -7,12 +7,8 @@ import type {
     ContainerValues,
     BreakpointValues,
     BoxShadowValues,
-} from "$lib/types/layout.type.js";
-import type {
-    FontTheme,
-    TransitionValues,
-    Font,
-} from "$lib/types/theme.type.js";
+} from "$package/types/layout.type.js";
+import type { FontTheme, TransitionValues, Font } from "$package/types/theme.type.js";
 import { defaultLightTheme, defaultDarkTheme } from "./colorPalette.default.js";
 import {
     defaultSpacing,
@@ -22,10 +18,7 @@ import {
     defaultBreakpoints,
     defaultBoxShadow,
 } from "./layout.default.js";
-import {
-    defaultFontTheme,
-    defaultTransitions,
-} from "$lib/config/theme.default.js";
+import { defaultFontTheme, defaultTransitions } from "./theme.default.js";
 
 const THEME_CONTEXT_KEY = Symbol.for("svlendid-theme");
 

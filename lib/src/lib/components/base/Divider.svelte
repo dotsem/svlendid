@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { getTheme } from "$lib/config/theme.js";
-    import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-    import type { Spacing } from "$lib/types/layout.type.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { Spacing } from "$package/types/layout.type.js";
 
     /**
      * Divider - Visual separator line

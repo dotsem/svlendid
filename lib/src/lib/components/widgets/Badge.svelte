@@ -1,24 +1,28 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
-    import { getTheme } from "$lib/config/theme.js";
-    import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-    import { resolveColor, getOnColor } from "$lib/utils/style.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import { resolveColor, getOnColor } from "$package/utils/style.js";
 
     /**
      * @component Badge
      * Small status indicator that can display counts or dots.
      * Supports both theme palette colors and custom colors.
-     * 
+     *
      * @example
      * <Badge content={5} color="error">
      *   <Icon name="Bell" />
      * </Badge>
-     * 
+     *
      * <Badge dot color="#00ff00">
      *   <Avatar />
      * </Badge>
      */
-    type BadgePosition = "top-right" | "top-left" | "bottom-right" | "bottom-left";
+    type BadgePosition =
+        | "top-right"
+        | "top-left"
+        | "bottom-right"
+        | "bottom-left";
 
     interface Props {
         children: Snippet;
@@ -59,7 +63,7 @@
 
     // Resolve background color - supports both palette and custom colors
     const bgColor = $derived(resolveColor(color, theme) ?? theme.colors.error);
-    
+
     // Resolve text color - auto-calculate or use provided
     const computedTextColor = $derived.by(() => {
         if (textColor) return textColor;
@@ -78,7 +82,8 @@
         if (!show) return false;
         if (dot) return true;
         if (hideWhenEmpty) {
-            if (content === undefined || content === "" || content === 0) return false;
+            if (content === undefined || content === "" || content === 0)
+                return false;
         }
         return true;
     });
@@ -86,9 +91,9 @@
 
 <div class="badge-wrapper" {...props}>
     {@render children()}
-    
+
     {#if shouldShow}
-        <span 
+        <span
             class="badge {position}"
             class:dot
             style:background={bgColor}

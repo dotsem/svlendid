@@ -5,7 +5,7 @@
         createTheme,
         type ThemeConfig,
         type Theme,
-    } from "$lib/config/theme.js";
+    } from "$package/config/theme.js";
 
     /**
      * @component ThemeProvider
@@ -57,7 +57,7 @@
     // Create theme synchronously during component initialization
     // This ensures theme is available before any child renders (including SSR)
     const theme: Theme = createTheme(config);
-    
+
     // Generate CSS vars synchronously (same on server and client)
     const cssVars = generateCssVars(theme);
 

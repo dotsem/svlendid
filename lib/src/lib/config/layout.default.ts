@@ -1,7 +1,20 @@
-import type { BoxShadow, BoxShadowValues, Breakpoint, BreakpointValues, Container, ContainerValues, Radius, RadiusValues, Spacing, SpacingValues, ZIndex, ZIndexValues } from "$lib/types/layout.type.js";
-import { palette } from "$lib/config/colorPalette.default.js";
+import type {
+    BoxShadow,
+    BoxShadowValues,
+    Breakpoint,
+    BreakpointValues,
+    Container,
+    ContainerValues,
+    Radius,
+    RadiusValues,
+    Spacing,
+    SpacingValues,
+    ZIndex,
+    ZIndexValues,
+} from "$package/types/layout.type.js";
+import { palette } from "./colorPalette.default.js";
 
-export const defaultSpacing: SpacingValues= {
+export const defaultSpacing: SpacingValues = {
     none: "0" as Spacing,
     xs: "4px" as Spacing,
     s: "8px" as Spacing,
@@ -52,10 +65,9 @@ export const defaultContainer: ContainerValues = {
     xl: "1280px" as Container,
 };
 
-export const defaultBoxShadow: BoxShadowValues= {
+export const defaultBoxShadow: BoxShadowValues = {
     none: "none",
     s: `0 1px 2px 0 ${palette.shadow}` as BoxShadow,
     m: `0 4px 6px -1px ${palette.shadow}, 0 2px 4px -1px ${palette.shadow}` as BoxShadow,
     l: `0 10px 15px -3px ${palette.shadow}, 0 4px 6px -2px ${palette.shadow}` as BoxShadow,
-   
-}
+};

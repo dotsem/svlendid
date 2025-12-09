@@ -1,8 +1,8 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import RippleEffect from "./RippleEffect.svelte";
-    import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-    import type { Radius } from "$lib/types/layout.type.js";
+    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { Radius } from "$package/types/layout.type.js";
 
     /**
      * @component Ripple

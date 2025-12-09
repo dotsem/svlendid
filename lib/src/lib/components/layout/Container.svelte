@@ -1,7 +1,10 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
-    import { getTheme } from "$lib/config/theme.js";
-    import type { Container as ContainerSize, Spacing } from "$lib/types/layout.type.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type {
+        Container as ContainerSize,
+        Spacing,
+    } from "$package/types/layout.type.js";
 
     /**
      * Container - Responsive max-width container
@@ -31,14 +34,17 @@
 
     const theme = getTheme();
 
-    function resolveSpacing(value: Spacing | string | undefined): string | undefined {
+    function resolveSpacing(
+        value: Spacing | string | undefined
+    ): string | undefined {
         if (!value) return undefined;
         const themeSpacing = theme.spacing[value as Spacing];
         return themeSpacing ?? value;
     }
 
     const computedMaxWidth = $derived(
-        maxWidth ?? (size === "full" ? "100%" : theme.container[size as ContainerSize])
+        maxWidth ??
+            (size === "full" ? "100%" : theme.container[size as ContainerSize])
     );
     const computedPadding = $derived(resolveSpacing(padding));
 </script>

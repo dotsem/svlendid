@@ -3,7 +3,7 @@
  * Maps friendly names to CSS timing functions
  */
 
-import type { AnimationEasing } from "$lib/types/animation.type.js";
+import type { AnimationEasing } from "$package/types/animation.type.js";
 
 /**
  * Map of easing names to CSS timing functions

@@ -1,7 +1,10 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { onDestroy } from "svelte";
-    import type { AnimationPreset, AnimationEasing } from "$lib/types/animation.type.js";
+    import type {
+        AnimationPreset,
+        AnimationEasing,
+    } from "$package/types/animation.type.js";
     import { resolveEasing } from "./easing.js";
     import "./animations.css";
 
@@ -9,12 +12,12 @@
      * @component Animate
      * Powerful entry/exit animation component using IntersectionObserver.
      * Animate elements when they enter or leave the viewport with preset or custom animations.
-     * 
+     *
      * @example
      * <Animate animation="fadeUp" duration={500}>
      *   <Card>Animated content</Card>
      * </Animate>
-     * 
+     *
      * @example
      * <Animate animation="scale" once>
      *   <Text>Animates only once</Text>
@@ -103,7 +106,9 @@
     // Compute the current animation class
     const animationClass = $derived.by(() => {
         if (disabled || animation === "none") return "";
-        const currentAnim = isVisible ? animation : (exitAnimation ?? animation);
+        const currentAnim = isVisible
+            ? animation
+            : (exitAnimation ?? animation);
         return `animate-${currentAnim}`;
     });
 
@@ -127,9 +132,9 @@
                     if (newIsVisible) {
                         onanimationstart?.();
                     }
-                    
+
                     isVisible = newIsVisible;
-                    
+
                     if (newIsVisible) {
                         hasAnimated = true;
                         // Fire end callback after animation completes

@@ -1,23 +1,27 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
-    import { getTheme } from "$lib/config/theme.js";
-    import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-    import type { Radius, Spacing, BoxShadow } from "$lib/types/layout.type.js";
-    import { 
-        resolveColor, 
-        resolveSpacing, 
-        resolveSpacingArray, 
+    import { getTheme } from "$package/config/theme.js";
+    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type {
+        Radius,
+        Spacing,
+        BoxShadow,
+    } from "$package/types/layout.type.js";
+    import {
+        resolveColor,
+        resolveSpacing,
+        resolveSpacingArray,
         resolveRadius,
         resolveShadow,
-        alignMap, 
-        justifyMap 
-    } from "$lib/utils/style.js";
+        alignMap,
+        justifyMap,
+    } from "$package/utils/style.js";
 
     /**
      * @component Box
      * A fundamental layout container with extensive styling options.
      * The most versatile building block for creating layouts.
-     * 
+     *
      * @example
      * <Box bg="surface" padding="m" radius="m">
      *   Content goes here
@@ -101,11 +105,19 @@
 
     // Use $derived to ensure reactivity with theme
     const computedBg = $derived(bg ? resolveColor(bg, theme) : undefined);
-    const computedPadding = $derived(padding ? resolveSpacingArray(padding, theme) : undefined);
-    const computedMargin = $derived(margin ? resolveSpacingArray(margin, theme) : undefined);
+    const computedPadding = $derived(
+        padding ? resolveSpacingArray(padding, theme) : undefined
+    );
+    const computedMargin = $derived(
+        margin ? resolveSpacingArray(margin, theme) : undefined
+    );
     const computedGap = $derived(gap ? resolveSpacing(gap, theme) : undefined);
-    const computedRadius = $derived(radius ? resolveRadius(radius, theme) : undefined);
-    const computedShadow = $derived(shadow ? resolveShadow(shadow, theme) : undefined);
+    const computedRadius = $derived(
+        radius ? resolveRadius(radius, theme) : undefined
+    );
+    const computedShadow = $derived(
+        shadow ? resolveShadow(shadow, theme) : undefined
+    );
 
     // Build combined style string
     const computedStyle = $derived.by(() => {
@@ -132,15 +144,12 @@
         if (position) styles.push(`position: ${position}`);
         // Append custom style last so it can override
         if (style) styles.push(style);
-        return styles.join('; ');
+        return styles.join("; ");
     });
 </script>
 
-<div
-    class="box"
-    style={computedStyle}
-    {...props}
->
+```
+<div class="box" style={computedStyle} {...props}>
     {#if children}
         {@render children()}
     {/if}

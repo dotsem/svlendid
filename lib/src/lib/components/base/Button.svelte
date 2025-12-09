@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { getTheme } from "$lib/config/theme.js";
-    import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-    import type { Radius, Spacing } from "$lib/types/layout.type.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { Radius, Spacing } from "$package/types/layout.type.js";
     import type { Snippet } from "svelte";
 
     /**
@@ -186,7 +186,7 @@
     // Click effect class
     const clickEffectClass = $derived(`click-effect-${theme.clickEffect}`);
 
-    import RippleEffect from "$lib/components/primitives/interactable/RippleEffect.svelte";
+    import RippleEffect from "$package/components/primitives/interactable/RippleEffect.svelte";
     let rippleEffect: RippleEffect;
 
     function handleClick(event: MouseEvent) {

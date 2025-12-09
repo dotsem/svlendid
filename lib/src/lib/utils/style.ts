@@ -3,16 +3,16 @@
  * These functions resolve theme values or pass through custom values
  */
 
-import { getTheme, type Theme } from "$lib/config/theme.js";
-import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-import type { Radius, Spacing, BoxShadow } from "$lib/types/layout.type.js";
+import { getTheme, type Theme } from "$package/config/theme.js";
+import type { ColorPalette } from "$package/types/colorPalette.type.js";
+import type { Radius, Spacing, BoxShadow } from "$package/types/layout.type.js";
 
 /**
  * Resolve a color from the theme palette or return custom color as-is
  * @param color - Color palette key or custom CSS color value
  * @param theme - Optional theme instance (uses getTheme() if not provided)
  * @returns Resolved CSS color value or undefined
- * 
+ *
  * @example
  * resolveColor("primary") // returns theme's primary color
  * resolveColor("#ff0000") // returns "#ff0000"
@@ -35,7 +35,7 @@ export function resolveColor(
  * @param value - Spacing key or custom CSS value
  * @param theme - Optional theme instance
  * @returns Resolved CSS spacing value or undefined
- * 
+ *
  * @example
  * resolveSpacing("m") // returns theme's medium spacing
  * resolveSpacing("16px") // returns "16px"
@@ -57,7 +57,7 @@ export function resolveSpacing(
  * @param value - Single spacing or array of spacings
  * @param theme - Optional theme instance
  * @returns CSS spacing string (e.g., "8px 16px")
- * 
+ *
  * @example
  * resolveSpacingArray("m") // returns "16px"
  * resolveSpacingArray(["s", "m"]) // returns "8px 16px"
@@ -70,7 +70,7 @@ export function resolveSpacingArray(
     if (!value) return undefined;
     const t = theme ?? getTheme();
     if (Array.isArray(value)) {
-        return value.map(v => resolveSpacing(v, t)).join(" ");
+        return value.map((v) => resolveSpacing(v, t)).join(" ");
     }
     return resolveSpacing(value, t);
 }
@@ -80,7 +80,7 @@ export function resolveSpacingArray(
  * @param value - Radius key or custom CSS value
  * @param theme - Optional theme instance
  * @returns Resolved CSS radius value or undefined
- * 
+ *
  * @example
  * resolveRadius("m") // returns theme's medium radius
  * resolveRadius("8px") // returns "8px"
@@ -101,7 +101,7 @@ export function resolveRadius(
  * @param value - Shadow key or custom CSS value
  * @param theme - Optional theme instance
  * @returns Resolved CSS shadow value or undefined
- * 
+ *
  * @example
  * resolveShadow("m") // returns theme's medium shadow
  * resolveShadow("0 2px 4px rgba(0,0,0,0.1)") // returns custom shadow
@@ -144,7 +144,7 @@ export const justifyMap = {
  * @param color - Base color palette key or custom color
  * @param theme - Optional theme instance
  * @returns The contrasting text color
- * 
+ *
  * @example
  * getOnColor("primary") // returns theme's onPrimary color
  * getOnColor("#ff0000") // returns "#fff" (fallback)
@@ -155,14 +155,16 @@ export function getOnColor(
 ): string {
     if (!color) return "#fff";
     const t = theme ?? getTheme();
-    
+
     // Check if it's a palette color and has a matching "on" color
     const paletteColor = t.colors[color as ColorPalette];
     if (paletteColor) {
-        const onKey = `on${color.charAt(0).toUpperCase()}${color.slice(1)}` as keyof typeof t.colors;
+        const onKey = `on${color.charAt(0).toUpperCase()}${color.slice(
+            1
+        )}` as keyof typeof t.colors;
         return t.colors[onKey] ?? "#fff";
     }
-    
+
     // For custom colors, return a default
     return "#fff";
 }
@@ -179,7 +181,7 @@ export function getContainerColor(
 ): string | undefined {
     if (!color) return undefined;
     const t = theme ?? getTheme();
-    
+
     const containerKey = `${color}Container` as keyof typeof t.colors;
     return t.colors[containerKey] ?? resolveColor(color, t);
 }
@@ -196,7 +198,9 @@ export function getOnContainerColor(
 ): string {
     if (!color) return "#000";
     const t = theme ?? getTheme();
-    
-    const onContainerKey = `on${color.charAt(0).toUpperCase()}${color.slice(1)}Container` as keyof typeof t.colors;
+
+    const onContainerKey = `on${color.charAt(0).toUpperCase()}${color.slice(
+        1
+    )}Container` as keyof typeof t.colors;
     return t.colors[onContainerKey] ?? getOnColor(color, t);
 }

@@ -1,12 +1,12 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
-    import { getTheme } from "$lib/config/theme.js";
-    import type { Spacing } from "$lib/types/layout.type.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type { Spacing } from "$package/types/layout.type.js";
 
     /**
      * @component Column
      * Vertical layout container that arranges children in a column.
-     * 
+     *
      * @example
      * <Column gap="m" align="center">
      *   <Text>Item 1</Text>
@@ -38,26 +38,28 @@
 
     const theme = getTheme();
 
-    function resolveSpacing(value: Spacing | string | undefined): string | undefined {
+    function resolveSpacing(
+        value: Spacing | string | undefined
+    ): string | undefined {
         if (!value) return undefined;
         const themeSpacing = theme.spacing[value as Spacing];
         return themeSpacing ?? value;
     }
 
-    const alignMap = { 
-        start: "flex-start", 
-        center: "center", 
-        end: "flex-end", 
-        stretch: "stretch" 
+    const alignMap = {
+        start: "flex-start",
+        center: "center",
+        end: "flex-end",
+        stretch: "stretch",
     };
-    
-    const justifyMap = { 
-        start: "flex-start", 
-        center: "center", 
-        end: "flex-end", 
-        between: "space-between", 
-        around: "space-around", 
-        evenly: "space-evenly" 
+
+    const justifyMap = {
+        start: "flex-start",
+        center: "center",
+        end: "flex-end",
+        between: "space-between",
+        around: "space-around",
+        evenly: "space-evenly",
     };
 
     const computedGap = $derived(resolveSpacing(gap));

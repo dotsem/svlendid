@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { getTheme } from "$lib/config/theme.js";
-    import type { Spacing } from "$lib/types/layout.type.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type { Spacing } from "$package/types/layout.type.js";
 
     /**
      * Spacer - Creates empty space in a flex container
@@ -16,16 +16,13 @@
         [key: string]: unknown;
     }
 
-    let {
-        width,
-        height,
-        flex,
-        ...props
-    }: Props = $props();
+    let { width, height, flex, ...props }: Props = $props();
 
     const theme = getTheme();
 
-    function resolveSpacing(value: Spacing | string | undefined): string | undefined {
+    function resolveSpacing(
+        value: Spacing | string | undefined
+    ): string | undefined {
         if (!value) return undefined;
         const themeSpacing = theme.spacing[value as Spacing];
         return themeSpacing ?? value;

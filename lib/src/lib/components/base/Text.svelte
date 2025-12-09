@@ -1,9 +1,9 @@
 <!-- filepath: /home/sem/prog/html/svlendid/lib/src/lib/components/base/Text.svelte -->
 <script lang="ts">
     import type { Snippet } from "svelte";
-    import { getTheme } from "$lib/config/theme.js";
-    import type { ColorPalette } from "$lib/types/colorPalette.type.js";
-    import type { FontTheme } from "$lib/types/theme.type.js";
+    import { getTheme } from "$package/config/theme.js";
+    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { FontTheme } from "$package/types/theme.type.js";
 
     /**
      * Text - Typography component with theme integration
@@ -19,7 +19,14 @@
         /** Text alignment */
         align?: "left" | "center" | "right" | "justify";
         /** Font weight override */
-        weight?: "extraThin" | "thin" | "regular" | "medium" | "bold" | "extrabold" | number;
+        weight?:
+            | "extraThin"
+            | "thin"
+            | "regular"
+            | "medium"
+            | "bold"
+            | "extrabold"
+            | number;
         /** Font size override */
         size?: string;
         /** Line height override */
@@ -37,7 +44,17 @@
         /** Allow text to wrap */
         wrap?: boolean;
         /** HTML element to render */
-        as?: "p" | "span" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "label" | "div";
+        as?:
+            | "p"
+            | "span"
+            | "h1"
+            | "h2"
+            | "h3"
+            | "h4"
+            | "h5"
+            | "h6"
+            | "label"
+            | "div";
         /** Additional HTML attributes */
         [key: string]: unknown;
     }
@@ -76,7 +93,9 @@
     const fontConfig = $derived(theme.fonts[variant]);
 
     // Resolve color from palette or use as-is
-    function resolveColor(colorValue: ColorPalette | string | undefined): string | undefined {
+    function resolveColor(
+        colorValue: ColorPalette | string | undefined
+    ): string | undefined {
         if (!colorValue) return undefined;
         const paletteColor = theme.colors[colorValue as ColorPalette];
         return paletteColor ?? colorValue;
@@ -86,16 +105,20 @@
     function resolveWeight(w: typeof weight): number | undefined {
         if (w === undefined) {
             const configWeight = fontConfig.fontWeight;
-            return typeof configWeight === "number" ? configWeight : weightMap[configWeight] ?? 400;
+            return typeof configWeight === "number"
+                ? configWeight
+                : (weightMap[configWeight] ?? 400);
         }
-        return typeof w === "number" ? w : weightMap[w] ?? 400;
+        return typeof w === "number" ? w : (weightMap[w] ?? 400);
     }
 
     const computedColor = $derived(resolveColor(color));
     const computedWeight = $derived(resolveWeight(weight));
     const computedSize = $derived(size ?? fontConfig.fontSize);
     const computedLineHeight = $derived(lineHeight ?? fontConfig.lineHeight);
-    const computedLetterSpacing = $derived(letterSpacing ?? fontConfig.letterSpacing);
+    const computedLetterSpacing = $derived(
+        letterSpacing ?? fontConfig.letterSpacing
+    );
     const computedItalic = $derived(italic ?? fontConfig.italic);
 </script>
 
