@@ -2,13 +2,15 @@
     Sidebar navigation for documentation
 -->
 <script lang="ts">
-    import { page } from '$app/stores';
-    import { Text, Column, Row, Icon, Clickable, Box } from 'lib';
-    import { navigation } from '$lib/data/navigation';
-    import { sidebarOpen } from '$lib/stores/docs';
+    import { page } from "$app/stores";
+    import { Text, Column, Row, Icon, Clickable, Box, Badge } from "lib";
+    import { navigation } from "$lib/data/navigation";
+    import { sidebarOpen } from "$lib/stores/docs";
 
     // Track expanded categories
-    let expandedCategories = $state<Set<string>>(new Set(navigation.map(c => c.slug)));
+    let expandedCategories = $state<Set<string>>(
+        new Set(navigation.map((c) => c.slug))
+    );
 
     function toggleCategory(slug: string) {
         if (expandedCategories.has(slug)) {
@@ -45,16 +47,26 @@
                     <div class="category-header">
                         <Row align="center" gap="s">
                             {#if category.icon}
-                                <Icon name={category.icon} size={16} color="onSurfaceVariant" />
+                                <Icon
+                                    name={category.icon}
+                                    size={16}
+                                    color="onSurfaceVariant"
+                                />
                             {/if}
-                            <Text variant="body2" color="onSurfaceVariant" style="font-weight: 600;">
+                            <Text
+                                variant="body2"
+                                color="onSurfaceVariant"
+                                style="font-weight: 600;"
+                            >
                                 {category.title}
                             </Text>
                         </Row>
-                        <Icon 
-                            name={expandedCategories.has(category.slug) ? "ChevronDown" : "ChevronRight"} 
-                            size={14} 
-                            color="onSurfaceVariant" 
+                        <Icon
+                            name={expandedCategories.has(category.slug)
+                                ? "ChevronDown"
+                                : "ChevronRight"}
+                            size={14}
+                            color="onSurfaceVariant"
                         />
                     </div>
                 </Clickable>
@@ -62,18 +74,35 @@
                 {#if expandedCategories.has(category.slug)}
                     <div class="category-items">
                         {#each category.items as item}
-                            <a 
+                            <a
                                 href="/docs/{category.slug}/{item.slug}"
                                 class="nav-item"
-                                class:active={isActive(category.slug, item.slug)}
+                                class:active={isActive(
+                                    category.slug,
+                                    item.slug
+                                )}
                                 onclick={closeSidebarOnMobile}
                             >
-                                <Text 
-                                    variant="body2" 
-                                    color={isActive(category.slug, item.slug) ? "primary" : "onSurface"}
-                                >
-                                    {item.title}
-                                </Text>
+                                <Row align="center" justify="between">
+                                    <Text
+                                        variant="body2"
+                                        color={isActive(
+                                            category.slug,
+                                            item.slug
+                                        )
+                                            ? "primary"
+                                            : "onSurface"}
+                                    >
+                                        {item.title}
+                                    </Text>
+                                    {#if item.badge}
+                                        <Badge
+                                            inline
+                                            content={item.badge}
+                                            color="primary"
+                                        />
+                                    {/if}
+                                </Row>
                             </a>
                         {/each}
                     </div>

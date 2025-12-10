@@ -1,6 +1,60 @@
 {
-  "generatedAt": "2025-12-09T22:14:56.938Z",
+  "generatedAt": "2025-12-09T23:04:25.055Z",
   "components": {
+    "Avatar": {
+      "name": "Avatar",
+      "description": "",
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "required": false,
+          "description": "Image source URL"
+        },
+        {
+          "name": "alt",
+          "type": "string",
+          "required": false,
+          "description": "Alt text for image",
+          "default": "\"\""
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "User name for initials fallback"
+        },
+        {
+          "name": "size",
+          "type": "AvatarSize",
+          "required": false,
+          "description": "Size preset",
+          "default": "\"m\""
+        },
+        {
+          "name": "variant",
+          "type": "AvatarVariant",
+          "required": false,
+          "description": "Shape variant",
+          "default": "\"circle\""
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Background color for initials",
+          "default": "\"primary\""
+        },
+        {
+          "name": "customSize",
+          "type": "string",
+          "required": false,
+          "description": "Custom size override"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Avatar.svelte"
+    },
     "Button": {
       "name": "Button",
       "description": "A versatile button component with multiple variants and sizes.",
@@ -156,6 +210,211 @@
       "snippets": [],
       "filePath": "base/Card.svelte"
     },
+    "Checkbox": {
+      "name": "Checkbox",
+      "description": "",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the checkbox is checked",
+          "default": "$bindable(false)"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Label text for the checkbox"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme from the palette",
+          "default": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "CheckboxSize",
+          "required": false,
+          "description": "Checkbox size",
+          "default": "\"m\""
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Name attribute for form submission"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "description": "Value attribute for form submission"
+        },
+        {
+          "name": "onchange",
+          "type": "(checked: boolean) => void",
+          "required": false,
+          "description": "Change handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Checkbox.svelte"
+    },
+    "Chip": {
+      "name": "Chip",
+      "description": "",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Chip label text (alternative to children)"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "variant",
+          "type": "ChipVariant",
+          "required": false,
+          "description": "Chip variant",
+          "default": "\"tonal\""
+        },
+        {
+          "name": "size",
+          "type": "ChipSize",
+          "required": false,
+          "description": "Chip size",
+          "default": "\"m\""
+        },
+        {
+          "name": "clickable",
+          "type": "boolean",
+          "required": false,
+          "description": "Clickable chip",
+          "default": "false"
+        },
+        {
+          "name": "selected",
+          "type": "boolean",
+          "required": false,
+          "description": "Selected state (for filter chips)",
+          "default": "false"
+        },
+        {
+          "name": "removable",
+          "type": "boolean",
+          "required": false,
+          "description": "Show remove button",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "leadingIcon",
+          "type": "Snippet",
+          "required": false,
+          "description": "Leading icon slot"
+        },
+        {
+          "name": "onclick",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Click handler"
+        },
+        {
+          "name": "onremove",
+          "type": "() => void",
+          "required": false,
+          "description": "Remove handler"
+        }
+      ],
+      "snippets": [
+        "leadingIcon"
+      ],
+      "filePath": "base/Chip.svelte"
+    },
+    "CircularProgress": {
+      "name": "CircularProgress",
+      "description": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": false,
+          "description": "Current value (0-100 or 0-max)",
+          "default": "0"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "required": false,
+          "description": "Maximum value",
+          "default": "100"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "CircularProgressSize",
+          "required": false,
+          "description": "Size preset",
+          "default": "\"m\""
+        },
+        {
+          "name": "customSize",
+          "type": "string",
+          "required": false,
+          "description": "Custom size override"
+        },
+        {
+          "name": "strokeWidth",
+          "type": "number",
+          "required": false,
+          "description": "Stroke width"
+        },
+        {
+          "name": "indeterminate",
+          "type": "boolean",
+          "required": false,
+          "description": "Indeterminate (loading) state",
+          "default": "false"
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "required": false,
+          "description": "Show percentage label",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/CircularProgress.svelte"
+    },
     "Divider": {
       "name": "Divider",
       "description": "",
@@ -204,6 +463,82 @@
       "snippets": [],
       "filePath": "base/Divider.svelte"
     },
+    "Head": {
+      "name": "Head",
+      "description": "",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "description": "Page title"
+        },
+        {
+          "name": "titleTemplate",
+          "type": "string",
+          "required": false,
+          "description": "Title template (e.g., \"%s | My Site\")"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "description": "Meta description"
+        },
+        {
+          "name": "keywords",
+          "type": "string | string[]",
+          "required": false,
+          "description": "Meta keywords"
+        },
+        {
+          "name": "canonical",
+          "type": "string",
+          "required": false,
+          "description": "Canonical URL"
+        },
+        {
+          "name": "ogImage",
+          "type": "string",
+          "required": false,
+          "description": "Open Graph image URL"
+        },
+        {
+          "name": "ogType",
+          "type": "\"website\" | \"article\" | \"product\"",
+          "required": false,
+          "description": "Open Graph type",
+          "default": "\"website\""
+        },
+        {
+          "name": "twitterCard",
+          "type": "\"summary\" | \"summary_large_image\"",
+          "required": false,
+          "description": "Twitter card type",
+          "default": "\"summary_large_image\""
+        },
+        {
+          "name": "robots",
+          "type": "string",
+          "required": false,
+          "description": "Robots directive"
+        },
+        {
+          "name": "themeColor",
+          "type": "string",
+          "required": false,
+          "description": "Theme color for mobile browsers"
+        },
+        {
+          "name": "favicon",
+          "type": "string",
+          "required": false,
+          "description": "Favicon URL"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Head.svelte"
+    },
     "Icon": {
       "name": "Icon",
       "description": "Renders icons from the Lucide icon library with theme integration.",
@@ -244,6 +579,77 @@
       ],
       "snippets": [],
       "filePath": "base/Icon.svelte"
+    },
+    "Image": {
+      "name": "Image",
+      "description": "",
+      "props": [
+        {
+          "name": "src",
+          "type": "string",
+          "required": true,
+          "description": "Image source URL"
+        },
+        {
+          "name": "alt",
+          "type": "string",
+          "required": true,
+          "description": "Alt text (required for accessibility)"
+        },
+        {
+          "name": "fallback",
+          "type": "string",
+          "required": false,
+          "description": "Fallback image URL"
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "description": "Image width"
+        },
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "description": "Image height"
+        },
+        {
+          "name": "aspectRatio",
+          "type": "string",
+          "required": false,
+          "description": "Aspect ratio (e.g., \"16/9\", \"1/1\")"
+        },
+        {
+          "name": "fit",
+          "type": "ImageFit",
+          "required": false,
+          "description": "Object fit behavior",
+          "default": "\"cover\""
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius"
+        },
+        {
+          "name": "loading",
+          "type": "ImageLoading",
+          "required": false,
+          "description": "Loading strategy",
+          "default": "\"lazy\""
+        },
+        {
+          "name": "showSkeleton",
+          "type": "boolean",
+          "required": false,
+          "description": "Show skeleton while loading",
+          "default": "true"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Image.svelte"
     },
     "Input": {
       "name": "Input",
@@ -354,6 +760,538 @@
       ],
       "filePath": "base/Input.svelte"
     },
+    "Link": {
+      "name": "Link",
+      "description": "",
+      "props": [
+        {
+          "name": "href",
+          "type": "string",
+          "required": true,
+          "description": "Link URL"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "underline",
+          "type": "LinkUnderline",
+          "required": false,
+          "description": "Underline behavior",
+          "default": "\"hover\""
+        },
+        {
+          "name": "external",
+          "type": "boolean",
+          "required": false,
+          "description": "Open in new tab",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Link.svelte"
+    },
+    "Modal": {
+      "name": "Modal",
+      "description": "",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the modal is visible",
+          "default": "$bindable(false)"
+        },
+        {
+          "name": "size",
+          "type": "ModalSize",
+          "required": false,
+          "description": "Modal size preset",
+          "default": "\"m\""
+        },
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "description": "Custom max width"
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius"
+        },
+        {
+          "name": "closeOnOverlay",
+          "type": "boolean",
+          "required": false,
+          "description": "Close when clicking overlay",
+          "default": "true"
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean",
+          "required": false,
+          "description": "Close when pressing Escape",
+          "default": "true"
+        },
+        {
+          "name": "centered",
+          "type": "boolean",
+          "required": false,
+          "description": "Center the modal vertically",
+          "default": "true"
+        },
+        {
+          "name": "onclose",
+          "type": "() => void",
+          "required": false,
+          "description": "Close handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Modal.svelte"
+    },
+    "Popup": {
+      "name": "Popup",
+      "description": "",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the popup is visible",
+          "default": "false"
+        },
+        {
+          "name": "anchor",
+          "type": "HTMLElement",
+          "required": false,
+          "description": "Reference element to position against"
+        },
+        {
+          "name": "placement",
+          "type": "PopupPlacement",
+          "required": false,
+          "description": "Placement relative to anchor",
+          "default": "\"bottom\""
+        },
+        {
+          "name": "offset",
+          "type": "number",
+          "required": false,
+          "description": "Offset from anchor in pixels",
+          "default": "8"
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius"
+        },
+        {
+          "name": "onclose",
+          "type": "() => void",
+          "required": false,
+          "description": "Close handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Popup.svelte"
+    },
+    "Progress": {
+      "name": "Progress",
+      "description": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": false,
+          "description": "Current value (0-100 or 0-max)",
+          "default": "0"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "required": false,
+          "description": "Maximum value",
+          "default": "100"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "ProgressSize",
+          "required": false,
+          "description": "Progress bar height",
+          "default": "\"m\""
+        },
+        {
+          "name": "indeterminate",
+          "type": "boolean",
+          "required": false,
+          "description": "Indeterminate (loading) state",
+          "default": "false"
+        },
+        {
+          "name": "showLabel",
+          "type": "boolean",
+          "required": false,
+          "description": "Show percentage label",
+          "default": "false"
+        },
+        {
+          "name": "rounded",
+          "type": "boolean",
+          "required": false,
+          "description": "Border radius",
+          "default": "true"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Progress.svelte"
+    },
+    "Radio": {
+      "name": "Radio",
+      "description": "",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the radio is checked",
+          "default": "false"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Label text for the radio button"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "description": "Name attribute for radio group"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": true,
+          "description": "Value for this radio option"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme from the palette",
+          "default": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "RadioSize",
+          "required": false,
+          "description": "Radio size",
+          "default": "\"m\""
+        },
+        {
+          "name": "onchange",
+          "type": "(value: string) => void",
+          "required": false,
+          "description": "Change handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Radio.svelte"
+    },
+    "Select": {
+      "name": "Select",
+      "description": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "description": "Current selected value",
+          "default": "$bindable(\"\")"
+        },
+        {
+          "name": "options",
+          "type": "SelectOption[]",
+          "required": true,
+          "description": "Available options"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text when no value selected",
+          "default": "\"Select an option\""
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "variant",
+          "type": "SelectVariant",
+          "required": false,
+          "description": "Select variant",
+          "default": "\"outlined\""
+        },
+        {
+          "name": "size",
+          "type": "SelectSize",
+          "required": false,
+          "description": "Select size",
+          "default": "\"m\""
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Name for form submission"
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "required": false,
+          "description": "Full width",
+          "default": "false"
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "description": "Error state",
+          "default": "false"
+        },
+        {
+          "name": "onchange",
+          "type": "(value: string) => void",
+          "required": false,
+          "description": "Change handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Select.svelte"
+    },
+    "Slider": {
+      "name": "Slider",
+      "description": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "number",
+          "required": false,
+          "description": "Current value",
+          "default": "$bindable(50)"
+        },
+        {
+          "name": "min",
+          "type": "number",
+          "required": false,
+          "description": "Minimum value",
+          "default": "0"
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "required": false,
+          "description": "Maximum value",
+          "default": "100"
+        },
+        {
+          "name": "step",
+          "type": "number",
+          "required": false,
+          "description": "Step increment",
+          "default": "1"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "SliderSize",
+          "required": false,
+          "description": "Slider size",
+          "default": "\"m\""
+        },
+        {
+          "name": "showValue",
+          "type": "boolean",
+          "required": false,
+          "description": "Show current value label",
+          "default": "false"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Name for form submission"
+        },
+        {
+          "name": "onchange",
+          "type": "(value: number) => void",
+          "required": false,
+          "description": "Change handler"
+        },
+        {
+          "name": "oninput",
+          "type": "(value: number) => void",
+          "required": false,
+          "description": "Input handler (fires during drag)"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Slider.svelte"
+    },
+    "Spinner": {
+      "name": "Spinner",
+      "description": "",
+      "props": [
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "SpinnerSize",
+          "required": false,
+          "description": "Size preset",
+          "default": "\"m\""
+        },
+        {
+          "name": "customSize",
+          "type": "string",
+          "required": false,
+          "description": "Custom size override"
+        },
+        {
+          "name": "strokeWidth",
+          "type": "number",
+          "required": false,
+          "description": "Stroke width"
+        },
+        {
+          "name": "speed",
+          "type": "string",
+          "required": false,
+          "description": "Animation speed (e.g., \"0.75s\")",
+          "default": "\"0.75s\""
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Spinner.svelte"
+    },
+    "Switch": {
+      "name": "Switch",
+      "description": "",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the switch is on",
+          "default": "$bindable(false)"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Label text"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color when switch is on",
+          "default": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "SwitchSize",
+          "required": false,
+          "description": "Switch size",
+          "default": "\"m\""
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Name attribute for form submission"
+        },
+        {
+          "name": "onchange",
+          "type": "(checked: boolean) => void",
+          "required": false,
+          "description": "Change handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/Switch.svelte"
+    },
     "Text": {
       "name": "Text",
       "description": "",
@@ -429,6 +1367,120 @@
       ],
       "snippets": [],
       "filePath": "base/Text.svelte"
+    },
+    "TextArea": {
+      "name": "TextArea",
+      "description": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "description": "Current value",
+          "default": "$bindable(\"\")"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text"
+        },
+        {
+          "name": "rows",
+          "type": "number",
+          "required": false,
+          "description": "Number of visible rows",
+          "default": "4"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "readonly",
+          "type": "boolean",
+          "required": false,
+          "description": "Readonly state",
+          "default": "false"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "variant",
+          "type": "TextAreaVariant",
+          "required": false,
+          "description": "Input variant",
+          "default": "\"outlined\""
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius"
+        },
+        {
+          "name": "resize",
+          "type": "TextAreaResize",
+          "required": false,
+          "description": "Resize behavior",
+          "default": "\"vertical\""
+        },
+        {
+          "name": "maxlength",
+          "type": "number",
+          "required": false,
+          "description": "Maximum length"
+        },
+        {
+          "name": "showCount",
+          "type": "boolean",
+          "required": false,
+          "description": "Show character count",
+          "default": "false"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "Name for form submission"
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "required": false,
+          "description": "Full width",
+          "default": "false"
+        },
+        {
+          "name": "error",
+          "type": "boolean",
+          "required": false,
+          "description": "Error state",
+          "default": "false"
+        },
+        {
+          "name": "oninput",
+          "type": "(value: string) => void",
+          "required": false,
+          "description": "Input handler"
+        },
+        {
+          "name": "onchange",
+          "type": "(value: string) => void",
+          "required": false,
+          "description": "Change handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "base/TextArea.svelte"
     },
     "ThemeProvider": {
       "name": "ThemeProvider",
@@ -785,6 +1837,75 @@
       "snippets": [],
       "filePath": "layout/Flex.svelte"
     },
+    "Grid": {
+      "name": "Grid",
+      "description": "",
+      "props": [
+        {
+          "name": "columns",
+          "type": "number | string",
+          "required": false,
+          "description": "Number of columns or grid-template-columns value"
+        },
+        {
+          "name": "rows",
+          "type": "number | string",
+          "required": false,
+          "description": "Number of rows or grid-template-rows value"
+        },
+        {
+          "name": "gap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Gap between grid items (uses theme spacing)"
+        },
+        {
+          "name": "columnGap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Column gap (overrides gap for columns)"
+        },
+        {
+          "name": "rowGap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Row gap (overrides gap for rows)"
+        },
+        {
+          "name": "autoFlow",
+          "type": "\"row\" | \"column\" | \"row dense\" | \"column dense\"",
+          "required": false,
+          "description": "Grid auto flow direction"
+        },
+        {
+          "name": "alignItems",
+          "type": "\"start\" | \"end\" | \"center\" | \"stretch\" | \"baseline\"",
+          "required": false,
+          "description": "Align items along the block axis"
+        },
+        {
+          "name": "justifyItems",
+          "type": "\"start\" | \"end\" | \"center\" | \"stretch\"",
+          "required": false,
+          "description": "Justify items along the inline axis"
+        },
+        {
+          "name": "minItemWidth",
+          "type": "string",
+          "required": false,
+          "description": "Align the grid within the container Justify the grid within the container Minimum item width for auto-fit/auto-fill columns"
+        },
+        {
+          "name": "autoFill",
+          "type": "boolean",
+          "required": false,
+          "description": "Use auto-fill instead of auto-fit for responsive columns",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "layout/Grid.svelte"
+    },
     "Row": {
       "name": "Row",
       "description": "",
@@ -1106,6 +2227,47 @@
       ],
       "filePath": "primitives/interactable/Draggable.svelte"
     },
+    "FocusRing": {
+      "name": "FocusRing",
+      "description": "",
+      "props": [
+        {
+          "name": "visible",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the focus ring is visible",
+          "default": "false"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette | string",
+          "required": false,
+          "description": "Color of the focus ring"
+        },
+        {
+          "name": "offset",
+          "type": "string",
+          "required": false,
+          "description": "Offset from the element edge",
+          "default": "\"2px\""
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "description": "Width of the focus ring",
+          "default": "\"2px\""
+        },
+        {
+          "name": "radius",
+          "type": "string",
+          "required": false,
+          "description": "Border radius (inherits from parent if not set)"
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/interactable/FocusRing.svelte"
+    },
     "Followable": {
       "name": "Followable",
       "description": "",
@@ -1283,6 +2445,53 @@
       "snippets": [],
       "filePath": "primitives/interactable/RippleEffect.svelte"
     },
+    "Overlay": {
+      "name": "Overlay",
+      "description": "",
+      "props": [
+        {
+          "name": "visible",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the overlay is visible",
+          "default": "true"
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "required": false,
+          "description": "Background color",
+          "default": "\"black\""
+        },
+        {
+          "name": "opacity",
+          "type": "number",
+          "required": false,
+          "description": "Background opacity (0-1)",
+          "default": "0.5"
+        },
+        {
+          "name": "blur",
+          "type": "string",
+          "required": false,
+          "description": "Apply backdrop blur effect"
+        },
+        {
+          "name": "onclick",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Click handler for the overlay"
+        },
+        {
+          "name": "zIndex",
+          "type": "number",
+          "required": false,
+          "description": "Z-index level"
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/visibility/Overlay.svelte"
+    },
     "Portal": {
       "name": "Portal",
       "description": "",
@@ -1312,6 +2521,164 @@
       "props": [],
       "snippets": [],
       "filePath": "primitives/visibility/Visible.svelte"
+    },
+    "VisuallyHidden": {
+      "name": "VisuallyHidden",
+      "description": "",
+      "props": [
+        {
+          "name": "as",
+          "type": "\"span\" | \"div\"",
+          "required": false,
+          "description": "Element tag to render",
+          "default": "\"span\""
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/visibility/VisuallyHidden.svelte"
+    },
+    "Accordion": {
+      "name": "Accordion",
+      "description": "",
+      "props": [
+        {
+          "name": "items",
+          "type": "AccordionItem[]",
+          "required": true,
+          "description": "List of accordion items"
+        },
+        {
+          "name": "multiple",
+          "type": "boolean",
+          "required": false,
+          "description": "Allow multiple items open",
+          "default": "false"
+        },
+        {
+          "name": "expanded",
+          "type": "string[]",
+          "required": false,
+          "description": "Initially expanded item IDs",
+          "default": "$bindable([])"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme for active state",
+          "default": "\"primary\""
+        },
+        {
+          "name": "variant",
+          "type": "\"default\" | \"bordered\" | \"separated\"",
+          "required": false,
+          "description": "Variant style",
+          "default": "\"default\""
+        }
+      ],
+      "snippets": [
+        "content"
+      ],
+      "filePath": "widgets/Accordion.svelte"
+    },
+    "Alert": {
+      "name": "Alert",
+      "description": "",
+      "props": [
+        {
+          "name": "severity",
+          "type": "AlertSeverity",
+          "required": false,
+          "description": "Alert severity/type",
+          "default": "\"info\""
+        },
+        {
+          "name": "variant",
+          "type": "AlertVariant",
+          "required": false,
+          "description": "Visual variant",
+          "default": "\"tonal\""
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "description": "Optional title"
+        },
+        {
+          "name": "showIcon",
+          "type": "boolean",
+          "required": false,
+          "description": "Show icon for severity",
+          "default": "true"
+        },
+        {
+          "name": "dismissible",
+          "type": "boolean",
+          "required": false,
+          "description": "Dismissible alert",
+          "default": "false"
+        },
+        {
+          "name": "icon",
+          "type": "Snippet",
+          "required": false,
+          "description": "Custom icon slot"
+        },
+        {
+          "name": "action",
+          "type": "Snippet",
+          "required": false,
+          "description": "Action slot"
+        },
+        {
+          "name": "ondismiss",
+          "type": "() => void",
+          "required": false,
+          "description": "Dismiss handler"
+        }
+      ],
+      "snippets": [
+        "icon",
+        "action"
+      ],
+      "filePath": "widgets/Alert.svelte"
+    },
+    "BackToTop": {
+      "name": "BackToTop",
+      "description": "",
+      "props": [
+        {
+          "name": "showAfter",
+          "type": "number",
+          "required": false,
+          "description": "Show after scrolling this many pixels",
+          "default": "300"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "BackToTopSize",
+          "required": false,
+          "description": "Size preset",
+          "default": "\"m\""
+        },
+        {
+          "name": "smooth",
+          "type": "boolean",
+          "required": false,
+          "description": "Smooth scroll behavior",
+          "default": "true"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/BackToTop.svelte"
     },
     "Badge": {
       "name": "Badge",
@@ -1375,6 +2742,986 @@
       ],
       "snippets": [],
       "filePath": "widgets/Badge.svelte"
+    },
+    "Breadcrumb": {
+      "name": "Breadcrumb",
+      "description": "",
+      "props": [
+        {
+          "name": "items",
+          "type": "BreadcrumbItem[]",
+          "required": true,
+          "description": "List of breadcrumb items"
+        },
+        {
+          "name": "separator",
+          "type": "string | Snippet",
+          "required": false,
+          "description": "Separator between items",
+          "default": "\"/\""
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color for active/current item",
+          "default": "\"primary\""
+        },
+        {
+          "name": "maxItems",
+          "type": "number",
+          "required": false,
+          "description": "Maximum items to show (collapsed if exceeded)"
+        }
+      ],
+      "snippets": [
+        "icon"
+      ],
+      "filePath": "widgets/Breadcrumb.svelte"
+    },
+    "Dialog": {
+      "name": "Dialog",
+      "description": "",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the dialog is visible",
+          "default": "$bindable(false)"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "description": "Dialog title"
+        },
+        {
+          "name": "actions",
+          "type": "Snippet",
+          "required": false,
+          "description": "Footer/actions slot"
+        },
+        {
+          "name": "size",
+          "type": "DialogSize",
+          "required": false,
+          "description": "Dialog size",
+          "default": "\"m\""
+        },
+        {
+          "name": "showClose",
+          "type": "boolean",
+          "required": false,
+          "description": "Show close button in header",
+          "default": "true"
+        },
+        {
+          "name": "closeOnOverlay",
+          "type": "boolean",
+          "required": false,
+          "description": "Close when clicking overlay",
+          "default": "true"
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean",
+          "required": false,
+          "description": "Close when pressing Escape",
+          "default": "true"
+        },
+        {
+          "name": "onclose",
+          "type": "() => void",
+          "required": false,
+          "description": "Close handler"
+        }
+      ],
+      "snippets": [
+        "actions"
+      ],
+      "filePath": "widgets/Dialog.svelte"
+    },
+    "Drawer": {
+      "name": "Drawer",
+      "description": "",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the drawer is visible",
+          "default": "$bindable(false)"
+        },
+        {
+          "name": "placement",
+          "type": "DrawerPlacement",
+          "required": false,
+          "description": "Drawer placement",
+          "default": "\"left\""
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "required": false,
+          "description": "Drawer size",
+          "default": "\"320px\""
+        },
+        {
+          "name": "closeOnOverlay",
+          "type": "boolean",
+          "required": false,
+          "description": "Close when clicking overlay",
+          "default": "true"
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean",
+          "required": false,
+          "description": "Close when pressing Escape",
+          "default": "true"
+        },
+        {
+          "name": "onclose",
+          "type": "() => void",
+          "required": false,
+          "description": "Close handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/Drawer.svelte"
+    },
+    "Dropdown": {
+      "name": "Dropdown",
+      "description": "",
+      "props": [
+        {
+          "name": "trigger",
+          "type": "Snippet",
+          "required": true,
+          "description": "Trigger element slot"
+        },
+        {
+          "name": "placement",
+          "type": "DropdownPlacement",
+          "required": false,
+          "description": "Dropdown placement",
+          "default": "\"bottom-start\""
+        },
+        {
+          "name": "offset",
+          "type": "number",
+          "required": false,
+          "description": "Offset from trigger",
+          "default": "4"
+        },
+        {
+          "name": "closeOnClick",
+          "type": "boolean",
+          "required": false,
+          "description": "Close on content click",
+          "default": "true"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        }
+      ],
+      "snippets": [
+        "trigger"
+      ],
+      "filePath": "widgets/Dropdown.svelte"
+    },
+    "FloatingActionButton": {
+      "name": "FloatingActionButton",
+      "description": "",
+      "props": [
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "size",
+          "type": "FABSize",
+          "required": false,
+          "description": "FAB size",
+          "default": "\"m\""
+        },
+        {
+          "name": "position",
+          "type": "FABPosition",
+          "required": false,
+          "description": "Fixed position on screen",
+          "default": "\"bottom-right\""
+        },
+        {
+          "name": "offset",
+          "type": "string",
+          "required": false,
+          "description": "Offset from edge",
+          "default": "\"1.5rem\""
+        },
+        {
+          "name": "extended",
+          "type": "boolean",
+          "required": false,
+          "description": "Extended FAB with label",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "onclick",
+          "type": "(event: MouseEvent) => void",
+          "required": false,
+          "description": "Click handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/FloatingActionButton.svelte"
+    },
+    "Form": {
+      "name": "Form",
+      "description": "",
+      "props": [
+        {
+          "name": "onsubmit",
+          "type": "(event: SubmitEvent) => void",
+          "required": false,
+          "description": "Form submission handler"
+        },
+        {
+          "name": "onreset",
+          "type": "() => void",
+          "required": false,
+          "description": "Form reset handler"
+        },
+        {
+          "name": "gap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Gap between form fields",
+          "default": "\"m\""
+        },
+        {
+          "name": "direction",
+          "type": "\"column\" | \"row\"",
+          "required": false,
+          "description": "Form layout direction",
+          "default": "\"column\""
+        },
+        {
+          "name": "novalidate",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable native browser validation",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/Form.svelte"
+    },
+    "FormField": {
+      "name": "FormField",
+      "description": "",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "required": false,
+          "description": "Field label"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false,
+          "description": "Help text"
+        },
+        {
+          "name": "error",
+          "type": "string",
+          "required": false,
+          "description": "Error message"
+        },
+        {
+          "name": "required",
+          "type": "boolean",
+          "required": false,
+          "description": "Required field indicator",
+          "default": "false"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "Field ID (for label association)"
+        },
+        {
+          "name": "horizontal",
+          "type": "boolean",
+          "required": false,
+          "description": "Horizontal layout",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/FormField.svelte"
+    },
+    "Hero": {
+      "name": "Hero",
+      "description": "",
+      "props": [
+        {
+          "name": "size",
+          "type": "HeroSize",
+          "required": false,
+          "description": "Hero height",
+          "default": "\"m\""
+        },
+        {
+          "name": "minHeight",
+          "type": "string",
+          "required": false,
+          "description": "Custom min height"
+        },
+        {
+          "name": "align",
+          "type": "HeroAlign",
+          "required": false,
+          "description": "Content alignment",
+          "default": "\"center\""
+        },
+        {
+          "name": "background",
+          "type": "string",
+          "required": false,
+          "description": "Background color or gradient"
+        },
+        {
+          "name": "backgroundImage",
+          "type": "string",
+          "required": false,
+          "description": "Background image URL"
+        },
+        {
+          "name": "overlay",
+          "type": "string",
+          "required": false,
+          "description": "Overlay color for background images"
+        },
+        {
+          "name": "paddingY",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Vertical padding",
+          "default": "\"3xl\""
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/Hero.svelte"
+    },
+    "List": {
+      "name": "List",
+      "description": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "ListVariant",
+          "required": false,
+          "description": "List variant",
+          "default": "\"default\""
+        },
+        {
+          "name": "gap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Gap between items (for default variant)",
+          "default": "\"none\""
+        },
+        {
+          "name": "noPadding",
+          "type": "boolean",
+          "required": false,
+          "description": "Disable padding",
+          "default": "false"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/List.svelte"
+    },
+    "ListItem": {
+      "name": "ListItem",
+      "description": "",
+      "props": [
+        {
+          "name": "clickable",
+          "type": "boolean",
+          "required": false,
+          "description": "Make item clickable",
+          "default": "false"
+        },
+        {
+          "name": "selected",
+          "type": "boolean",
+          "required": false,
+          "description": "Selected state",
+          "default": "false"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "leading",
+          "type": "Snippet",
+          "required": false,
+          "description": "Leading content slot"
+        },
+        {
+          "name": "trailing",
+          "type": "Snippet",
+          "required": false,
+          "description": "Trailing content slot"
+        },
+        {
+          "name": "secondary",
+          "type": "string",
+          "required": false,
+          "description": "Secondary text"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color for selected state",
+          "default": "\"primary\""
+        },
+        {
+          "name": "onclick",
+          "type": "() => void",
+          "required": false,
+          "description": "Click handler"
+        }
+      ],
+      "snippets": [
+        "leading",
+        "trailing"
+      ],
+      "filePath": "widgets/ListItem.svelte"
+    },
+    "Menu": {
+      "name": "Menu",
+      "description": "",
+      "props": [
+        {
+          "name": "items",
+          "type": "MenuItem[]",
+          "required": true,
+          "description": "Menu items"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color for hover state",
+          "default": "\"primary\""
+        },
+        {
+          "name": "selected",
+          "type": "string",
+          "required": false,
+          "description": "Selected item ID"
+        },
+        {
+          "name": "compact",
+          "type": "boolean",
+          "required": false,
+          "description": "Compact mode",
+          "default": "false"
+        }
+      ],
+      "snippets": [
+        "icon"
+      ],
+      "filePath": "widgets/Menu.svelte"
+    },
+    "Pagination": {
+      "name": "Pagination",
+      "description": "",
+      "props": [
+        {
+          "name": "page",
+          "type": "number",
+          "required": false,
+          "description": "Current page (1-indexed)",
+          "default": "$bindable(1)"
+        },
+        {
+          "name": "totalPages",
+          "type": "number",
+          "required": true,
+          "description": "Total number of pages"
+        },
+        {
+          "name": "siblingCount",
+          "type": "number",
+          "required": false,
+          "description": "Number of page buttons to show",
+          "default": "1"
+        },
+        {
+          "name": "showEnds",
+          "type": "boolean",
+          "required": false,
+          "description": "Show first/last buttons",
+          "default": "true"
+        },
+        {
+          "name": "showArrows",
+          "type": "boolean",
+          "required": false,
+          "description": "Show prev/next buttons",
+          "default": "true"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "onchange",
+          "type": "(page: number) => void",
+          "required": false,
+          "description": "Page change handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/Pagination.svelte"
+    },
+    "SearchInput": {
+      "name": "SearchInput",
+      "description": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": false,
+          "description": "Search query value",
+          "default": "$bindable(\"\")"
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "description": "Placeholder text",
+          "default": "\"Search...\""
+        },
+        {
+          "name": "size",
+          "type": "SearchInputSize",
+          "required": false,
+          "description": "Input size",
+          "default": "\"m\""
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "radius",
+          "type": "Radius | string",
+          "required": false,
+          "description": "Border radius"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Disabled state",
+          "default": "false"
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "required": false,
+          "description": "Loading state",
+          "default": "false"
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "required": false,
+          "description": "Full width",
+          "default": "false"
+        },
+        {
+          "name": "oninput",
+          "type": "(value: string) => void",
+          "required": false,
+          "description": "Input handler"
+        },
+        {
+          "name": "onsubmit",
+          "type": "(value: string) => void",
+          "required": false,
+          "description": "Submit handler (on Enter)"
+        },
+        {
+          "name": "onclear",
+          "type": "() => void",
+          "required": false,
+          "description": "Clear handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/SearchInput.svelte"
+    },
+    "Skeleton": {
+      "name": "Skeleton",
+      "description": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "SkeletonVariant",
+          "required": false,
+          "description": "Skeleton variant",
+          "default": "\"text\""
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "required": false,
+          "description": "Width (default: 100%)",
+          "default": "\"100%\""
+        },
+        {
+          "name": "height",
+          "type": "string",
+          "required": false,
+          "description": "Height (default: based on variant)"
+        },
+        {
+          "name": "animation",
+          "type": "\"pulse\" | \"shimmer\" | \"none\"",
+          "required": false,
+          "description": "Animation type",
+          "default": "\"shimmer\""
+        },
+        {
+          "name": "lines",
+          "type": "number",
+          "required": false,
+          "description": "Number of lines for text variant",
+          "default": "1"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/Skeleton.svelte"
+    },
+    "SplitSection": {
+      "name": "SplitSection",
+      "description": "",
+      "props": [
+        {
+          "name": "start",
+          "type": "Snippet",
+          "required": true,
+          "description": "Left/start content"
+        },
+        {
+          "name": "end",
+          "type": "Snippet",
+          "required": true,
+          "description": "Right/end content"
+        },
+        {
+          "name": "layout",
+          "type": "SplitLayout",
+          "required": false,
+          "description": "Which side has the primary content",
+          "default": "\"left\""
+        },
+        {
+          "name": "ratio",
+          "type": "SplitRatio",
+          "required": false,
+          "description": "Split ratio",
+          "default": "\"1:1\""
+        },
+        {
+          "name": "gap",
+          "type": "Spacing | string",
+          "required": false,
+          "description": "Gap between columns",
+          "default": "\"xl\""
+        },
+        {
+          "name": "alignItems",
+          "type": "\"start\" | \"center\" | \"end\" | \"stretch\"",
+          "required": false,
+          "description": "Vertical alignment",
+          "default": "\"center\""
+        },
+        {
+          "name": "stackOnMobile",
+          "type": "boolean",
+          "required": false,
+          "description": "Stack on mobile",
+          "default": "true"
+        },
+        {
+          "name": "reverseOnMobile",
+          "type": "boolean",
+          "required": false,
+          "description": "Reverse stack order on mobile",
+          "default": "false"
+        },
+        {
+          "name": "minHeight",
+          "type": "string",
+          "required": false,
+          "description": "Minimum height"
+        }
+      ],
+      "snippets": [
+        "start",
+        "end"
+      ],
+      "filePath": "widgets/SplitSection.svelte"
+    },
+    "Table": {
+      "name": "Table",
+      "description": "",
+      "props": [
+        {
+          "name": "data",
+          "type": "Record<string, unknown>[]",
+          "required": true,
+          "description": "Table data rows"
+        },
+        {
+          "name": "columns",
+          "type": "TableColumn[]",
+          "required": true,
+          "description": "Column definitions"
+        },
+        {
+          "name": "striped",
+          "type": "boolean",
+          "required": false,
+          "description": "Striped rows",
+          "default": "false"
+        },
+        {
+          "name": "hoverable",
+          "type": "boolean",
+          "required": false,
+          "description": "Hoverable rows",
+          "default": "false"
+        },
+        {
+          "name": "compact",
+          "type": "boolean",
+          "required": false,
+          "description": "Compact padding",
+          "default": "false"
+        },
+        {
+          "name": "bordered",
+          "type": "boolean",
+          "required": false,
+          "description": "Bordered style",
+          "default": "false"
+        },
+        {
+          "name": "stickyHeader",
+          "type": "boolean",
+          "required": false,
+          "description": "Sticky header",
+          "default": "false"
+        },
+        {
+          "name": "sortColumn",
+          "type": "string",
+          "required": false,
+          "description": "Currently sorted column"
+        },
+        {
+          "name": "sortDirection",
+          "type": "\"asc\" | \"desc\"",
+          "required": false,
+          "description": "Sort direction",
+          "default": "\"asc\""
+        },
+        {
+          "name": "onsort",
+          "type": "(column: string, direction: \"asc\" | \"desc\") => void",
+          "required": false,
+          "description": "Sort handler"
+        },
+        {
+          "name": "onrowclick",
+          "type": "(row: Record<string, unknown>, index: number) => void",
+          "required": false,
+          "description": "Row click handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/Table.svelte"
+    },
+    "Tabs": {
+      "name": "Tabs",
+      "description": "",
+      "props": [
+        {
+          "name": "tabs",
+          "type": "Tab[]",
+          "required": true,
+          "description": "List of tabs"
+        },
+        {
+          "name": "activeTab",
+          "type": "string",
+          "required": false,
+          "description": "Currently active tab ID",
+          "default": "$bindable(tabs[0]?.id ?? \"\")"
+        },
+        {
+          "name": "fullWidth",
+          "type": "boolean",
+          "required": false,
+          "description": "Full width tabs",
+          "default": "false"
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "onchange",
+          "type": "(tabId: string) => void",
+          "required": false,
+          "description": "Tab change handler"
+        }
+      ],
+      "snippets": [
+        "icon"
+      ],
+      "filePath": "widgets/Tabs.svelte"
+    },
+    "ThemeToggle": {
+      "name": "ThemeToggle",
+      "description": "",
+      "props": [
+        {
+          "name": "dark",
+          "type": "boolean",
+          "required": false,
+          "description": "Current dark mode state",
+          "default": "$bindable(false)"
+        },
+        {
+          "name": "size",
+          "type": "ThemeToggleSize",
+          "required": false,
+          "description": "Size preset",
+          "default": "\"m\""
+        },
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Color scheme",
+          "default": "\"primary\""
+        },
+        {
+          "name": "ontoggle",
+          "type": "(dark: boolean) => void",
+          "required": false,
+          "description": "Toggle handler"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/ThemeToggle.svelte"
+    },
+    "Toast": {
+      "name": "Toast",
+      "description": "",
+      "props": [
+        {
+          "name": "color",
+          "type": "ColorPalette",
+          "required": false,
+          "description": "Toast color/type",
+          "default": "\"primary\""
+        },
+        {
+          "name": "variant",
+          "type": "ToastVariant",
+          "required": false,
+          "description": "Visual variant",
+          "default": "\"filled\""
+        },
+        {
+          "name": "closable",
+          "type": "boolean",
+          "required": false,
+          "description": "Show close button",
+          "default": "true"
+        },
+        {
+          "name": "icon",
+          "type": "Snippet",
+          "required": false,
+          "description": "Icon slot"
+        },
+        {
+          "name": "action",
+          "type": "Snippet",
+          "required": false,
+          "description": "Action slot"
+        },
+        {
+          "name": "onclose",
+          "type": "() => void",
+          "required": false,
+          "description": "Close handler"
+        }
+      ],
+      "snippets": [
+        "icon",
+        "action"
+      ],
+      "filePath": "widgets/Toast.svelte"
     }
   }
 }

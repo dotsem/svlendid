@@ -84,6 +84,26 @@ export {
     type IconName,
 } from "$package/components/base/Icon.svelte";
 
+// Form Inputs
+export { default as Checkbox } from "$package/components/base/Checkbox.svelte";
+export { default as Radio } from "$package/components/base/Radio.svelte";
+export { default as Switch } from "$package/components/base/Switch.svelte";
+export { default as Select } from "$package/components/base/Select.svelte";
+export { default as Slider } from "$package/components/base/Slider.svelte";
+export { default as TextArea } from "$package/components/base/TextArea.svelte";
+
+// Display Components
+export { default as Avatar } from "$package/components/base/Avatar.svelte";
+export { default as Chip } from "$package/components/base/Chip.svelte";
+export { default as Image } from "$package/components/base/Image.svelte";
+export { default as Link } from "$package/components/base/Link.svelte";
+export { default as Progress } from "$package/components/base/Progress.svelte";
+export { default as CircularProgress } from "$package/components/base/CircularProgress.svelte";
+export { default as Spinner } from "$package/components/base/Spinner.svelte";
+export { default as Modal } from "$package/components/base/Modal.svelte";
+export { default as Popup } from "$package/components/base/Popup.svelte";
+export { default as Head } from "$package/components/base/Head.svelte";
+
 // ============================================
 // Layout Components
 // ============================================
@@ -96,6 +116,7 @@ export { default as Center } from "$package/components/layout/Center.svelte";
 export { default as Spacer } from "$package/components/layout/Spacer.svelte";
 export { default as Expanded } from "$package/components/layout/Expanded.svelte";
 export { default as Container } from "$package/components/layout/Container.svelte";
+export { default as Grid } from "$package/components/layout/Grid.svelte";
 
 // ============================================
 // Primitive Components - Interactable
@@ -106,12 +127,15 @@ export { default as Hoverable } from "$package/components/primitives/interactabl
 export { default as Followable } from "$package/components/primitives/interactable/Followable.svelte";
 export { default as Keyboard } from "$package/components/primitives/interactable/Keyboard.svelte";
 export { default as Ripple } from "$package/components/primitives/interactable/Ripple.svelte";
+export { default as FocusRing } from "$package/components/primitives/interactable/FocusRing.svelte";
 
 // ============================================
 // Primitive Components - Visibility
 // ============================================
 export { default as Visible } from "$package/components/primitives/visibility/Visible.svelte";
 export { default as Portal } from "$package/components/primitives/visibility/Portal.svelte";
+export { default as Overlay } from "$package/components/primitives/visibility/Overlay.svelte";
+export { default as VisuallyHidden } from "$package/components/primitives/visibility/VisuallyHidden.svelte";
 
 // ============================================
 // Primitive Components - Animation
@@ -128,6 +152,38 @@ export type {
 // ============================================
 export { default as Tooltip } from "$package/components/base/Tooltip.svelte";
 export { default as Badge } from "$package/components/widgets/Badge.svelte";
+
+// Navigation Widgets
+export { default as Tabs } from "$package/components/widgets/Tabs.svelte";
+export { default as Breadcrumb } from "$package/components/widgets/Breadcrumb.svelte";
+export { default as Pagination } from "$package/components/widgets/Pagination.svelte";
+export { default as Menu } from "$package/components/widgets/Menu.svelte";
+export { default as Dropdown } from "$package/components/widgets/Dropdown.svelte";
+
+// Feedback Widgets
+export { default as Alert } from "$package/components/widgets/Alert.svelte";
+export { default as Toast } from "$package/components/widgets/Toast.svelte";
+export { default as Skeleton } from "$package/components/widgets/Skeleton.svelte";
+export { default as Dialog } from "$package/components/widgets/Dialog.svelte";
+export { default as Drawer } from "$package/components/widgets/Drawer.svelte";
+
+// Form Widgets
+export { default as Form } from "$package/components/widgets/Form.svelte";
+export { default as FormField } from "$package/components/widgets/FormField.svelte";
+export { default as SearchInput } from "$package/components/widgets/SearchInput.svelte";
+
+// Content Widgets
+export { default as Accordion } from "$package/components/widgets/Accordion.svelte";
+export { default as List } from "$package/components/widgets/List.svelte";
+export { default as ListItem } from "$package/components/widgets/ListItem.svelte";
+export { default as Table } from "$package/components/widgets/Table.svelte";
+export { default as Hero } from "$package/components/widgets/Hero.svelte";
+export { default as SplitSection } from "$package/components/widgets/SplitSection.svelte";
+
+// Special Widgets
+export { default as ThemeToggle } from "$package/components/widgets/ThemeToggle.svelte";
+export { default as BackToTop } from "$package/components/widgets/BackToTop.svelte";
+export { default as FloatingActionButton } from "$package/components/widgets/FloatingActionButton.svelte";
 
 // ============================================
 // Utilities

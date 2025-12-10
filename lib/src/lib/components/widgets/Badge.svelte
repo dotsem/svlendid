@@ -17,6 +17,8 @@
      * <Badge dot color="#00ff00">
      *   <Avatar />
      * </Badge>
+     *
+     * <Badge inline content="New" color="primary" />
      */
     type BadgePosition =
         | "top-right"
@@ -25,7 +27,7 @@
         | "bottom-left";
 
     interface Props {
-        children: Snippet;
+        children?: Snippet;
         /** Badge content (number or text) */
         content?: string | number;
         /** Badge color (palette key or custom CSS color) */
@@ -42,6 +44,8 @@
         hideWhenEmpty?: boolean;
         /** Show badge (can be used to conditionally hide) */
         show?: boolean;
+        /** Use inline positioning instead of overlay */
+        inline?: boolean;
         /** Additional HTML attributes */
         [key: string]: unknown;
     }
@@ -56,6 +60,7 @@
         max = 99,
         hideWhenEmpty = true,
         show = true,
+        inline = false,
         ...props
     }: Props = $props();
 
@@ -81,7 +86,7 @@
     const shouldShow = $derived.by(() => {
         if (!show) return false;
         if (dot) return true;
-        if (hideWhenEmpty) {
+        if (hideWhenEmpty && !inline) {
             if (content === undefined || content === "" || content === 0)
                 return false;
         }
@@ -90,12 +95,13 @@
 </script>
 
 <div class="badge-wrapper" {...props}>
-    {@render children()}
+    {@render children?.()}
 
     {#if shouldShow}
         <span
             class="badge {position}"
             class:dot
+            class:inline
             style:background={bgColor}
             style:color={computedTextColor}
             style:--badge-radius={theme.radius.full}
@@ -109,6 +115,7 @@
     .badge-wrapper {
         position: relative;
         display: inline-flex;
+        align-items: center;
     }
 
     .badge {
@@ -123,6 +130,13 @@
         font-weight: 500;
         border-radius: var(--badge-radius);
         line-height: 1;
+        white-space: nowrap;
+    }
+
+    .badge.inline {
+        position: static;
+        transform: none;
+        margin-left: 8px;
     }
 
     .badge.dot {
@@ -132,25 +146,25 @@
         padding: 0;
     }
 
-    .badge.top-right {
+    .badge.top-right:not(.inline) {
         top: 0;
         right: 0;
         transform: translate(50%, -50%);
     }
 
-    .badge.top-left {
+    .badge.top-left:not(.inline) {
         top: 0;
         left: 0;
         transform: translate(-50%, -50%);
     }
 
-    .badge.bottom-right {
+    .badge.bottom-right:not(.inline) {
         bottom: 0;
         right: 0;
         transform: translate(50%, 50%);
     }
 
-    .badge.bottom-left {
+    .badge.bottom-left:not(.inline) {
         bottom: 0;
         left: 0;
         transform: translate(-50%, 50%);
