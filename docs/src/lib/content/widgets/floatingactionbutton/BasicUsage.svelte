@@ -3,10 +3,10 @@
 </script>
 
 <Row gap="m" alignItems="center">
-    <FloatingActionButton position="bottom-left" offset="0">
+    <FloatingActionButton position="bottom-left">
         <Icon name="plus" />
     </FloatingActionButton>
-    <FloatingActionButton extended position="bottom-right" offset="0">
+    <FloatingActionButton extended position="bottom-right" offset="8px">
         <Icon name="plus" />
         Add Item
     </FloatingActionButton>
