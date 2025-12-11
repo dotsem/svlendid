@@ -185,6 +185,7 @@ export { default as SearchInput } from "$package/components/widgets/SearchInput.
 
 // Content Widgets
 export { default as Accordion } from "$package/components/widgets/Accordion.svelte";
+export { default as AccordionItem } from "$package/components/widgets/AccordionItem.svelte";
 export { default as List } from "$package/components/widgets/List.svelte";
 export { default as ListItem } from "$package/components/widgets/ListItem.svelte";
 export { default as Table } from "$package/components/widgets/Table.svelte";

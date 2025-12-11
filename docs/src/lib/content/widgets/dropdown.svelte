@@ -2,7 +2,12 @@
     import { Demo, PropTable } from "$lib";
     import { getComponentProps } from "$lib/utils/component-docs";
 
-    import { BasicUsage, BasicUsageCode } from "./dropdown/index";
+    import {
+        BasicUsage,
+        BasicUsageCode,
+        Placement,
+        PlacementCode,
+    } from "./dropdown/index";
 
     const dropdownProps = getComponentProps("Dropdown");
 </script>
@@ -19,6 +24,14 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<Demo
+    title="Placement"
+    description="Control where the menu appears relative to the trigger"
+    code={PlacementCode}
+>
+    <Placement />
 </Demo>
 
 <h2 id="props">Props</h2>

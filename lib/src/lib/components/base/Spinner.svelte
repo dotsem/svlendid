@@ -4,9 +4,11 @@
     import { resolveColor } from "$package/utils/style.js";
 
     /**
-     * Spinner - A simple loading spinner
+     * Spinner - A loading spinner with multiple animation variants
      */
     type SpinnerSize = "xs" | "s" | "m" | "l" | "xl";
+    type SpinnerVariant = "spin" | "pulse" | "dots";
+    type SpinnerStyle = "smooth" | "steps" | "bounce";
 
     interface Props {
         /** Color scheme */
@@ -19,6 +21,10 @@
         strokeWidth?: number;
         /** Animation speed (e.g., "0.75s") */
         speed?: string;
+        /** Animation variant */
+        variant?: SpinnerVariant;
+        /** Animation style (sub-variant) */
+        animationStyle?: SpinnerStyle;
         /** Additional HTML attributes */
         [key: string]: unknown;
     }
@@ -29,6 +35,8 @@
         customSize,
         strokeWidth,
         speed = "0.75s",
+        variant = "spin",
+        animationStyle = "smooth",
         ...props
     }: Props = $props();
 
@@ -46,84 +54,257 @@
     const computedSize = $derived(customSize ?? sizeConfig[size].size);
     const computedStroke = $derived(strokeWidth ?? sizeConfig[size].stroke);
 
-    // Calculate circumference for the dash animation
-    const radius = $derived(10 - computedStroke / 2);
-    const circumference = $derived(2 * Math.PI * radius);
+    const animationClass = $derived(`${variant}-${animationStyle}`);
 </script>
 
-<svg
-    class="spinner"
-    viewBox="0 0 24 24"
-    style:--spinner-size={computedSize}
-    style:--spinner-color={computedColor}
-    style:--spinner-speed={speed}
-    style:--spinner-circumference={circumference}
-    role="status"
-    aria-label="Loading"
-    {...props}
->
-    <!-- Track circle (faint background) -->
-    <circle
-        class="spinner-track"
-        cx="12"
-        cy="12"
-        r={radius}
-        fill="none"
-        stroke-width={computedStroke}
-    />
-    <!-- Animated arc -->
-    <circle
-        class="spinner-arc"
-        cx="12"
-        cy="12"
-        r={radius}
-        fill="none"
-        stroke-width={computedStroke}
-        stroke-dasharray={`${circumference * 0.25} ${circumference * 0.75}`}
-    />
-</svg>
+{#if variant === "dots"}
+    <div
+        class="spinner-dots {animationClass}"
+        style:--spinner-size={computedSize}
+        style:--spinner-color={computedColor}
+        style:--spinner-speed={speed}
+        role="status"
+        aria-label="Loading"
+        {...props}
+    >
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+{:else if variant === "pulse"}
+    <div
+        class="spinner-pulse {animationClass}"
+        style:--spinner-size={computedSize}
+        style:--spinner-color={computedColor}
+        style:--spinner-speed={speed}
+        role="status"
+        aria-label="Loading"
+        {...props}
+    ></div>
+{:else}
+    <svg
+        class="spinner-circle {animationClass}"
+        viewBox="0 0 50 50"
+        style:--spinner-size={computedSize}
+        style:--spinner-color={computedColor}
+        style:--spinner-speed={speed}
+        role="status"
+        aria-label="Loading"
+        {...props}
+    >
+        <circle
+            class="track"
+            cx="25"
+            cy="25"
+            r="20"
+            fill="none"
+            stroke-width={computedStroke}
+        />
+        <circle
+            class="arc"
+            cx="25"
+            cy="25"
+            r="20"
+            fill="none"
+            stroke-width={computedStroke}
+            stroke-linecap="round"
+        />
+    </svg>
+{/if}
 
 <style>
-    .spinner {
+    .spinner-circle {
         width: var(--spinner-size);
         height: var(--spinner-size);
-        animation: spinner-rotate var(--spinner-speed) linear infinite;
     }
 
-    .spinner-track {
+    .spinner-circle .track {
         stroke: var(--spinner-color);
         opacity: 0.2;
     }
 
-    .spinner-arc {
+    .spinner-circle .arc {
         stroke: var(--spinner-color);
-        stroke-linecap: round;
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: 0;
         transform-origin: center;
-        animation: spinner-dash calc(var(--spinner-speed) * 2) ease-in-out
-            infinite;
     }
 
-    @keyframes spinner-rotate {
-        to {
+    /* Spin Smooth */
+    .spin-smooth {
+        animation: spin-smooth var(--spinner-speed) linear infinite;
+    }
+
+    @keyframes spin-smooth {
+        100% {
             transform: rotate(360deg);
         }
     }
 
-    @keyframes spinner-dash {
+    /* Spin Steps */
+    .spin-steps {
+        animation: spin-steps var(--spinner-speed) steps(12) infinite;
+    }
+
+    @keyframes spin-steps {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Spin Bounce */
+    .spin-bounce {
+        animation: spin-bounce var(--spinner-speed) ease-in-out infinite;
+    }
+
+    @keyframes spin-bounce {
         0% {
-            stroke-dasharray: calc(var(--spinner-circumference) * 0.1)
-                calc(var(--spinner-circumference) * 0.9);
-            stroke-dashoffset: 0;
+            transform: rotate(0deg);
         }
         50% {
-            stroke-dasharray: calc(var(--spinner-circumference) * 0.7)
-                calc(var(--spinner-circumference) * 0.3);
-            stroke-dashoffset: calc(var(--spinner-circumference) * -0.2);
+            transform: rotate(200deg);
         }
         100% {
-            stroke-dasharray: calc(var(--spinner-circumference) * 0.1)
-                calc(var(--spinner-circumference) * 0.9);
-            stroke-dashoffset: calc(var(--spinner-circumference) * -0.9);
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Pulse variant */
+    .spinner-pulse {
+        width: var(--spinner-size);
+        height: var(--spinner-size);
+        border-radius: 50%;
+        background: var(--spinner-color);
+    }
+
+    .pulse-smooth {
+        animation: pulse-smooth var(--spinner-speed) ease-in-out infinite;
+    }
+
+    @keyframes pulse-smooth {
+        0%,
+        100% {
+            transform: scale(0.8);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .pulse-steps {
+        animation: pulse-steps var(--spinner-speed) steps(4) infinite;
+    }
+
+    @keyframes pulse-steps {
+        0%,
+        100% {
+            transform: scale(0.8);
+            opacity: 0.5;
+        }
+        50% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .pulse-bounce {
+        animation: pulse-bounce var(--spinner-speed) ease-out infinite;
+    }
+
+    @keyframes pulse-bounce {
+        0% {
+            transform: scale(0.5);
+            opacity: 0.3;
+        }
+        50% {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(0.5);
+            opacity: 0.3;
+        }
+    }
+
+    /* Dots variant */
+    .spinner-dots {
+        display: flex;
+        gap: calc(var(--spinner-size) * 0.2);
+        align-items: center;
+    }
+
+    .spinner-dots .dot {
+        width: calc(var(--spinner-size) * 0.3);
+        height: calc(var(--spinner-size) * 0.3);
+        border-radius: 50%;
+        background: var(--spinner-color);
+    }
+
+    .dots-smooth .dot {
+        animation: dots-smooth var(--spinner-speed) ease-in-out infinite;
+    }
+
+    .dots-smooth .dot:nth-child(2) {
+        animation-delay: calc(var(--spinner-speed) * 0.15);
+    }
+    .dots-smooth .dot:nth-child(3) {
+        animation-delay: calc(var(--spinner-speed) * 0.3);
+    }
+
+    @keyframes dots-smooth {
+        0%,
+        80%,
+        100% {
+            transform: scale(0.6);
+            opacity: 0.5;
+        }
+        40% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .dots-steps .dot {
+        animation: dots-steps var(--spinner-speed) steps(2) infinite;
+    }
+
+    .dots-steps .dot:nth-child(2) {
+        animation-delay: calc(var(--spinner-speed) * 0.33);
+    }
+    .dots-steps .dot:nth-child(3) {
+        animation-delay: calc(var(--spinner-speed) * 0.66);
+    }
+
+    @keyframes dots-steps {
+        0%,
+        100% {
+            opacity: 0.3;
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+
+    .dots-bounce .dot {
+        animation: dots-bounce var(--spinner-speed) ease infinite;
+    }
+
+    .dots-bounce .dot:nth-child(2) {
+        animation-delay: calc(var(--spinner-speed) * 0.1);
+    }
+    .dots-bounce .dot:nth-child(3) {
+        animation-delay: calc(var(--spinner-speed) * 0.2);
+    }
+
+    @keyframes dots-bounce {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(calc(var(--spinner-size) * -0.3));
         }
     }
 </style>

@@ -48,8 +48,9 @@
         const showSiblings = siblingCount;
 
         // If we have few enough pages, just show all of them
-        const maxVisible = 1 + showSiblings * 2 + 4; // first + siblings on each side + 2 ellipsis + last
-        if (totalPages <= maxVisible) {
+        // +1 for first, +1 for last, 2*siblingCount for middle, +2 for ellipsis slots
+        const maxVisible = 2 + showSiblings * 2 + 2;
+        if (totalPages <= maxVisible + 2) {
             for (let i = 1; i <= totalPages; i++) {
                 range.push(i);
             }
@@ -60,19 +61,21 @@
         range.push(1);
 
         // Calculate start and end of middle section
-        // Ensure we always show exactly (1 + 2*siblingCount) pages in the middle
+        // We want at least 4 pages visible at the start: 1 2 3 4 ... N
         let start = Math.max(2, page - showSiblings);
         let end = Math.min(totalPages - 1, page + showSiblings);
 
-        // Adjust if we're near the start
+        // Ensure minimum of 4 pages at start (show 1 2 3 4 ... N)
         if (start <= 3) {
             start = 2;
-            end = Math.min(totalPages - 1, 2 + showSiblings * 2);
+            end = Math.max(end, 2 + showSiblings * 2 + 1);
+            end = Math.min(end, totalPages - 1);
         }
-        // Adjust if we're near the end
+        // Near the end, show more pages
         else if (end >= totalPages - 2) {
             end = totalPages - 1;
-            start = Math.max(2, totalPages - 1 - showSiblings * 2);
+            start = Math.min(start, totalPages - 2 - showSiblings * 2);
+            start = Math.max(start, 2);
         }
 
         // Add ellipsis after first if needed

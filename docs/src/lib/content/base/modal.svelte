@@ -9,7 +9,11 @@
 
 <h2 id="overview">Overview</h2>
 
-<p>Modal displays content in a centered overlay with backdrop.</p>
+<p>
+    Modal displays content in a centered overlay with backdrop. It will block
+    the main interface & will not go await until you explicitly close it by
+    making a decision. You can't close it with escape or clicking outside.
+</p>
 
 <h2 id="usage">Usage</h2>
 

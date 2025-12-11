@@ -5,16 +5,17 @@
 
     /**
      * Radio - A themed radio button input with optional label
+     * Supports simple two-way binding via bind:selected
      */
     type RadioSize = "s" | "m" | "l";
 
     interface Props {
-        /** Whether the radio is checked */
-        checked?: boolean;
+        /** Currently selected value in the group (use with bind:selected) */
+        selected?: string;
         /** Label text for the radio button */
         label?: string;
         /** Name attribute for radio group */
-        group: string;
+        name: string;
         /** Value for this radio option */
         value: string;
         /** Disabled state */
@@ -30,9 +31,9 @@
     }
 
     let {
-        checked = false,
+        selected = $bindable(),
         label,
-        group,
+        name,
         value,
         disabled = false,
         color = "primary",
@@ -50,8 +51,10 @@
     };
 
     const computedColor = $derived(resolveColor(color, theme));
+    const isChecked = $derived(selected === value);
 
     function handleChange() {
+        selected = value;
         onchange?.(value);
     }
 </script>
@@ -69,9 +72,9 @@
     <input
         type="radio"
         class="radio-input"
-        {checked}
+        checked={isChecked}
         {disabled}
-        {group}
+        {name}
         {value}
         onchange={handleChange}
     />

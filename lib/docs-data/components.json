@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-11T15:03:04.762Z",
+  "generatedAt": "2025-12-11T23:08:37.905Z",
   "components": {
     "Avatar": {
       "name": "Avatar",
@@ -851,7 +851,7 @@
           "type": "boolean",
           "required": false,
           "description": "Close when pressing Escape",
-          "default": "true"
+          "default": "false"
         },
         {
           "name": "centered",
@@ -879,33 +879,54 @@
           "type": "boolean",
           "required": false,
           "description": "Whether the popup is visible",
-          "default": "false"
+          "default": "$bindable(false)"
         },
         {
-          "name": "anchor",
-          "type": "HTMLElement",
+          "name": "size",
+          "type": "PopupSize",
           "required": false,
-          "description": "Reference element to position against"
+          "description": "Size preset",
+          "default": "\"m\""
         },
         {
-          "name": "placement",
-          "type": "PopupPlacement",
+          "name": "maxWidth",
+          "type": "string",
           "required": false,
-          "description": "Placement relative to anchor",
-          "default": "\"bottom\""
-        },
-        {
-          "name": "offset",
-          "type": "number",
-          "required": false,
-          "description": "Offset from anchor in pixels",
-          "default": "8"
+          "description": "Custom max width"
         },
         {
           "name": "radius",
           "type": "Radius | string",
           "required": false,
           "description": "Border radius"
+        },
+        {
+          "name": "padding",
+          "type": "string",
+          "required": false,
+          "description": "Content padding",
+          "default": "\"1.5rem\""
+        },
+        {
+          "name": "closeOnOverlay",
+          "type": "boolean",
+          "required": false,
+          "description": "Close when clicking overlay",
+          "default": "true"
+        },
+        {
+          "name": "closeOnEscape",
+          "type": "boolean",
+          "required": false,
+          "description": "Close when pressing Escape",
+          "default": "true"
+        },
+        {
+          "name": "showCloseButton",
+          "type": "boolean",
+          "required": false,
+          "description": "Show close button in corner",
+          "default": "true"
         },
         {
           "name": "onclose",
@@ -979,11 +1000,11 @@
       "description": "",
       "props": [
         {
-          "name": "checked",
-          "type": "boolean",
+          "name": "selected",
+          "type": "string",
           "required": false,
-          "description": "Whether the radio is checked",
-          "default": "false"
+          "description": "Currently selected value in the group (use with bind:selected)",
+          "default": "$bindable()"
         },
         {
           "name": "label",
@@ -992,7 +1013,7 @@
           "description": "Label text for the radio button"
         },
         {
-          "name": "group",
+          "name": "name",
           "type": "string",
           "required": true,
           "description": "Name attribute for radio group"
@@ -1240,6 +1261,20 @@
           "required": false,
           "description": "Animation speed (e.g., \"0.75s\")",
           "default": "\"0.75s\""
+        },
+        {
+          "name": "variant",
+          "type": "SpinnerVariant",
+          "required": false,
+          "description": "Animation variant",
+          "default": "\"spin\""
+        },
+        {
+          "name": "animationStyle",
+          "type": "SpinnerStyle",
+          "required": false,
+          "description": "Animation style (sub-variant)",
+          "default": "\"smooth\""
         }
       ],
       "snippets": [],
@@ -2589,12 +2624,6 @@
       "description": "",
       "props": [
         {
-          "name": "items",
-          "type": "AccordionItem[]",
-          "required": true,
-          "description": "List of accordion items"
-        },
-        {
           "name": "multiple",
           "type": "boolean",
           "required": false,
@@ -2623,10 +2652,35 @@
           "default": "\"default\""
         }
       ],
-      "snippets": [
-        "content"
-      ],
+      "snippets": [],
       "filePath": "widgets/Accordion.svelte"
+    },
+    "AccordionItem": {
+      "name": "AccordionItem",
+      "description": "",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "description": "Title displayed in the header"
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the item is disabled",
+          "default": "false"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "Unique identifier (auto-generated if not provided)"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/AccordionItem.svelte"
     },
     "Alert": {
       "name": "Alert",

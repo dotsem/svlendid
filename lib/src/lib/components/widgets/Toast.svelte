@@ -66,11 +66,14 @@
 
 <div
     class="toast"
-    role="status"
+    role="button"
     style:--toast-bg={variantStyles.bg}
     style:--toast-color={variantStyles.color}
     style:--toast-radius={theme.radius.m}
     style:--toast-shadow={theme.boxShadow.l}
+    onclick={handleClose}
+    onkeydown={(e) => e.key === "Enter" && handleClose()}
+    tabindex="0"
     {...props}
 >
     {#if icon}
@@ -117,6 +120,18 @@
         min-width: 280px;
         max-width: 420px;
         animation: toast-enter 0.2s ease-out;
+        cursor: pointer;
+        transition:
+            opacity 0.15s ease,
+            transform 0.15s ease;
+
+        &:hover {
+            opacity: 0.95;
+        }
+
+        &:active {
+            transform: scale(0.98);
+        }
     }
 
     @keyframes toast-enter {

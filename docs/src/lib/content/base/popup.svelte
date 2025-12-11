@@ -9,7 +9,10 @@
 
 <h2 id="overview">Overview</h2>
 
-<p>Popup positions floating content relative to an anchor element.</p>
+<p>
+    Popup is dismissible without making a decision. It doesn't block the main
+    interface & is closable with escape, clicking the cross or clicking outside.
+</p>
 
 <h2 id="usage">Usage</h2>
 

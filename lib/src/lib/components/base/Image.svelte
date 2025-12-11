@@ -2,6 +2,7 @@
     import { getTheme } from "$package/config/theme.js";
     import type { Radius } from "$package/types/layout.type.js";
     import { resolveRadius } from "$package/utils/style.js";
+    import Skeleton from "../widgets/Skeleton.svelte";
 
     /**
      * Image - Enhanced image component with loading states and fallback
@@ -85,7 +86,7 @@
     {...props}
 >
     {#if showSkeleton && isLoading}
-        <div class="image-skeleton"></div>
+        <Skeleton height="100%" />
     {/if}
 
     {#if showBrokenPlaceholder}
@@ -126,6 +127,7 @@
         overflow: hidden;
         border-radius: var(--image-radius);
         background: var(--image-bg);
+        min-height: 100px;
     }
 
     .image {
@@ -139,19 +141,6 @@
         }
     }
 
-    .image-skeleton {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-            90deg,
-            var(--image-bg) 0%,
-            color-mix(in srgb, var(--image-bg) 80%, white) 50%,
-            var(--image-bg) 100%
-        );
-        background-size: 200% 100%;
-        animation: shimmer 1.5s infinite;
-    }
-
     .image-broken {
         position: absolute;
         inset: 0;
@@ -163,6 +152,13 @@
         color: var(--image-text);
         padding: 1rem;
         text-align: center;
+        background: color-mix(
+            in srgb,
+            var(--image-bg) 80%,
+            var(--image-text) 10%
+        );
+        border: 2px dashed var(--image-text);
+        border-radius: inherit;
 
         svg {
             width: 48px;

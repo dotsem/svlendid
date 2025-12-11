@@ -88,12 +88,17 @@
 
     $effect(() => {
         if (isVisible) {
+            // Get scrollbar width before hiding
+            const scrollbarWidth =
+                window.innerWidth - document.documentElement.clientWidth;
             document.body.style.overflow = "hidden";
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
             window.addEventListener("keydown", handleKeydown);
         }
 
         return () => {
             document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
             window.removeEventListener("keydown", handleKeydown);
         };
     });

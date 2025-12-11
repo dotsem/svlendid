@@ -82,6 +82,7 @@
     }
 
     .progress-track {
+        position: relative;
         flex: 1;
         height: var(--progress-height);
         background: var(--progress-bg);
@@ -98,19 +99,27 @@
     }
 
     .indeterminate .progress-bar {
+        position: absolute;
         width: 30%;
-        animation: indeterminate 1.5s infinite ease-in-out;
+        animation: indeterminate 2s infinite ease-in-out;
     }
 
     @keyframes indeterminate {
         0% {
-            transform: translateX(-100%);
+            left: -30%;
+            width: 30%;
         }
         50% {
-            transform: translateX(200%);
+            left: 100%;
+            width: 30%;
+        }
+        50.01% {
+            left: 100%;
+            width: 30%;
         }
         100% {
-            transform: translateX(-100%);
+            left: -30%;
+            width: 30%;
         }
     }
 

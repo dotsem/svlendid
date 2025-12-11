@@ -70,10 +70,18 @@
         }
     });
 
-    const visibleToasts = $derived($toastStore.slice(-maxVisible));
+    const visibleToasts = $derived($toastStore.toasts.slice(-maxVisible));
 
     function handleClose(id: string) {
         toastStore.remove(id);
+    }
+
+    function handleMouseEnter(id: string) {
+        toastStore.pauseTimer(id);
+    }
+
+    function handleMouseLeave(id: string) {
+        toastStore.resumeTimer(id);
     }
 </script>
 
@@ -93,7 +101,11 @@
         {...props}
     >
         {#each visibleToasts as toast (toast.id)}
-            <div class="toast-wrapper">
+            <div
+                class="toast-wrapper"
+                onmouseenter={() => handleMouseEnter(toast.id)}
+                onmouseleave={() => handleMouseLeave(toast.id)}
+            >
                 <Toast
                     color={toast.color}
                     variant={toast.variant}

@@ -7,7 +7,7 @@
     import Overlay from "$package/components/primitives/visibility/Overlay.svelte";
 
     /**
-     * Modal - A modal dialog container
+     * Modal - A modal dialog container with enter/exit animations
      */
     type ModalSize = "s" | "m" | "l" | "xl" | "full";
 
@@ -43,7 +43,7 @@
         radius,
         padding = "1.5rem",
         closeOnOverlay = true,
-        closeOnEscape = true,
+        closeOnEscape = false,
         centered = true,
         onclose,
         ...props
@@ -64,9 +64,18 @@
         resolveRadius(radius, theme) ?? theme.radius.l
     );
 
+    let isVisible = $state(false);
+    let isAnimating = $state(false);
+
     function handleClose() {
-        open = false;
-        onclose?.();
+        if (isAnimating) return;
+        isAnimating = true;
+        isVisible = false;
+        setTimeout(() => {
+            open = false;
+            isAnimating = false;
+            onclose?.();
+        }, 150);
     }
 
     function handleOverlayClick() {
@@ -83,12 +92,18 @@
 
     $effect(() => {
         if (open) {
+            isVisible = true;
+            // Get scrollbar width before hiding
+            const scrollbarWidth =
+                window.innerWidth - document.documentElement.clientWidth;
             document.body.style.overflow = "hidden";
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
             window.addEventListener("keydown", handleKeydown);
         }
 
         return () => {
             document.body.style.overflow = "";
+            document.body.style.paddingRight = "";
             window.removeEventListener("keydown", handleKeydown);
         };
     });
@@ -96,14 +111,16 @@
 
 {#if open}
     <Portal>
-        <Overlay onclick={handleOverlayClick} />
+        <Overlay onclick={handleOverlayClick} closing={!isVisible} />
         <div
             class="modal-container"
             class:centered
+            class:exiting={!isVisible}
             style:--modal-z-index={theme.zIndex.modal}
         >
             <div
                 class="modal"
+                class:exiting={!isVisible}
                 style:--modal-max-width={computedMaxWidth}
                 style:--modal-radius={computedRadius}
                 style:--modal-bg={theme.colors.card}
@@ -143,7 +160,11 @@
         border-radius: var(--modal-radius);
         box-shadow: var(--modal-shadow);
         padding: var(--modal-padding);
-        animation: modal-enter 0.2s ease-out;
+        animation: modal-enter 0.2s ease-out forwards;
+
+        &.exiting {
+            animation: modal-exit 0.15s ease-in forwards;
+        }
     }
 
     @keyframes modal-enter {
@@ -154,6 +175,17 @@
         to {
             opacity: 1;
             transform: scale(1) translateY(0);
+        }
+    }
+
+    @keyframes modal-exit {
+        from {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: scale(0.95) translateY(-10px);
         }
     }
 </style>

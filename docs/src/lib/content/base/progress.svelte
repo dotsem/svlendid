@@ -2,7 +2,12 @@
     import { Demo, PropTable } from "$lib";
     import { getComponentProps } from "$lib/utils/component-docs";
 
-    import { BasicUsage, BasicUsageCode } from "./progress/index";
+    import {
+        BasicUsage,
+        BasicUsageCode,
+        Increment,
+        IncrementCode,
+    } from "./progress/index";
 
     const progressProps = getComponentProps("Progress");
 </script>
@@ -19,6 +24,14 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<Demo
+    title="Increment"
+    description="Increment progress bar"
+    code={IncrementCode}
+>
+    <Increment />
 </Demo>
 
 <h2 id="props">Props</h2>
