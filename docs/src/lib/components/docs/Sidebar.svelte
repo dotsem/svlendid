@@ -25,19 +25,44 @@
         return $page.url.pathname === `/docs/${categorySlug}/${itemSlug}`;
     }
 
+    function closeSidebar() {
+        sidebarOpen.set(false);
+    }
+
     function closeSidebarOnMobile() {
         if (window.innerWidth < 1024) {
-            sidebarOpen.set(false);
+            closeSidebar();
         }
     }
 </script>
+
+<!-- Mobile overlay -->
+{#if $sidebarOpen}
+    <div
+        class="sidebar-overlay"
+        onclick={closeSidebar}
+        onkeydown={(e) => e.key === "Escape" && closeSidebar()}
+        role="button"
+        tabindex="-1"
+        aria-label="Close sidebar"
+    ></div>
+{/if}
 
 <aside class="sidebar" class:open={$sidebarOpen}>
     <div class="sidebar-header">
         <a href="/" class="logo">
             <Text variant="h5" color="primary">Svlendid</Text>
         </a>
-        <Text variant="caption" color="onSurfaceVariant">v0.0.1</Text>
+        <Row align="center" gap="s">
+            <Text variant="caption" color="onSurfaceVariant">v0.0.1</Text>
+            <button
+                class="close-btn"
+                onclick={closeSidebar}
+                aria-label="Close sidebar"
+            >
+                <Icon name="X" size={20} />
+            </button>
+        </Row>
     </div>
 
     <nav class="sidebar-nav">
@@ -113,6 +138,14 @@
 </aside>
 
 <style>
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+    }
+
     .sidebar {
         width: 260px;
         height: 100vh;
@@ -135,6 +168,25 @@
 
     .logo {
         text-decoration: none;
+    }
+
+    .close-btn {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        background: transparent;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        color: inherit;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: var(--color-surfaceVariant);
+        }
     }
 
     .sidebar-nav {
@@ -179,6 +231,10 @@
     }
 
     @media (max-width: 1023px) {
+        .sidebar-overlay {
+            display: block;
+        }
+
         .sidebar {
             transform: translateX(-100%);
             transition: transform 0.3s ease;
@@ -186,6 +242,10 @@
 
         .sidebar.open {
             transform: translateX(0);
+        }
+
+        .close-btn {
+            display: flex;
         }
     }
 </style>

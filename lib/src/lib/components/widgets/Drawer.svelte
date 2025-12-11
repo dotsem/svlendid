@@ -17,6 +17,8 @@
         placement?: DrawerPlacement;
         /** Drawer size */
         size?: string;
+        /** Content padding */
+        padding?: string;
         /** Close when clicking overlay */
         closeOnOverlay?: boolean;
         /** Close when pressing Escape */
@@ -32,6 +34,7 @@
         open = $bindable(false),
         placement = "left",
         size = "320px",
+        padding = "1.5rem",
         closeOnOverlay = true,
         closeOnEscape = true,
         onclose,
@@ -40,13 +43,25 @@
 
     const theme = getTheme();
 
+    let isClosing = $state(false);
+    let isVisible = $state(false);
+
     const isHorizontal = $derived(
         placement === "left" || placement === "right"
     );
 
     function handleClose() {
-        open = false;
-        onclose?.();
+        if (isClosing) return;
+        isClosing = true;
+    }
+
+    function handleAnimationEnd() {
+        if (isClosing) {
+            isClosing = false;
+            isVisible = false;
+            open = false;
+            onclose?.();
+        }
     }
 
     function handleOverlayClick() {
@@ -61,8 +76,18 @@
         }
     }
 
+    // Track open state changes
     $effect(() => {
-        if (open) {
+        if (open && !isVisible) {
+            isVisible = true;
+            isClosing = false;
+        } else if (!open && isVisible && !isClosing) {
+            handleClose();
+        }
+    });
+
+    $effect(() => {
+        if (isVisible) {
             document.body.style.overflow = "hidden";
             window.addEventListener("keydown", handleKeydown);
         }
@@ -74,9 +99,9 @@
     });
 </script>
 
-{#if open}
+{#if isVisible}
     <Portal>
-        <Overlay onclick={handleOverlayClick} />
+        <Overlay onclick={handleOverlayClick} closing={isClosing} />
         <div
             class="drawer"
             class:horizontal={isHorizontal}
@@ -84,12 +109,15 @@
             class:right={placement === "right"}
             class:top={placement === "top"}
             class:bottom={placement === "bottom"}
+            class:closing={isClosing}
             style:--drawer-size={size}
+            style:--drawer-padding={padding}
             style:--drawer-bg={theme.colors.card}
             style:--drawer-shadow={theme.boxShadow.l}
             style:--drawer-z-index={theme.zIndex.modal}
             role="dialog"
             aria-modal="true"
+            onanimationend={handleAnimationEnd}
             {...props}
         >
             {@render children()}
@@ -103,6 +131,7 @@
         background: var(--drawer-bg);
         box-shadow: var(--drawer-shadow);
         z-index: var(--drawer-z-index);
+        padding: var(--drawer-padding);
         overflow-y: auto;
     }
 
@@ -116,11 +145,19 @@
     .drawer.left {
         left: 0;
         animation: slide-in-left 0.25s ease-out;
+
+        &.closing {
+            animation: slide-out-left 0.2s ease-in forwards;
+        }
     }
 
     .drawer.right {
         right: 0;
         animation: slide-in-right 0.25s ease-out;
+
+        &.closing {
+            animation: slide-out-right 0.2s ease-in forwards;
+        }
     }
 
     .drawer:not(.horizontal) {
@@ -133,13 +170,22 @@
     .drawer.top {
         top: 0;
         animation: slide-in-top 0.25s ease-out;
+
+        &.closing {
+            animation: slide-out-top 0.2s ease-in forwards;
+        }
     }
 
     .drawer.bottom {
         bottom: 0;
         animation: slide-in-bottom 0.25s ease-out;
+
+        &.closing {
+            animation: slide-out-bottom 0.2s ease-in forwards;
+        }
     }
 
+    /* Slide-in animations */
     @keyframes slide-in-left {
         from {
             transform: translateX(-100%);
@@ -173,6 +219,43 @@
         }
         to {
             transform: translateY(0);
+        }
+    }
+
+    /* Slide-out animations */
+    @keyframes slide-out-left {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-100%);
+        }
+    }
+
+    @keyframes slide-out-right {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(100%);
+        }
+    }
+
+    @keyframes slide-out-top {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-100%);
+        }
+    }
+
+    @keyframes slide-out-bottom {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(100%);
         }
     }
 </style>

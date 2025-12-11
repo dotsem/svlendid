@@ -14,7 +14,7 @@
         /** Label text for the radio button */
         label?: string;
         /** Name attribute for radio group */
-        name: string;
+        group: string;
         /** Value for this radio option */
         value: string;
         /** Disabled state */
@@ -32,7 +32,7 @@
     let {
         checked = false,
         label,
-        name,
+        group,
         value,
         disabled = false,
         color = "primary",
@@ -71,7 +71,7 @@
         class="radio-input"
         {checked}
         {disabled}
-        {name}
+        {group}
         {value}
         onchange={handleChange}
     />

@@ -45,6 +45,10 @@
     const computedColor = $derived(resolveColor(color, theme));
     const computedSize = $derived(customSize ?? sizeConfig[size].size);
     const computedStroke = $derived(strokeWidth ?? sizeConfig[size].stroke);
+
+    // Calculate circumference for the dash animation
+    const radius = $derived(10 - computedStroke / 2);
+    const circumference = $derived(2 * Math.PI * radius);
 </script>
 
 <svg
@@ -53,17 +57,29 @@
     style:--spinner-size={computedSize}
     style:--spinner-color={computedColor}
     style:--spinner-speed={speed}
+    style:--spinner-circumference={circumference}
     role="status"
     aria-label="Loading"
     {...props}
 >
+    <!-- Track circle (faint background) -->
     <circle
-        class="spinner-circle"
+        class="spinner-track"
         cx="12"
         cy="12"
-        r={10 - computedStroke / 2}
+        r={radius}
         fill="none"
         stroke-width={computedStroke}
+    />
+    <!-- Animated arc -->
+    <circle
+        class="spinner-arc"
+        cx="12"
+        cy="12"
+        r={radius}
+        fill="none"
+        stroke-width={computedStroke}
+        stroke-dasharray={`${circumference * 0.25} ${circumference * 0.75}`}
     />
 </svg>
 
@@ -71,19 +87,43 @@
     .spinner {
         width: var(--spinner-size);
         height: var(--spinner-size);
-        animation: spin var(--spinner-speed) linear infinite;
+        animation: spinner-rotate var(--spinner-speed) linear infinite;
     }
 
-    .spinner-circle {
+    .spinner-track {
+        stroke: var(--spinner-color);
+        opacity: 0.2;
+    }
+
+    .spinner-arc {
         stroke: var(--spinner-color);
         stroke-linecap: round;
-        stroke-dasharray: 60, 200;
-        stroke-dashoffset: 0;
+        transform-origin: center;
+        animation: spinner-dash calc(var(--spinner-speed) * 2) ease-in-out
+            infinite;
     }
 
-    @keyframes spin {
+    @keyframes spinner-rotate {
         to {
             transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spinner-dash {
+        0% {
+            stroke-dasharray: calc(var(--spinner-circumference) * 0.1)
+                calc(var(--spinner-circumference) * 0.9);
+            stroke-dashoffset: 0;
+        }
+        50% {
+            stroke-dasharray: calc(var(--spinner-circumference) * 0.7)
+                calc(var(--spinner-circumference) * 0.3);
+            stroke-dashoffset: calc(var(--spinner-circumference) * -0.2);
+        }
+        100% {
+            stroke-dasharray: calc(var(--spinner-circumference) * 0.1)
+                calc(var(--spinner-circumference) * 0.9);
+            stroke-dashoffset: calc(var(--spinner-circumference) * -0.9);
         }
     }
 </style>

@@ -9,6 +9,8 @@
         ColorsCode,
         Sizes,
         SizesCode,
+        ValueBinding,
+        ValueBindingCode,
     } from "./checkbox/index";
 
     const checkboxProps = getComponentProps("Checkbox");
@@ -29,6 +31,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="value-binding">Value Binding</h2>
+
+<p>Use <code>bind:checked</code> for two-way binding:</p>
+
+<Demo
+    title="Reactive State"
+    description="Checkbox state updates reactively"
+    code={ValueBindingCode}
+>
+    <ValueBinding />
 </Demo>
 
 <h2 id="colors">Colors</h2>

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-12-09T23:04:25.055Z",
+  "generatedAt": "2025-12-11T15:03:04.762Z",
   "components": {
     "Avatar": {
       "name": "Avatar",
@@ -782,7 +782,7 @@
           "type": "LinkUnderline",
           "required": false,
           "description": "Underline behavior",
-          "default": "\"hover\""
+          "default": "\"always\""
         },
         {
           "name": "external",
@@ -831,6 +831,13 @@
           "type": "Radius | string",
           "required": false,
           "description": "Border radius"
+        },
+        {
+          "name": "padding",
+          "type": "string",
+          "required": false,
+          "description": "Content padding",
+          "default": "\"1.5rem\""
         },
         {
           "name": "closeOnOverlay",
@@ -985,7 +992,7 @@
           "description": "Label text for the radio button"
         },
         {
-          "name": "name",
+          "name": "group",
           "type": "string",
           "required": true,
           "description": "Name attribute for radio group"
@@ -1465,6 +1472,25 @@
           "required": false,
           "description": "Error state",
           "default": "false"
+        },
+        {
+          "name": "autoResize",
+          "type": "boolean",
+          "required": false,
+          "description": "Auto-resize height based on content",
+          "default": "false"
+        },
+        {
+          "name": "minHeight",
+          "type": "string",
+          "required": false,
+          "description": "Minimum height when auto-resizing"
+        },
+        {
+          "name": "maxHeight",
+          "type": "string",
+          "required": false,
+          "description": "Maximum height when auto-resizing"
         },
         {
           "name": "oninput",
@@ -2457,6 +2483,13 @@
           "default": "true"
         },
         {
+          "name": "closing",
+          "type": "boolean",
+          "required": false,
+          "description": "Whether the overlay is closing (for animation)",
+          "default": "false"
+        },
+        {
           "name": "color",
           "type": "string",
           "required": false,
@@ -2513,6 +2546,20 @@
       ],
       "snippets": [],
       "filePath": "primitives/visibility/Portal.svelte"
+    },
+    "ViewPort": {
+      "name": "ViewPort",
+      "description": "",
+      "props": [
+        {
+          "name": "visibleWhile",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "snippets": [],
+      "filePath": "primitives/visibility/ViewPort.svelte"
     },
     "Visible": {
       "name": "Visible",
@@ -2653,7 +2700,7 @@
           "type": "number",
           "required": false,
           "description": "Show after scrolling this many pixels",
-          "default": "300"
+          "default": "24"
         },
         {
           "name": "color",
@@ -2683,7 +2730,7 @@
     "Badge": {
       "name": "Badge",
       "description": "Small status indicator that can display counts or dots. Supports both theme palette colors and custom colors.",
-      "example": "<Badge content={5} color=\"error\">\n<Icon name=\"Bell\" />\n</Badge>\n\n<Badge dot color=\"#00ff00\">\n<Avatar />\n</Badge>\n",
+      "example": "<Badge content={5} color=\"error\">\n<Icon name=\"Bell\" />\n</Badge>\n\n<Badge dot color=\"#00ff00\">\n<Avatar />\n</Badge>\n\n<Badge inline content=\"New\" color=\"primary\" />\n",
       "props": [
         {
           "name": "content",
@@ -2738,6 +2785,13 @@
           "required": false,
           "description": "Show badge (can be used to conditionally hide)",
           "default": "true"
+        },
+        {
+          "name": "inline",
+          "type": "boolean",
+          "required": false,
+          "description": "Use inline positioning instead of overlay",
+          "default": "false"
         }
       ],
       "snippets": [],
@@ -2868,6 +2922,13 @@
           "default": "\"320px\""
         },
         {
+          "name": "padding",
+          "type": "string",
+          "required": false,
+          "description": "Content padding",
+          "default": "\"1.5rem\""
+        },
+        {
           "name": "closeOnOverlay",
           "type": "boolean",
           "required": false,
@@ -2923,6 +2984,13 @@
           "default": "true"
         },
         {
+          "name": "triggerOnHover",
+          "type": "boolean",
+          "required": false,
+          "description": "Open on hover instead of click",
+          "default": "false"
+        },
+        {
           "name": "disabled",
           "type": "boolean",
           "required": false,
@@ -2966,6 +3034,13 @@
           "required": false,
           "description": "Offset from edge",
           "default": "\"1.5rem\""
+        },
+        {
+          "name": "relative",
+          "type": "boolean",
+          "required": false,
+          "description": "Position relative to parent instead of screen",
+          "default": "false"
         },
         {
           "name": "extended",
@@ -3360,6 +3435,12 @@
           "description": "Border radius"
         },
         {
+          "name": "shortcut",
+          "type": "string",
+          "required": false,
+          "description": "Keyboard shortcut to focus (e.g., \"/\" or \"Ctrl+K\")"
+        },
+        {
           "name": "disabled",
           "type": "boolean",
           "required": false,
@@ -3722,6 +3803,35 @@
         "action"
       ],
       "filePath": "widgets/Toast.svelte"
+    },
+    "ToastStack": {
+      "name": "ToastStack",
+      "description": "",
+      "props": [
+        {
+          "name": "position",
+          "type": "ToastPosition",
+          "required": false,
+          "description": "Position of the toast stack",
+          "default": "\"top-right\""
+        },
+        {
+          "name": "gap",
+          "type": "string",
+          "required": false,
+          "description": "Gap between toasts",
+          "default": "\"0.5rem\""
+        },
+        {
+          "name": "maxVisible",
+          "type": "number",
+          "required": false,
+          "description": "Maximum number of visible toasts",
+          "default": "5"
+        }
+      ],
+      "snippets": [],
+      "filePath": "widgets/ToastStack.svelte"
     }
   }
 }

@@ -7,6 +7,8 @@
         BasicUsageCode,
         Colors,
         ColorsCode,
+        ValueBinding,
+        ValueBindingCode,
     } from "./radio/index";
 
     const radioProps = getComponentProps("Radio");
@@ -27,6 +29,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="value-binding">Value Binding</h2>
+
+<p>Track the selected radio value with reactive state:</p>
+
+<Demo
+    title="Reactive Group Selection"
+    description="Track and display the selected radio option"
+    code={ValueBindingCode}
+>
+    <ValueBinding />
 </Demo>
 
 <h2 id="colors">Colors</h2>

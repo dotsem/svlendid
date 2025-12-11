@@ -3,3 +3,6 @@ export { default as BasicUsageCode } from "./BasicUsage.svelte?raw";
 
 export { default as AutoFit } from "./AutoFit.svelte";
 export { default as AutoFitCode } from "./AutoFit.svelte?raw";
+
+export { default as Spanning } from "./Spanning.svelte";
+export { default as SpanningCode } from "./Spanning.svelte?raw";

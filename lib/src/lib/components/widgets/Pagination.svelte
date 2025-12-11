@@ -47,12 +47,33 @@
         const range: (number | "...")[] = [];
         const showSiblings = siblingCount;
 
+        // If we have few enough pages, just show all of them
+        const maxVisible = 1 + showSiblings * 2 + 4; // first + siblings on each side + 2 ellipsis + last
+        if (totalPages <= maxVisible) {
+            for (let i = 1; i <= totalPages; i++) {
+                range.push(i);
+            }
+            return range;
+        }
+
         // Always show first page
         range.push(1);
 
         // Calculate start and end of middle section
-        const start = Math.max(2, page - showSiblings);
-        const end = Math.min(totalPages - 1, page + showSiblings);
+        // Ensure we always show exactly (1 + 2*siblingCount) pages in the middle
+        let start = Math.max(2, page - showSiblings);
+        let end = Math.min(totalPages - 1, page + showSiblings);
+
+        // Adjust if we're near the start
+        if (start <= 3) {
+            start = 2;
+            end = Math.min(totalPages - 1, 2 + showSiblings * 2);
+        }
+        // Adjust if we're near the end
+        else if (end >= totalPages - 2) {
+            end = totalPages - 1;
+            start = Math.max(2, totalPages - 1 - showSiblings * 2);
+        }
 
         // Add ellipsis after first if needed
         if (start > 2) {
@@ -69,7 +90,7 @@
             range.push("...");
         }
 
-        // Always show last page if more than 1 page
+        // Always show last page
         if (totalPages > 1) {
             range.push(totalPages);
         }

@@ -9,6 +9,8 @@
         VariantsCode,
         Interactive,
         InteractiveCode,
+        Removable,
+        RemovableCode,
     } from "./chip/index";
 
     const chipProps = getComponentProps("Chip");
@@ -46,6 +48,18 @@
     code={InteractiveCode}
 >
     <Interactive />
+</Demo>
+
+<h2 id="removable">Removable Chips</h2>
+
+<p>Chips can be removed from a list:</p>
+
+<Demo
+    title="Removable Tag List"
+    description="Click the X to remove chips from the list"
+    code={RemovableCode}
+>
+    <Removable />
 </Demo>
 
 <h2 id="props">Props</h2>

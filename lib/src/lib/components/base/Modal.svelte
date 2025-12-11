@@ -21,6 +21,8 @@
         maxWidth?: string;
         /** Border radius */
         radius?: Radius | string;
+        /** Content padding */
+        padding?: string;
         /** Close when clicking overlay */
         closeOnOverlay?: boolean;
         /** Close when pressing Escape */
@@ -39,6 +41,7 @@
         size = "m",
         maxWidth,
         radius,
+        padding = "1.5rem",
         closeOnOverlay = true,
         closeOnEscape = true,
         centered = true,
@@ -105,6 +108,7 @@
                 style:--modal-radius={computedRadius}
                 style:--modal-bg={theme.colors.card}
                 style:--modal-shadow={theme.boxShadow.l}
+                style:--modal-padding={padding}
                 role="dialog"
                 aria-modal="true"
                 {...props}
@@ -138,6 +142,7 @@
         background: var(--modal-bg);
         border-radius: var(--modal-radius);
         box-shadow: var(--modal-shadow);
+        padding: var(--modal-padding);
         animation: modal-enter 0.2s ease-out;
     }
 

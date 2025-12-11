@@ -7,6 +7,8 @@
         BasicUsageCode,
         Variants,
         VariantsCode,
+        Dismissable,
+        DismissableCode,
     } from "./alert/index";
 
     const alertProps = getComponentProps("Alert");
@@ -24,6 +26,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="dismissable">Dismissable</h2>
+
+<p>Alerts can be dismissed by the user:</p>
+
+<Demo
+    title="Dismissable Alert"
+    description="Click the X to dismiss"
+    code={DismissableCode}
+>
+    <Dismissable />
 </Demo>
 
 <h2 id="variants">Variants</h2>

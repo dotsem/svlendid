@@ -22,7 +22,7 @@
     }
 
     let {
-        showAfter = 300,
+        showAfter = 24,
         color = "primary",
         size = "m",
         smooth = true,

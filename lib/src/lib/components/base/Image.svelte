@@ -54,6 +54,7 @@
 
     let isLoading = $state(true);
     let hasError = $state(false);
+    let fallbackFailed = $state(false);
 
     function handleLoad() {
         isLoading = false;
@@ -61,10 +62,16 @@
 
     function handleError() {
         isLoading = false;
+        if (hasError) {
+            fallbackFailed = true;
+        }
         hasError = true;
     }
 
     const displaySrc = $derived(hasError && fallback ? fallback : src);
+    const showBrokenPlaceholder = $derived(
+        hasError && (!fallback || fallbackFailed)
+    );
 </script>
 
 <div
@@ -74,21 +81,42 @@
     style:aspect-ratio={aspectRatio}
     style:--image-radius={computedRadius}
     style:--image-bg={theme.colors.surfaceVariant}
+    style:--image-text={theme.colors.outline}
     {...props}
 >
     {#if showSkeleton && isLoading}
         <div class="image-skeleton"></div>
     {/if}
-    <img
-        src={displaySrc}
-        {alt}
-        {loading}
-        class="image"
-        class:loading={isLoading}
-        style:object-fit={fit}
-        onload={handleLoad}
-        onerror={handleError}
-    />
+
+    {#if showBrokenPlaceholder}
+        <div class="image-broken">
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                <circle cx="8.5" cy="8.5" r="1.5" />
+                <polyline points="21 15 16 10 5 21" />
+                <line x1="2" y1="2" x2="22" y2="22" />
+            </svg>
+            <span class="image-broken-text">Image not found</span>
+        </div>
+    {:else}
+        <img
+            src={displaySrc}
+            {alt}
+            {loading}
+            class="image"
+            class:loading={isLoading}
+            style:object-fit={fit}
+            onload={handleLoad}
+            onerror={handleError}
+        />
+    {/if}
 </div>
 
 <style>
@@ -122,6 +150,30 @@
         );
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite;
+    }
+
+    .image-broken {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: var(--image-text);
+        padding: 1rem;
+        text-align: center;
+
+        svg {
+            width: 48px;
+            height: 48px;
+            opacity: 0.5;
+        }
+    }
+
+    .image-broken-text {
+        font-size: 0.75rem;
+        opacity: 0.7;
     }
 
     @keyframes shimmer {

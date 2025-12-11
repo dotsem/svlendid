@@ -2,7 +2,12 @@
     import { Demo, PropTable } from "$lib";
     import { getComponentProps } from "$lib/utils/component-docs";
 
-    import { BasicUsage, BasicUsageCode } from "./circularprogress/index";
+    import {
+        BasicUsage,
+        BasicUsageCode,
+        Interactive,
+        InteractiveCode,
+    } from "./circularprogress/index";
 
     const circularProgressProps = getComponentProps("CircularProgress");
 </script>
@@ -19,6 +24,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="interactive">Interactive Control</h2>
+
+<p>Control the progress value with a slider:</p>
+
+<Demo
+    title="Interactive Progress"
+    description="Adjust the progress value dynamically"
+    code={InteractiveCode}
+>
+    <Interactive />
 </Demo>
 
 <h2 id="props">Props</h2>

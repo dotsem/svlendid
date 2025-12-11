@@ -7,6 +7,8 @@
         BasicUsageCode,
         Variants,
         VariantsCode,
+        ValueBinding,
+        ValueBindingCode,
     } from "./select/index";
 
     const selectProps = getComponentProps("Select");
@@ -24,6 +26,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="value-binding">Value Binding</h2>
+
+<p>Use <code>bind:value</code> to track the selected option:</p>
+
+<Demo
+    title="Reactive Selection"
+    description="Track and display the selected value"
+    code={ValueBindingCode}
+>
+    <ValueBinding />
 </Demo>
 
 <h2 id="variants">Variants</h2>

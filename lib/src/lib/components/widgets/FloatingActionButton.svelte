@@ -25,6 +25,8 @@
         position?: FABPosition;
         /** Offset from edge */
         offset?: string;
+        /** Position relative to parent instead of screen */
+        relative?: boolean;
         /** Extended FAB with label */
         extended?: boolean;
         /** Disabled state */
@@ -41,6 +43,7 @@
         size = "m",
         position = "bottom-right",
         offset = "1.5rem",
+        relative = false,
         extended = false,
         disabled = false,
         onclick,
@@ -59,6 +62,11 @@
     const computedOnColor = $derived(getOnColor(color, theme));
 
     const positionStyles = $derived.by(() => {
+        if (relative) {
+            // For relative positioning, return empty styles (handled by CSS classes)
+            return { position: "absolute" } as Record<string, string>;
+        }
+
         const styles: Record<string, string> = { position: "fixed" };
 
         switch (position) {
@@ -93,6 +101,11 @@
     class="fab"
     class:extended
     class:disabled
+    class:relative
+    class:bottom-right={relative && position === "bottom-right"}
+    class:bottom-left={relative && position === "bottom-left"}
+    class:top-right={relative && position === "top-right"}
+    class:top-left={relative && position === "top-left"}
     style:--fab-size={sizeConfig[size].size}
     style:--fab-icon-size={sizeConfig[size].iconSize}
     style:--fab-padding={sizeConfig[size].padding}
@@ -100,7 +113,8 @@
     style:--fab-color={computedOnColor}
     style:--fab-shadow={theme.boxShadow.l}
     style:--fab-transition={theme.transitions.fast}
-    style:--fab-z-index={theme.zIndex.fixed}
+    style:--fab-z-index={relative ? "auto" : theme.zIndex.fixed}
+    style:--fab-offset={offset}
     style:position={positionStyles.position}
     style:top={positionStyles.top}
     style:bottom={positionStyles.bottom}
@@ -161,6 +175,26 @@
             padding: var(--fab-padding);
             border-radius: 9999px;
             font-weight: 500;
+        }
+
+        /* Relative positioning within parent */
+        &.relative {
+            &.bottom-right {
+                bottom: var(--fab-offset);
+                right: var(--fab-offset);
+            }
+            &.bottom-left {
+                bottom: var(--fab-offset);
+                left: var(--fab-offset);
+            }
+            &.top-right {
+                top: var(--fab-offset);
+                right: var(--fab-offset);
+            }
+            &.top-left {
+                top: var(--fab-offset);
+                left: var(--fab-offset);
+            }
         }
     }
 </style>

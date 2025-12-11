@@ -29,7 +29,7 @@
         children,
         href,
         color = "primary",
-        underline = "hover",
+        underline = "always",
         external = false,
         disabled = false,
         ...props

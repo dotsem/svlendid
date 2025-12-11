@@ -2,7 +2,12 @@
     import { Demo, PropTable } from "$lib";
     import { getComponentProps } from "$lib/utils/component-docs";
 
-    import { BasicUsage, BasicUsageCode } from "./tabs/index";
+    import {
+        BasicUsage,
+        BasicUsageCode,
+        Controlled,
+        ControlledCode,
+    } from "./tabs/index";
 
     const tabsProps = getComponentProps("Tabs");
 </script>
@@ -22,6 +27,20 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="controlled">Controlled Tabs</h2>
+
+<p>
+    Use <code>bind:activeTab</code> to control the active tab programmatically:
+</p>
+
+<Demo
+    title="Controlled State"
+    description="Navigate tabs with buttons"
+    code={ControlledCode}
+>
+    <Controlled />
 </Demo>
 
 <h2 id="props">Props</h2>

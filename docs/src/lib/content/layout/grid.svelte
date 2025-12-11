@@ -7,6 +7,8 @@
         BasicUsageCode,
         AutoFit,
         AutoFitCode,
+        Spanning,
+        SpanningCode,
     } from "./grid/index";
 
     const gridProps = getComponentProps("Grid");
@@ -24,6 +26,20 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="spanning">Column & Row Spanning</h2>
+
+<p>
+    Use <code>grid-column: span N</code> and <code>grid-row: span N</code> on children:
+</p>
+
+<Demo
+    title="Spanning Cells"
+    description="Items spanning multiple columns or rows"
+    code={SpanningCode}
+>
+    <Spanning />
 </Demo>
 
 <h2 id="autofit">Auto-fit Layout</h2>

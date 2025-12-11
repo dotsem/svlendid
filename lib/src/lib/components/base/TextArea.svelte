@@ -39,6 +39,12 @@
         fullWidth?: boolean;
         /** Error state */
         error?: boolean;
+        /** Auto-resize height based on content */
+        autoResize?: boolean;
+        /** Minimum height when auto-resizing */
+        minHeight?: string;
+        /** Maximum height when auto-resizing */
+        maxHeight?: string;
         /** Input handler */
         oninput?: (value: string) => void;
         /** Change handler */
@@ -62,12 +68,17 @@
         name,
         fullWidth = false,
         error = false,
+        autoResize = false,
+        minHeight,
+        maxHeight,
         oninput,
         onchange,
         ...props
     }: Props = $props();
 
     const theme = getTheme();
+
+    let textareaEl = $state<HTMLTextAreaElement>();
 
     const computedColor = $derived(resolveColor(color, theme));
     const computedRadius = $derived(
@@ -84,10 +95,20 @@
             : "none"
     );
     const charCount = $derived(value.length);
+    const computedResize = $derived(autoResize ? "none" : resize);
+
+    function adjustHeight() {
+        if (!autoResize || !textareaEl) return;
+
+        // Reset height to auto to get the correct scrollHeight
+        textareaEl.style.height = "auto";
+        textareaEl.style.height = `${textareaEl.scrollHeight}px`;
+    }
 
     function handleInput(event: Event) {
         const target = event.target as HTMLTextAreaElement;
         value = target.value;
+        adjustHeight();
         oninput?.(value);
     }
 
@@ -96,6 +117,13 @@
         value = target.value;
         onchange?.(value);
     }
+
+    // Adjust height when value changes externally
+    $effect(() => {
+        if (autoResize && textareaEl && value !== undefined) {
+            adjustHeight();
+        }
+    });
 </script>
 
 <div
@@ -107,17 +135,21 @@
     style:--textarea-border={computedBorder}
     style:--textarea-radius={computedRadius}
     style:--textarea-transition={theme.transitions.fast}
+    style:--textarea-min-height={minHeight}
+    style:--textarea-max-height={maxHeight}
     {...props}
 >
     <textarea
+        bind:this={textareaEl}
         class="textarea-input"
+        class:auto-resize={autoResize}
         {placeholder}
         {rows}
         {disabled}
         {readonly}
         {maxlength}
         {name}
-        style:resize
+        style:resize={computedResize}
         oninput={handleInput}
         onchange={handleChange}
         aria-invalid={error}>{value}</textarea
@@ -168,6 +200,12 @@
             border-color: var(--textarea-color);
             box-shadow: 0 0 0 2px
                 color-mix(in srgb, var(--textarea-color) 20%, transparent);
+        }
+
+        &.auto-resize {
+            overflow: hidden;
+            min-height: var(--textarea-min-height, auto);
+            max-height: var(--textarea-max-height, none);
         }
     }
 

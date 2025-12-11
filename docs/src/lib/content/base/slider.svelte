@@ -7,6 +7,8 @@
         BasicUsageCode,
         Colors,
         ColorsCode,
+        ValueBinding,
+        ValueBindingCode,
     } from "./slider/index";
 
     const sliderProps = getComponentProps("Slider");
@@ -27,6 +29,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="value-binding">Value Binding</h2>
+
+<p>Use <code>bind:value</code> for two-way binding with external controls:</p>
+
+<Demo
+    title="Interactive Value Control"
+    description="Slider synchronized with a number input"
+    code={ValueBindingCode}
+>
+    <ValueBinding />
 </Demo>
 
 <h2 id="colors">Colors</h2>

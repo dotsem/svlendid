@@ -2,7 +2,12 @@
     import { Demo, PropTable } from "$lib";
     import { getComponentProps } from "$lib/utils/component-docs";
 
-    import { BasicUsage, BasicUsageCode } from "./table/index";
+    import {
+        BasicUsage,
+        BasicUsageCode,
+        Sortable,
+        SortableCode,
+    } from "./table/index";
 
     const tableProps = getComponentProps("Table");
 </script>
@@ -19,6 +24,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="sorting">Column Sorting</h2>
+
+<p>Click column headers to sort data:</p>
+
+<Demo
+    title="Sortable Table"
+    description="Click on column headers to sort ascending/descending"
+    code={SortableCode}
+>
+    <Sortable />
 </Demo>
 
 <h2 id="props">Props</h2>

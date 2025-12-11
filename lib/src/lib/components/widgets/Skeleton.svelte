@@ -70,7 +70,8 @@
             style:width={i === lines - 1 && lines > 1 ? "80%" : computedWidth}
             style:height={computedHeight}
             style:--skeleton-radius={computedRadius}
-            style:--skeleton-bg={theme.colors.surfaceVariant}
+            style:--skeleton-bg={theme.colors.outline}
+            style:--skeleton-highlight="rgba(255, 255, 255, 0.4)"
         ></span>
     {/each}
 </div>
@@ -90,6 +91,7 @@
         display: block;
         background: var(--skeleton-bg);
         border-radius: var(--skeleton-radius);
+        opacity: 0.3;
     }
 
     .skeleton.pulse {
@@ -97,32 +99,40 @@
     }
 
     .skeleton.shimmer {
-        background: linear-gradient(
-            90deg,
-            var(--skeleton-bg) 0%,
-            color-mix(in srgb, var(--skeleton-bg) 70%, white) 50%,
-            var(--skeleton-bg) 100%
-        );
-        background-size: 200% 100%;
-        animation: shimmer 1.5s infinite;
+        position: relative;
+        overflow: hidden;
+        opacity: 0.4;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                var(--skeleton-highlight) 50%,
+                transparent 100%
+            );
+            animation: shimmer 1.5s infinite;
+        }
     }
 
     @keyframes pulse {
         0%,
         100% {
-            opacity: 1;
+            opacity: 0.4;
         }
         50% {
-            opacity: 0.5;
+            opacity: 0.2;
         }
     }
 
     @keyframes shimmer {
         0% {
-            background-position: 200% 0;
+            transform: translateX(-100%);
         }
         100% {
-            background-position: -200% 0;
+            transform: translateX(100%);
         }
     }
 </style>

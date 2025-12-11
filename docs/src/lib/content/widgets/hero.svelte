@@ -2,7 +2,12 @@
     import { Demo, PropTable } from "$lib";
     import { getComponentProps } from "$lib/utils/component-docs";
 
-    import { BasicUsage, BasicUsageCode } from "./hero/index";
+    import {
+        BasicUsage,
+        BasicUsageCode,
+        WithImage,
+        WithImageCode,
+    } from "./hero/index";
 
     const heroProps = getComponentProps("Hero");
 </script>
@@ -19,6 +24,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="with-image">Background Image</h2>
+
+<p>Hero with a background image and overlay:</p>
+
+<Demo
+    title="Hero with Image"
+    description="Uses backgroundImage and overlay props"
+    code={WithImageCode}
+>
+    <WithImage />
 </Demo>
 
 <h2 id="props">Props</h2>

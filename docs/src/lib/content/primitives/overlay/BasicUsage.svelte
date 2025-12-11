@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Overlay, Button, Text, Portal } from "lib";
+    import { Overlay, Button, Text, Portal, Center, Card, Column } from "lib";
 
     let show = $state(false);
 </script>
@@ -7,12 +7,23 @@
 <Button onclick={() => (show = !show)}>Toggle Overlay</Button>
 
 {#if show}
-    <Overlay onclick={() => (show = false)} />
+    <Overlay onclick={() => (show = false)} blur="4px" />
     <Portal>
-        <div
-            style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 401; background: white; padding: 2rem; border-radius: 8px;"
+        <Center
+            style="position: fixed; inset: 0; z-index: 401; pointer-events: none;"
         >
-            <Text>Click overlay to close</Text>
-        </div>
+            <Card
+                style="padding: 2rem; pointer-events: auto; max-width: 400px;"
+            >
+                <Column gap="m" alignItems="center">
+                    <Text variant="h4">Modal Content</Text>
+                    <Text
+                        >This uses the Center component to position content over
+                        the overlay.</Text
+                    >
+                    <Button onclick={() => (show = false)}>Close</Button>
+                </Column>
+            </Card>
+        </Center>
     </Portal>
 {/if}

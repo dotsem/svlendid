@@ -136,6 +136,7 @@ export { default as Visible } from "$package/components/primitives/visibility/Vi
 export { default as Portal } from "$package/components/primitives/visibility/Portal.svelte";
 export { default as Overlay } from "$package/components/primitives/visibility/Overlay.svelte";
 export { default as VisuallyHidden } from "$package/components/primitives/visibility/VisuallyHidden.svelte";
+export { default as ViewPort } from "$package/components/primitives/visibility/ViewPort.svelte";
 
 // ============================================
 // Primitive Components - Animation
@@ -163,6 +164,16 @@ export { default as Dropdown } from "$package/components/widgets/Dropdown.svelte
 // Feedback Widgets
 export { default as Alert } from "$package/components/widgets/Alert.svelte";
 export { default as Toast } from "$package/components/widgets/Toast.svelte";
+export { default as ToastStack } from "$package/components/widgets/ToastStack.svelte";
+export {
+    toastStore,
+    showToast,
+    showSuccess,
+    showError,
+    showWarning,
+    showInfo,
+    type ToastMessage,
+} from "$package/stores/toast.js";
 export { default as Skeleton } from "$package/components/widgets/Skeleton.svelte";
 export { default as Dialog } from "$package/components/widgets/Dialog.svelte";
 export { default as Drawer } from "$package/components/widgets/Drawer.svelte";

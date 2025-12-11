@@ -3,3 +3,6 @@ export { default as BasicUsageCode } from "./BasicUsage.svelte?raw";
 
 export { default as Colors } from "./Colors.svelte";
 export { default as ColorsCode } from "./Colors.svelte?raw";
+
+export { default as ValueBinding } from "./ValueBinding.svelte";
+export { default as ValueBindingCode } from "./ValueBinding.svelte?raw";

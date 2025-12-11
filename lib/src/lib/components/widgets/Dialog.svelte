@@ -131,16 +131,23 @@
         height: 32px;
         padding: 0;
         margin-left: auto;
-        background: none;
+        background: transparent;
         border: none;
         color: inherit;
         cursor: pointer;
         opacity: 0.6;
         border-radius: 50%;
-        transition: opacity 0.15s ease;
+        transition:
+            opacity 0.15s ease,
+            background-color 0.15s ease;
 
         &:hover {
             opacity: 1;
+            background: rgba(128, 128, 128, 0.15);
+        }
+
+        &:active {
+            background: rgba(128, 128, 128, 0.25);
         }
 
         &:focus-visible {

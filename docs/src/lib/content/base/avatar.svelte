@@ -7,6 +7,8 @@
         BasicUsageCode,
         Sizes,
         SizesCode,
+        Initials,
+        InitialsCode,
     } from "./avatar/index";
 
     const avatarProps = getComponentProps("Avatar");
@@ -24,6 +26,21 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="initials">Name to Initials</h2>
+
+<p>
+    Pass a <code>name</code> prop to auto-generate initials (e.g., "Jeff Peterson"
+    → "JP"):
+</p>
+
+<Demo
+    title="Auto-Generated Initials"
+    description="Type a name to see initials update"
+    code={InitialsCode}
+>
+    <Initials />
 </Demo>
 
 <h2 id="sizes">Sizes</h2>

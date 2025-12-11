@@ -25,6 +25,8 @@
         offset?: number;
         /** Close on content click */
         closeOnClick?: boolean;
+        /** Open on hover instead of click */
+        triggerOnHover?: boolean;
         /** Disabled state */
         disabled?: boolean;
         /** Additional HTML attributes */
@@ -37,6 +39,7 @@
         placement = "bottom-start",
         offset = 4,
         closeOnClick = true,
+        triggerOnHover = false,
         disabled = false,
         ...props
     }: Props = $props();
@@ -45,15 +48,50 @@
 
     let open = $state(false);
     let triggerEl = $state<HTMLElement>();
+    let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
 
     function toggle() {
-        if (!disabled) {
+        if (!disabled && !triggerOnHover) {
             open = !open;
+        }
+    }
+
+    function openDropdown() {
+        if (!disabled) {
+            open = true;
         }
     }
 
     function close() {
         open = false;
+    }
+
+    function handleMouseEnter() {
+        if (triggerOnHover && !disabled) {
+            if (hoverTimeout) clearTimeout(hoverTimeout);
+            openDropdown();
+        }
+    }
+
+    function handleMouseLeave() {
+        if (triggerOnHover) {
+            // Small delay to allow moving to dropdown content
+            hoverTimeout = setTimeout(() => {
+                close();
+            }, 150);
+        }
+    }
+
+    function handleContentMouseEnter() {
+        if (triggerOnHover && hoverTimeout) {
+            clearTimeout(hoverTimeout);
+        }
+    }
+
+    function handleContentMouseLeave() {
+        if (triggerOnHover) {
+            close();
+        }
     }
 
     function handleContentClick() {
@@ -69,17 +107,24 @@
     }
 
     $effect(() => {
-        if (open) {
+        if (open && !triggerOnHover) {
             document.addEventListener("click", handleClickOutside, true);
         }
 
         return () => {
             document.removeEventListener("click", handleClickOutside, true);
+            if (hoverTimeout) clearTimeout(hoverTimeout);
         };
     });
 </script>
 
-<div class="dropdown" class:disabled {...props}>
+<div
+    class="dropdown"
+    class:disabled
+    onmouseenter={handleMouseEnter}
+    onmouseleave={handleMouseLeave}
+    {...props}
+>
     <div
         bind:this={triggerEl}
         class="dropdown-trigger"
@@ -97,7 +142,12 @@
         <div
             class="dropdown-content"
             style:--dropdown-radius={theme.radius.m}
+            style:--dropdown-z-index={theme.zIndex.popover}
+            style:--dropdown-bg={theme.colors.card}
+            style:--dropdown-shadow={theme.boxShadow.l}
             onclick={handleContentClick}
+            onmouseenter={handleContentMouseEnter}
+            onmouseleave={handleContentMouseLeave}
             onkeydown={(e) => e.key === "Escape" && close()}
             role="menu"
             tabindex="-1"
@@ -130,6 +180,9 @@
 
     .dropdown-content {
         border-radius: var(--dropdown-radius);
+        background: var(--dropdown-bg);
+        box-shadow: var(--dropdown-shadow);
+        z-index: var(--dropdown-z-index);
         overflow: hidden;
     }
 </style>

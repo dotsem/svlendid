@@ -2,7 +2,12 @@
     import { Demo, PropTable } from "$lib";
     import { getComponentProps } from "$lib/utils/component-docs";
 
-    import { BasicUsage, BasicUsageCode } from "./form/index";
+    import {
+        BasicUsage,
+        BasicUsageCode,
+        SubmittedValues,
+        SubmittedValuesCode,
+    } from "./form/index";
 
     const formProps = getComponentProps("Form");
 </script>
@@ -19,6 +24,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="submitted-values">Handling Submitted Values</h2>
+
+<p>Display submitted form values in an alert:</p>
+
+<Demo
+    title="Form with Value Display"
+    description="Submit to see the captured values"
+    code={SubmittedValuesCode}
+>
+    <SubmittedValues />
 </Demo>
 
 <h2 id="props">Props</h2>

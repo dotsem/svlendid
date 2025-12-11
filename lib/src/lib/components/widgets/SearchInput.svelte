@@ -20,6 +20,8 @@
         color?: ColorPalette;
         /** Border radius */
         radius?: Radius | string;
+        /** Keyboard shortcut to focus (e.g., "/" or "Ctrl+K") */
+        shortcut?: string;
         /** Disabled state */
         disabled?: boolean;
         /** Loading state */
@@ -42,6 +44,7 @@
         size = "m",
         color = "primary",
         radius,
+        shortcut,
         disabled = false,
         loading = false,
         fullWidth = false,
@@ -52,6 +55,8 @@
     }: Props = $props();
 
     const theme = getTheme();
+
+    let inputElement = $state<HTMLInputElement>();
 
     const sizeConfig = {
         s: {
@@ -79,6 +84,18 @@
         resolveRadius(radius, theme) ?? theme.radius.full
     );
 
+    // Parse shortcut for keyboard handling
+    const shortcutKeys = $derived.by(() => {
+        if (!shortcut) return null;
+        const parts = shortcut.toLowerCase().split("+");
+        return {
+            ctrl: parts.includes("ctrl") || parts.includes("cmd"),
+            shift: parts.includes("shift"),
+            alt: parts.includes("alt"),
+            key: parts[parts.length - 1],
+        };
+    });
+
     function handleInput(event: Event) {
         const target = event.target as HTMLInputElement;
         value = target.value;
@@ -96,6 +113,41 @@
         value = "";
         onclear?.();
     }
+
+    function handleGlobalKeydown(event: KeyboardEvent) {
+        if (!shortcutKeys || disabled) return;
+
+        // Check if we're in an editable element
+        const target = event.target as HTMLElement;
+        const isEditable =
+            target.tagName === "INPUT" ||
+            target.tagName === "TEXTAREA" ||
+            target.isContentEditable;
+
+        // For single-character shortcuts, don't trigger in editable elements
+        if (!shortcutKeys.ctrl && !shortcutKeys.alt && isEditable) return;
+
+        const matchesModifiers =
+            shortcutKeys.ctrl === (event.ctrlKey || event.metaKey) &&
+            shortcutKeys.shift === event.shiftKey &&
+            shortcutKeys.alt === event.altKey;
+
+        const matchesKey = event.key.toLowerCase() === shortcutKeys.key;
+
+        if (matchesModifiers && matchesKey) {
+            event.preventDefault();
+            inputElement?.focus();
+        }
+    }
+
+    $effect(() => {
+        if (shortcut && typeof window !== "undefined") {
+            window.addEventListener("keydown", handleGlobalKeydown);
+            return () => {
+                window.removeEventListener("keydown", handleGlobalKeydown);
+            };
+        }
+    });
 </script>
 
 <div
@@ -143,8 +195,10 @@
     </span>
 
     <input
+        bind:this={inputElement}
         type="search"
         class="search-input-field"
+        class:has-shortcut={shortcut && !value}
         {value}
         {placeholder}
         {disabled}
@@ -152,7 +206,11 @@
         onkeydown={handleKeydown}
     />
 
-    {#if value}
+    {#if shortcut && !value}
+        <span class="shortcut-indicator">
+            {shortcut}
+        </span>
+    {:else if value}
         <button
             type="button"
             class="clear-button"
@@ -231,6 +289,10 @@
         border-radius: var(--search-radius);
         transition: box-shadow var(--search-transition) ease;
 
+        &.has-shortcut {
+            padding-right: 3.5rem;
+        }
+
         &::placeholder {
             color: inherit;
             opacity: 0.5;
@@ -245,6 +307,23 @@
         &::-webkit-search-cancel-button {
             display: none;
         }
+    }
+
+    .shortcut-indicator {
+        position: absolute;
+        right: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.125rem 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: inherit;
+        opacity: 0.4;
+        background: rgba(128, 128, 128, 0.1);
+        border: 1px solid rgba(128, 128, 128, 0.2);
+        border-radius: 4px;
+        pointer-events: none;
     }
 
     .clear-button {

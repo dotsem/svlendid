@@ -7,6 +7,8 @@
         BasicUsageCode,
         Features,
         FeaturesCode,
+        ValueBinding,
+        ValueBindingCode,
     } from "./textarea/index";
 
     const textareaProps = getComponentProps("TextArea");
@@ -24,6 +26,18 @@
     code={BasicUsageCode}
 >
     <BasicUsage />
+</Demo>
+
+<h2 id="value-binding">Value Binding</h2>
+
+<p>Use <code>bind:value</code> for two-way binding with auto-resize:</p>
+
+<Demo
+    title="Reactive State with Auto-Resize"
+    description="TextArea that grows as you type"
+    code={ValueBindingCode}
+>
+    <ValueBinding />
 </Demo>
 
 <h2 id="features">Features</h2>

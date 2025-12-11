@@ -3,3 +3,6 @@ export { default as BasicUsageCode } from "./BasicUsage.svelte?raw";
 
 export { default as Sizes } from "./Sizes.svelte";
 export { default as SizesCode } from "./Sizes.svelte?raw";
+
+export { default as Initials } from "./Initials.svelte";
+export { default as InitialsCode } from "./Initials.svelte?raw";

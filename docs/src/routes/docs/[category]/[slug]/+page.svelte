@@ -62,6 +62,7 @@
     import PrimitivesOverlay from "$lib/content/primitives/overlay.svelte";
     import PrimitivesFocusRing from "$lib/content/primitives/focusring.svelte";
     import PrimitivesVisuallyHidden from "$lib/content/primitives/visuallyhidden.svelte";
+    import PrimitivesViewPort from "$lib/content/primitives/viewport.svelte";
 
     import WidgetsBadge from "$lib/content/widgets/badge.svelte";
     import WidgetsTabs from "$lib/content/widgets/tabs.svelte";
@@ -157,6 +158,7 @@
             overlay: PrimitivesOverlay,
             focusring: PrimitivesFocusRing,
             visuallyhidden: PrimitivesVisuallyHidden,
+            viewport: PrimitivesViewPort,
         },
         widgets: {
             badge: WidgetsBadge,
