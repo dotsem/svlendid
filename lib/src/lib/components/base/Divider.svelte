@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import type { Spacing } from "$package/types/layout.type.js";
 
     /**
@@ -10,7 +10,7 @@
         /** Orientation */
         direction?: "horizontal" | "vertical";
         /** Color from palette or custom */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Thickness */
         thickness?: string;
         /** Margin around the divider */
@@ -35,7 +35,7 @@
 
     const theme = getTheme();
 
-    function resolveColor(c: ColorPalette | string | undefined): string {
+    function resolveColor(c: ColorProp | undefined): string {
         if (!c) return theme.colors.outline ?? "#e5e7eb";
         const paletteColor = theme.colors[c as ColorPalette];
         return paletteColor ?? c;

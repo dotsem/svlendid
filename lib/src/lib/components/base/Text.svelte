@@ -2,7 +2,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import type { FontTheme } from "$package/types/theme.type.js";
 
     /**
@@ -15,7 +15,7 @@
         /** Typography variant from theme */
         variant?: TextVariant;
         /** Text color from palette or custom */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Text alignment */
         align?: "left" | "center" | "right" | "justify";
         /** Font weight override */
@@ -94,7 +94,7 @@
 
     // Resolve color from palette or use as-is
     function resolveColor(
-        colorValue: ColorPalette | string | undefined
+        colorValue: ColorProp | undefined
     ): string | undefined {
         if (!colorValue) return undefined;
         const paletteColor = theme.colors[colorValue as ColorPalette];

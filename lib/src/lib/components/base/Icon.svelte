@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import type { Component } from "svelte";
     import * as lucideIcons from "lucide-svelte";
 
@@ -41,7 +41,7 @@
         /** Icon size (default: 24px) */
         size?: string | number;
         /** Color from palette or custom CSS color */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Stroke width */
         strokeWidth?: number;
         /** Accessible label for screen readers */
@@ -61,7 +61,7 @@
 
     const theme = getTheme();
 
-    function resolveColor(c: ColorPalette | string | undefined): string {
+    function resolveColor(c: ColorProp | undefined): string {
         if (!c) return "currentColor";
         const paletteColor = theme.colors[c as ColorPalette];
         return paletteColor ?? c;

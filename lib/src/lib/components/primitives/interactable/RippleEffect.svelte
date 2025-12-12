@@ -1,11 +1,11 @@
 <script lang="ts">
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import type { Radius } from "$package/types/layout.type.js";
 
     interface Props {
         /** Ripple color */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Ripple opacity */
         opacity?: number;
         /** Duration in ms */
@@ -37,7 +37,7 @@
     let nextId = 0;
     let containerEl: HTMLElement;
 
-    function resolveColor(c: ColorPalette | string | undefined): string {
+    function resolveColor(c: ColorProp | undefined): string {
         if (!c) return theme.colors.onSurface ?? "#000";
         const paletteColor = theme.colors[c as ColorPalette];
         return paletteColor ?? c;

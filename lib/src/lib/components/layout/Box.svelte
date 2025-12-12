@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import type {
         Radius,
         Spacing,
@@ -30,7 +30,7 @@
     interface Props {
         children?: Snippet;
         /** Background color from palette or custom CSS (supports gradients) */
-        bg?: ColorPalette | string;
+        bg?: ColorProp;
         /** Width */
         width?: string;
         /** Height */

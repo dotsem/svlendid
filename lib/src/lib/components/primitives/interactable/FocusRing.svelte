@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
 
     /**
      * FocusRing - A consistent focus indicator for interactive elements
@@ -10,7 +10,7 @@
         /** Whether the focus ring is visible */
         visible?: boolean;
         /** Color of the focus ring */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Offset from the element edge */
         offset?: string;
         /** Width of the focus ring */

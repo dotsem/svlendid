@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import { resolveColor } from "$package/utils/style.js";
 
     /**
@@ -12,7 +12,7 @@
 
     interface Props {
         /** Color scheme */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Size preset */
         size?: SpinnerSize;
         /** Custom size override */

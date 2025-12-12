@@ -70,6 +70,13 @@
 </div>
 
 <style>
+    /* Global CSS reset */
+    :global(*),
+    :global(*::before),
+    :global(*::after) {
+        box-sizing: border-box;
+    }
+
     .svlendid-theme-root {
         /* Ensure theme root takes full space and inherits properly */
         display: contents;

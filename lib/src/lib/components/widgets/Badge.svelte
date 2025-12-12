@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import { resolveColor, getOnColor } from "$package/utils/style.js";
 
     /**
@@ -31,7 +31,7 @@
         /** Badge content (number or text) */
         content?: string | number;
         /** Badge color (palette key or custom CSS color) */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Text color (auto-calculated if not provided) */
         textColor?: string;
         /** Position when used as overlay */

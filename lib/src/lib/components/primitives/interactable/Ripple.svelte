@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import RippleEffect from "./RippleEffect.svelte";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import type { Radius } from "$package/types/layout.type.js";
 
     /**
@@ -11,7 +11,7 @@
     interface Props {
         children: Snippet;
         /** Ripple color */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Ripple opacity */
         opacity?: number;
         /** Duration in ms */

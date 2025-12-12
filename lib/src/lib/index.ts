@@ -44,6 +44,7 @@ export {
 export type {
     Color,
     ColorPalette,
+    ColorProp,
     ColorPaletteValues,
     ThemeMode,
 } from "$package/types/colorPalette.type.js";

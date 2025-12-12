@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import type { Radius, Spacing } from "$package/types/layout.type.js";
 
     /**
@@ -14,7 +14,7 @@
         /** Card style variant */
         variant?: CardVariant;
         /** Background color */
-        bg?: ColorPalette | string;
+        bg?: ColorProp;
         /** Border radius */
         radius?: Radius | string;
         /** Padding */
@@ -47,7 +47,7 @@
     const theme = getTheme();
 
     function resolveColor(
-        color: ColorPalette | string | undefined
+        color: ColorProp | undefined
     ): string | undefined {
         if (!color) return undefined;
         const paletteColor = theme.colors[color as ColorPalette];

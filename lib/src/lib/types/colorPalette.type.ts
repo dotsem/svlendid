@@ -1,15 +1,21 @@
 export type Color = string;
 export type ColorPalette = keyof ColorPaletteValues;
 
-export type ThemeMode = 'light' | 'dark' | 'system';
+/**
+ * ColorProp type that preserves intellisense suggestions while allowing custom strings.
+ * Use this for component props that accept color values.
+ */
+export type ColorProp = ColorPalette | (string & {});
+
+export type ThemeMode = "light" | "dark" | "system";
 
 /**
  * Color palette
  * Each color has an on variant, which should be a high contrast color
- * 
+ *
  * Colors which are not user defined but used will use the default colors
  */
-export interface ColorPaletteValues{
+export interface ColorPaletteValues {
     primary?: Color;
     onPrimary?: Color;
     secondary?: Color;

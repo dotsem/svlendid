@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
 
     /**
      * Tooltip - Shows a tooltip on hover
@@ -15,9 +15,9 @@
         /** Position relative to trigger */
         position?: TooltipPosition;
         /** Background color */
-        bg?: ColorPalette | string;
+        bg?: ColorProp;
         /** Text color */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Delay before showing (ms) */
         delay?: number;
         /** Disable tooltip */
@@ -43,7 +43,7 @@
     let showTimeout: ReturnType<typeof setTimeout>;
 
     function resolveColor(
-        c: ColorPalette | string | undefined,
+        c: ColorProp | undefined,
         fallback: string
     ): string {
         if (!c) return fallback;

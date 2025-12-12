@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
     import { getTheme } from "$package/config/theme.js";
-    import type { ColorPalette } from "$package/types/colorPalette.type.js";
+    import type { ColorProp } from "$package/types/colorPalette.type.js";
     import { resolveColor } from "$package/utils/style.js";
 
     /**
@@ -14,7 +14,7 @@
         /** Link URL */
         href: string;
         /** Color scheme */
-        color?: ColorPalette | string;
+        color?: ColorProp;
         /** Underline behavior */
         underline?: LinkUnderline;
         /** Open in new tab */
