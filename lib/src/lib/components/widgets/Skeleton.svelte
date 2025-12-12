@@ -62,12 +62,19 @@
     class:multi-line={variant === "text" && lines > 1}
     {...props}
 >
-    {#each Array(variant === "text" ? lines : 1) as _, i}
+    {#each { length: variant === "text" ? Math.max(1, lines) : 1 } as _, i}
+        {@const lineWidths = [100, 95, 85, 90, 75, 100, 80, 95, 70, 85]}
+        {@const widthPercent =
+            lines > 1
+                ? i === lines - 1
+                    ? 60
+                    : lineWidths[i % lineWidths.length]
+                : 100}
         <span
             class="skeleton"
             class:pulse={animation === "pulse"}
             class:shimmer={animation === "shimmer"}
-            style:width={i === lines - 1 && lines > 1 ? "80%" : computedWidth}
+            style:width="{widthPercent}%"
             style:height={computedHeight}
             style:--skeleton-radius={computedRadius}
             style:--skeleton-bg={theme.colors.outline}
@@ -84,6 +91,7 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+            flex: 1;
         }
     }
 
